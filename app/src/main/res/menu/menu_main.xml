@@ -6,5 +6,6 @@
         android:title="Preferencias"
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="5"
+        android:onClick=""
         app:showAsAction="never"/>
 </menu>
