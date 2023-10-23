@@ -7,9 +7,11 @@
 
     <Button
         android:id="@+id/btnSignInWithGoogle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="90dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="#A60101"
         android:text="Iniciar sesión con Google"
         android:textColor="#FFFFFF"
@@ -29,8 +31,10 @@
 
     <Button
         android:id="@+id/btnSignInWithEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="#AAA8A8"
         android:text="Iniciar sesión con Email"
         android:textColor="#000000"
@@ -42,12 +46,21 @@
 
     <Button
         android:id="@+id/btnSignInWithFacebook"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="#0500A1"
         android:text="Iniciar sesión con Facebook"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignInWithEmail" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="47dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
