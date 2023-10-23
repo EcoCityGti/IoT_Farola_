@@ -1,9 +1,14 @@
 package com.example.iot_farola;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +24,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+    private ImageView imageView;
+
     private static final int RC_SIGN_IN = 123;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         login();
+        imageView = findViewById(R.id.imagen2);
         Button btnSignInWithGoogle = findViewById(R.id.btnSignInWithGoogle);
         Button btnSignInWithEmail = findViewById(R.id.btnSignInWithEmail);
         Button btnSignInWithFacebook = findViewById(R.id.btnSignInWithFacebook);
@@ -78,6 +86,29 @@ public class LoginActivity extends AppCompatActivity {
                 );
             }
         });
+        // Crear un ObjectAnimator para la propiedad de traslación en el eje Y (mueve hacia arriba y luego hacia abajo)
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -50f, 0f); // Empieza en 0, sube 50px y vuelve a 0
+        translationY.setDuration(2000);
+
+        // Crear un AnimatorSet para agrupar la animación original y configurar la repetición
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(translationY); // Agregar la animación original
+
+        // Configurar la repetición infinita
+        animatorSet.setStartDelay(0);
+        animatorSet.setDuration(2000); // Duración de la repetición
+        animatorSet.setInterpolator(null); // Sin interpolación
+        animatorSet.setTarget(imageView);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // Reiniciar la animación al finalizar
+                animatorSet.start();
+            }
+        });
+
+        // Iniciar la animación
+        animatorSet.start();
 
     }
 
@@ -99,22 +130,6 @@ public class LoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_login);
         }
     }
-
-   /* private void startSignInFlow() {
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build());
-
-        Intent intent = AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .setIsSmartLockEnabled(false)
-                .setTheme(R.style.CustomFirebaseUI) // Establece el tema personalizado
-                .build();
-
-        startActivityForResult(intent, RC_SIGN_IN);
-    }*/
-
     @Override
     public void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);

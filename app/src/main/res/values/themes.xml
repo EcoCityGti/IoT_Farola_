@@ -2,8 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.IoT_Farola" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="colorSecondary">@color/my_light_secondary</item>
+        <item name="buttonTint">@color/my_light_secondary</item>
     </style>
 
     <style name="Theme.IoT_Farola" parent="Base.Theme.IoT_Farola" />
+
+    <color name="my_light_primary">#FFFFFF</color>
+    <color name="my_light_secondary">#000000</color>
 </resources>

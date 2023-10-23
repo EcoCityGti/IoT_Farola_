@@ -2,6 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.IoT_Farola" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+         <item name="colorPrimary">@color/my_dark_primary</item>
+        <item name="colorSecondary">@color/my_dark_secondary</item>
+        <item name="buttonTint">@color/white</item>
+
     </style>
+
+    <color name="my_dark_primary">#000000</color>
+    <color name="my_dark_secondary">#FFFFFF</color>
 </resources>
