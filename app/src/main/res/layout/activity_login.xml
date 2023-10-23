@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
+        android:backgroundTint="#C60000"
         android:text="Iniciar sesión con Google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,9 @@
         android:id="@+id/btnSignInWithEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
         android:text="Iniciar sesión con Email"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +43,9 @@
         android:id="@+id/btnSignInWithFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión con Faacebook"
+        android:backgroundTint="#0500A1"
+        android:text="Iniciar sesión con Facebook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithEmail"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithEmail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
