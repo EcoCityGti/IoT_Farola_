@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         login();
         Button btnSignInWithGoogle = findViewById(R.id.btnSignInWithGoogle);
         Button btnSignInWithEmail = findViewById(R.id.btnSignInWithEmail);
+        Button btnSignInWithFacebook = findViewById(R.id.btnSignInWithFacebook);
         btnSignInWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +56,23 @@ public class LoginActivity extends AppCompatActivity {
                                 .setAvailableProviders(providers)
                                 .setIsSmartLockEnabled(false)
                                 //.setTheme(R.style.CustomFirebaseUI) // Establece el tema personalizado
+                                .build(),
+                        RC_SIGN_IN
+                );
+            }
+        });
+        btnSignInWithFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.FacebookBuilder().build()
+                );
+
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .setIsSmartLockEnabled(false)
                                 .build(),
                         RC_SIGN_IN
                 );
