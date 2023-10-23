@@ -17,13 +17,13 @@
 
     <Button
         android:id="@+id/btn_cerrar_sesion"
+        style="@style/boton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="#d0021b"
         android:padding="8dp"
         android:text="Cerrar sesión"
-        android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uid" />
 
