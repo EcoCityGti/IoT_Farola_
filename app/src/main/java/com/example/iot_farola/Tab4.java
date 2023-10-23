@@ -10,6 +10,7 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,16 @@ public class Tab4 extends Fragment {
 
         TextView uid = v.findViewById(R.id.uid);
         uid.setText(usuario.getUid());
+        Button button = v.findViewById(R.id.btn_cerrar_sesion);
+
+        // Set an OnClickListener for the button
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the cerrarSesion method when the button is clicked
+                cerrarSesion(view);
+            }
+        });
 
 
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());

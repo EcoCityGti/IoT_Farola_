@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:background="#d0021b"
-        android:onClick="cerrarSesion"
         android:padding="8dp"
         android:text="Cerrar sesión"
         android:textColor="#fff"
