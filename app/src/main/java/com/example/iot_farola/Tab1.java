@@ -27,8 +27,8 @@ public class Tab1 extends Fragment {
         View v = inflater.inflate(R.layout.tab1, container, false);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         TextView nombre = v.findViewById(R.id.nombre);
-        ImageView cuenta = v.findViewById(R.id.cuenta);
-        cuenta.setOnClickListener(new View.OnClickListener() {
+        //ImageView cuenta = v.findViewById(R.id.cuenta);
+        /*cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Crear un Intent para iniciar la nueva actividad
@@ -40,7 +40,7 @@ public class Tab1 extends Fragment {
                 // Iniciar la nueva actividad
                 startActivity(intent);
             }
-        });
+        });*/
         nombre.setText(usuario.getDisplayName());
         return v;
     }
