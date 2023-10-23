@@ -5,10 +5,13 @@
         <item name="colorPrimary">@color/my_light_primary</item>
         <item name="colorSecondary">@color/my_light_secondary</item>
         <item name="buttonTint">@color/my_light_secondary</item>
+        <item name="colorTertiary">@color/my_light_tertiary</item>
     </style>
 
     <style name="Theme.IoT_Farola" parent="Base.Theme.IoT_Farola" />
 
     <color name="my_light_primary">#FFFFFF</color>
     <color name="my_light_secondary">#000000</color>
+    <color name="my_light_tertiari">#33333333</color>
+    <color name="my_light_tertiary">#33333333</color>
 </resources>

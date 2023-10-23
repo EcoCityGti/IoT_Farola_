@@ -31,5 +31,5 @@ public class AppActivity extends AppCompatActivity {
                 }
         ).attach();
     }
-    private String[] nombres = new String[]{"Inicio","Farola","Mapa","Perfil"};
+    private String[] nombres = new String[]{"Inicio","Farola","EcoCoin","Perfil"};
 }

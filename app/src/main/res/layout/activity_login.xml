@@ -10,9 +10,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
-        android:backgroundTint="#A60101"
+        android:backgroundTint="@color/common_google_signin_btn_text_light"
         android:text="Iniciar sesión con Google"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:backgroundTint="#AAA8A8"
+        android:backgroundTint="@color/fui_bgEmail"
         android:text="Iniciar sesión con Email"
         android:textColor="#000000"
         android:textSize="16dp"
@@ -69,4 +69,48 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="47dp" />
+
+    <Button
+        android:id="@+id/btnSignInWithPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/fui_bgPhone"
+        android:text="Iniciar sesión con Teléfono"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithFacebook" />
+
+    <Button
+        android:id="@+id/btnSignInWithTwitter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/fui_bgTwitter"
+        android:text="Iniciar sesión con Twitter"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithPhone" />
+
+    <Button
+        android:id="@+id/btnSignInWithAnonim"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/fui_bgAnonymous"
+        android:text="Iniciar sesión de invitado"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithTwitter"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

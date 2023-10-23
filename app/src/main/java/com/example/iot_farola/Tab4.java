@@ -36,7 +36,6 @@ public class Tab4 extends Fragment {
         View v = inflater.inflate(R.layout.tab4, container, false);
         //super.onCreate(savedInstanceState);
         //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         TextView nombre = v.findViewById(R.id.nombre);
