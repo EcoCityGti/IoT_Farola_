@@ -4,19 +4,25 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.facebook.FacebookSdk;
@@ -28,6 +34,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private ImageView imageView;
+    private FirebaseAuth auth;
+    private ProgressDialog dialog;
 
     private static final int RC_SIGN_IN = 123;
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,45 @@ public class LoginActivity extends AppCompatActivity {
         Button btnSignInWithGoogle = findViewById(R.id.btnSignInWithGoogle);
         Button btnSignInWithEmail = findViewById(R.id.btnSignInWithEmail);
         Button btnSignInWithFacebook = findViewById(R.id.btnSignInWithFacebook);
+        Button btnSignInWithAnonim = findViewById(R.id.btnSignInWithAnonim);
+        Button btnSignInWithTwitter = findViewById(R.id.btnSignInWithTwitter);
+        Button btnSignInWithTelf = findViewById(R.id.btnSignInWithPhone);
+
+        btnSignInWithTelf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.PhoneBuilder().build()
+                );
+
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .setIsSmartLockEnabled(false)
+                                .build(),
+                        RC_SIGN_IN
+                );
+            }
+        });
+        btnSignInWithTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.TwitterBuilder().build()
+                );
+
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .setIsSmartLockEnabled(false)
+                                .build(),
+                        RC_SIGN_IN
+                );
+            }
+        });
+
         btnSignInWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,15 +161,12 @@ public class LoginActivity extends AppCompatActivity {
         animatorSet.start();
 
     }
-
-
-
     private void login() {
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         if (usuario != null) {
             Toast.makeText(this, "Inicia sesión: " + usuario.getDisplayName() +
-                    " - " + usuario.getEmail(), Toast.LENGTH_LONG).show();
+                    " - " + usuario.getEmail()+ " - "+usuario.getPhoneNumber(), Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, AppActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK

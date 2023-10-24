@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">IoT_Farola</string>
+    <string name="twitter_consumer_key"
+        translatable="false">WVdst82QUVxUjfn66YzfD9ql7
+    </string>
+    <string name="twitter_consumer_secret"
+        translatable="false">fT3PEEqcSRkkGu6Gh5mU75WOMKxjpIdk5LbwhQwHTOTcUy8xDU
+    </string>
+    <!--aW41RVNNVnZObVFSOWRla3UzbGQ6MTpjaQ
+    t_VgrmrqMPVnx9awE5fyr-QocifyPv-Ne9P1utuFWM-fxERw5P-->
 </resources>
