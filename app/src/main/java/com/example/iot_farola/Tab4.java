@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,7 @@ public class Tab4 extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.tab4, container, false);
+        View v = inflater.inflate(R.layout.edicion_cuenta, container, false);
         //super.onCreate(savedInstanceState);
         //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
@@ -41,18 +42,18 @@ public class Tab4 extends Fragment {
         TextView nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
 
-        TextView correo = v.findViewById(R.id.correo);
+        EditText correo = v.findViewById(R.id.correoE);
         correo.setText(usuario.getEmail());
 
-        TextView proveedor = v.findViewById(R.id.proveedor);
-        proveedor.setText(usuario.getProviderId());
+        /*TextView proveedor = v.findViewById(R.id.proveedor);
+        proveedor.setText(usuario.getProviderId());*/
 
         TextView telf = v.findViewById(R.id.telefono);
         telf.setText(usuario.getPhoneNumber());
 
-        TextView uid = v.findViewById(R.id.uid);
+        TextView uid = v.findViewById(R.id.Uid);
         uid.setText(usuario.getUid());
-        Button button = v.findViewById(R.id.btn_cerrar_sesion);
+        Button button = v.findViewById(R.id.btn_cerrar_sesion1);
 
         // Set an OnClickListener for the button
         button.setOnClickListener(new View.OnClickListener() {
@@ -77,11 +78,11 @@ public class Tab4 extends Fragment {
                     }
                 });
 // Foto de usuario
-        Uri urlImagen = usuario.getPhotoUrl();
+        /*Uri urlImagen = usuario.getPhotoUrl();
         if (urlImagen != null) {
             NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen);
             foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }
+        }*/
         return v;
 
     }
