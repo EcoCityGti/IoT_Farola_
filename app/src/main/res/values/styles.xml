@@ -17,4 +17,9 @@
         <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabIndicatorColor">@color/white</item>
     </style>
+    <style name="etiquetas" parent="Theme.AppCompat.Light">
+        <item name="fontFamily">@font/raleway</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/my_light_secondary</item>
+    </style>
 </resources>

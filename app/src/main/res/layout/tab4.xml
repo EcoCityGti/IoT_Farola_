@@ -21,8 +21,7 @@
         style="@style/boton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="#d0021b"
+        android:layout_marginTop="16dp"
         android:padding="8dp"
         android:text="Cerrar sesión"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,16 +29,19 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:text="Nombre de Usuario:"
         app:layout_constraintEnd_toEndOf="@+id/imagen"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
     <TextView
         android:id="@+id/nombre"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -50,6 +52,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -69,6 +72,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -88,6 +92,7 @@
 
     <TextView
         android:id="@+id/textView4"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -107,6 +112,7 @@
 
     <TextView
         android:id="@+id/textView5"
+        style="@style/etiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
