@@ -39,7 +39,7 @@ public class Tab4 extends Fragment {
         //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
-        TextView nombre = v.findViewById(R.id.nombre);
+        EditText nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
 
         EditText correo = v.findViewById(R.id.correoE);
@@ -48,12 +48,39 @@ public class Tab4 extends Fragment {
         /*TextView proveedor = v.findViewById(R.id.proveedor);
         proveedor.setText(usuario.getProviderId());*/
 
-        TextView telf = v.findViewById(R.id.telefono);
+        EditText telf = v.findViewById(R.id.telefono);
+        EditText nusu = v.findViewById(R.id.usuario);
+        EditText postal = v.findViewById(R.id.postal);
+        EditText contr = v.findViewById(R.id.contrasenya);
         telf.setText(usuario.getPhoneNumber());
 
         TextView uid = v.findViewById(R.id.Uid);
         uid.setText(usuario.getUid());
         Button button = v.findViewById(R.id.btn_cerrar_sesion1);
+        Button editar = v.findViewById(R.id.toggleButton);
+
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the cerrarSesion method when the button is clicked
+               if(nombre.isEnabled()){
+                   nombre.setEnabled(false);
+                   correo.setEnabled(false);
+                   telf.setEnabled(false);
+                   nusu.setEnabled(false);
+                   postal.setEnabled(false);
+                   contr.setEnabled(false);
+               }else{
+                   nombre.setEnabled(true);
+                   correo.setEnabled(true);
+                   telf.setEnabled(true);
+                   nusu.setEnabled(true);
+                   postal.setEnabled(true);
+                   contr.setEnabled(true);
+               }
+            }
+        });
+
 
         // Set an OnClickListener for the button
         button.setOnClickListener(new View.OnClickListener() {
