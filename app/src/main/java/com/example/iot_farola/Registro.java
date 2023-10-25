@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registro extends AppActivity{
 
@@ -24,6 +25,9 @@ public class Registro extends AppActivity{
 
     private EditText confContraseña;
 
+    private EditText nombre;
+
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
@@ -31,6 +35,7 @@ public class Registro extends AppActivity{
         etCorreo = findViewById(R.id.editTextTextEmailAddress);
         etContraseña = findViewById(R.id.editTextTextPassword);
         confContraseña = findViewById(R.id.editTextTextPassword2);
+        nombre = findViewById(R.id.editTextText);
         Button registro = findViewById(R.id.Registrarse);
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +97,7 @@ public class Registro extends AppActivity{
 
             String correo = etCorreo.getText().toString();
             String contraseña = etContraseña.getText().toString();
+            String nombreDeUsuario = nombre.getText().toString();
 
             auth.createUserWithEmailAndPassword(correo, contraseña)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,6 +109,9 @@ public class Registro extends AppActivity{
                                 // Registro exitoso, realizar acciones adicionales
                                 FirebaseUser user = auth.getCurrentUser();
                                 if (user != null) {
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(nombreDeUsuario) // Reemplaza "nombreDeUsuario" con el valor real
+                                            .build();
                                     // Envía un correo de verificación
                                     user.sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
