@@ -34,6 +34,9 @@
         <activity android:name=".LoginCorreo">
 
         </activity>
+        <activity android:name=".Registro">
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
