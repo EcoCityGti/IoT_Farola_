@@ -64,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                                 .build(),
                         RC_SIGN_IN
                 );
+
+                /*Intent i = new Intent(getApplicationContext(),PhoneAuthHandler.class);
+                startActivity(i);*/
             }
         });
         btnSignInWithTwitter.setOnClickListener(new View.OnClickListener() {
