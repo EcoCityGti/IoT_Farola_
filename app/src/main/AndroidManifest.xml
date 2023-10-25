@@ -31,7 +31,7 @@
             android:name=".AppActivity">
             <!-- Otras configuraciones de la actividad -->
         </activity>
-        <activity android:name=".cuenta">
+        <activity android:name=".LoginCorreo">
 
         </activity>
 
