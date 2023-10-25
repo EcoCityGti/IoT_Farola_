@@ -51,7 +51,7 @@ public class Registro extends AppActivity{
     private void mensaje(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
-                .setTitle("Error")
+                .setTitle("Aviso")
                 .setPositiveButton("OK", null);
         AlertDialog dialog = builder.create();
         dialog.show();
