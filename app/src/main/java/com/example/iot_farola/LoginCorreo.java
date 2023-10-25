@@ -32,6 +32,15 @@ public class LoginCorreo extends AppCompatActivity {
         etCorreo = findViewById(R.id.corr);
         etContraseña = findViewById(R.id.password);
         Button inicio = findViewById(R.id.iniciar_sesion);
+        TextView reestablecer = findViewById(R.id.Reestableecer);
+
+        reestablecer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Reestablecer.class);
+                startActivity(i);
+            }
+        });
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
