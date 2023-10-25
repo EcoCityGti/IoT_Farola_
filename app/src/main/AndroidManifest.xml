@@ -37,7 +37,9 @@
         <activity android:name=".Registro">
 
         </activity>
-
+        <activity android:name=".AcercaDeActivity"
+            android:label="Acerca de ..."
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

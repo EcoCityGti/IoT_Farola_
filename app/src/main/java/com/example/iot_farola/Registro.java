@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,8 @@ public class Registro extends AppActivity{
 
     private EditText nombre;
 
+    private CheckBox acepto;
+
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class Registro extends AppActivity{
         etContraseña = findViewById(R.id.editTextTextPassword);
         confContraseña = findViewById(R.id.editTextTextPassword2);
         nombre = findViewById(R.id.editTextText);
+        acepto = findViewById(R.id.checkBox2);
         Button registro = findViewById(R.id.Registrarse);
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +81,8 @@ public class Registro extends AppActivity{
         }else if (!contraseña.equals(confcontraseña)){
             etContraseña.setError("Los dos campos deben coincidir");
             confContraseña.setError("Los dos campos deben coincidir");
+        }else if(!acepto.isChecked()){
+            acepto.setError("Debes aceptar los términos y condiciones");
         } else if (contraseña.length() < 6) {
             etContraseña.setError("Ha de contener al menos 6 caracteres");
         } else if (!contraseña.matches(".*[0-9].*")) {
