@@ -43,6 +43,10 @@ public class Tab1 extends Fragment {
         TextView nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
 
+        if(usuario.isAnonymous()){
+            nombre.setText("Invitado/a");
+        }
+
         String[] nombres = new String[]{"Listas","Mapa de la zona"};
         TabLayout tabs = v.findViewById(R.id.tabs1);
         new TabLayoutMediator(tabs, viewpager,
