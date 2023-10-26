@@ -45,6 +45,10 @@ public class Tab4 extends Fragment {
         EditText nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
 
+        if(usuario.isAnonymous()){
+            nombre.setText("Invitado/a");
+        }
+
         EditText correo = v.findViewById(R.id.correoE);
         correo.setText(usuario.getEmail());
 
