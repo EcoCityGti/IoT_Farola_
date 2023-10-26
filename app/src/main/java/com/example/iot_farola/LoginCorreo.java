@@ -3,6 +3,7 @@ package com.example.iot_farola;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,9 @@ public class LoginCorreo extends AppCompatActivity {
         });
 
         TextView Registro = findViewById(R.id.Registrarte);
+        Registro.setPaintFlags(Registro.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        reestablecer.setPaintFlags(reestablecer.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         Registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

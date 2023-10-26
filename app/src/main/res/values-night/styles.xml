@@ -5,17 +5,17 @@
         <item name="android:textColor">@color/black</item>
         <item name="fontFamily">@font/raleway_bold</item>
     </style>
-    <style name="titulo" parent="Theme.AppCompat.Light">
+    <style name="titulo" parent="Theme.AppCompat">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/raleway_bold</item>
         <item name="android:textSize">25dp</item>
     </style>
-    <style name="enlace" parent="Theme.AppCompat.Light">
+    <style name="enlace" parent="Theme.AppCompat">
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/raleway_bold</item>
         <item name="android:textSize">15dp</item>
     </style>
-    <style name="barra" parent="Theme.AppCompat.Light">
+    <style name="barra" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/my_dark_secondary</item>
         <item name="android:textColor">@color/my_dark_tertiary</item>
         <item name="fontFamily">@font/raleway_bold</item>
@@ -23,9 +23,17 @@
         <item name="tabSelectedTextColor">@color/my_dark_primary</item>
         <item name="tabIndicatorColor">@color/white</item>
     </style>
-    <style name="etiquetas" parent="Theme.AppCompat.Light">
+    <style name="etiquetas" parent="Theme.AppCompat">
         <item name="fontFamily">@font/raleway</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/my_dark_secondary</item>
+    </style>
+    <style name="barra2" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:backgroundTint">@color/my_dark_tertiary</item>
+        <item name="android:textColor">@color/my_light_primary</item>
+        <item name="fontFamily">@font/raleway_bold</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/white</item>
     </style>
 </resources>

@@ -28,4 +28,12 @@
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/my_light_secondary</item>
     </style>
+    <style name="barra2" parent="Theme.AppCompat">
+        <item name="android:backgroundTint">@color/my_dark_tertiary</item>
+        <item name="android:textColor">@color/my_light_secondary</item>
+        <item name="fontFamily">@font/raleway_bold</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/white</item>
+    </style>
 </resources>

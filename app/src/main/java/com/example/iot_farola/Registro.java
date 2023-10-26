@@ -126,6 +126,8 @@ public class Registro extends AppActivity{
                                                     if (emailTask.isSuccessful()) {
                                                         // Envío de correo de verificación exitoso
                                                         // Puedes mostrar un mensaje al usuario
+                                                        Intent i = new Intent(Registro.this, LoginCorreo.class);
+                                                        startActivity(i);
                                                         mensaje("Se ha enviado un correo de verificación a su dirección de correo.");
                                                     } else {
                                                         // Fallo en el envío del correo de verificación
