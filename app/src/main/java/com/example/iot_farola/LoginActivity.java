@@ -49,6 +49,33 @@ public class LoginActivity extends AppCompatActivity {
         Button btnSignInWithTwitter = findViewById(R.id.btnSignInWithTwitter);
         Button btnSignInWithTelf = findViewById(R.id.btnSignInWithPhone);
 
+        btnSignInWithAnonim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Iniciar la autenticación anónima
+                auth = FirebaseAuth.getInstance();
+                auth.signInAnonymously()
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Autenticación anónima exitosa
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    Toast.makeText(LoginActivity.this, "Autenticación anónima exitosa", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(getApplicationContext(), AppActivity.class);
+                                    startActivity(i);
+
+                                    // Puedes redirigir al usuario a la siguiente actividad aquí si lo deseas
+                                } else {
+                                    // Error en la autenticación anónima
+                                    Toast.makeText(LoginActivity.this, "Error en la autenticación anónima", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
+
+
         btnSignInWithTelf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
