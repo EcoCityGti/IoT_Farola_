@@ -23,10 +23,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 public class Tab1 extends Fragment {
     @Override
@@ -57,7 +64,8 @@ public class Tab1 extends Fragment {
                     }
                 }
         ).attach();
-
+        LineChart lineChart = v.findViewById(R.id.LineChart);
+        setupLineChart(lineChart);
 
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
@@ -78,5 +86,32 @@ public class Tab1 extends Fragment {
             foto.setImageUrl(urlImagen.toString(), lectorImagenes);
         }
         return v;
+    }
+    private void setupLineChart(LineChart lineChart) {
+        // Configuración del gráfico
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.getDescription().setEnabled(false);
+
+        // Agregar datos al gráfico de líneas (puedes llamar a tu método addDataToLineChart aquí)
+        addDataToLineChart(lineChart);
+    }
+    private void addDataToLineChart(LineChart lineChart) {
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        // Agregar datos de ejemplo (puedes reemplazarlos con tus propios datos)
+        entries.add(new Entry(1f, 10f));
+        entries.add(new Entry(2f, 25f));
+        entries.add(new Entry(3f, 15f));
+        entries.add(new Entry(4f, 32f));
+        entries.add(new Entry(5f, 18f));
+
+        LineDataSet dataSet = new LineDataSet(entries, "Datos de Ejemplo");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(dataSet);
+
+        LineData lineData = new LineData(dataSets);
+        lineChart.setData(lineData);
     }
 }

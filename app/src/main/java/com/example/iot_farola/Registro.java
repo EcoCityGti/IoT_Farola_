@@ -41,11 +41,11 @@ public class Registro extends AppActivity{
         nombre = findViewById(R.id.editTextText);
         acepto = findViewById(R.id.checkBox2);
         Button registro = findViewById(R.id.Registrarse);
-        if(!acepto.isChecked()){
+        /*if(!acepto.isChecked()){
             registro.setEnabled(false);
-        }else{
+        }else if (acepto.isChecked()){
             registro.setEnabled(true);
-        }
+        }*/
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
