@@ -24,8 +24,6 @@ public class AppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabs_barra);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar);
         ViewPager2 viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new com.example.iot_farola.MiPageAdapter(this));
         TabLayout tabs = findViewById(R.id.tabs);

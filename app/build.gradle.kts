@@ -13,6 +13,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,5 +54,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.android.gms:play-services-location:18.0.0")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 
 }
