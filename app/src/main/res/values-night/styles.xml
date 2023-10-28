@@ -22,6 +22,7 @@
         <item name="rippleColor">@color/white</item>
         <item name="tabSelectedTextColor">@color/my_dark_primary</item>
         <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabIconTint">@color/my_dark_tertiary</item>
     </style>
     <style name="etiquetas" parent="Theme.AppCompat">
         <item name="fontFamily">@font/raleway</item>

@@ -1,6 +1,8 @@
 package com.example.iot_farola;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -18,8 +21,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class AppActivity extends AppCompatActivity {
 
-    private EditText entrada;
-    private TextView salida;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +33,31 @@ public class AppActivity extends AppCompatActivity {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
-                        tab.setText(nombres[position]);
+                        Drawable iconDrawable = null;
+
+                        switch (position) {
+                            case 0:
+                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.twotone_home_24);
+                                break;
+                            case 1:
+                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.baseline_light_24);
+                                break;
+                            case 2:
+                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.baseline_electric_bolt_24);
+                                break;
+                            case 3:
+                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_account_circle_24);
+                                break;
+                        }
+                        if (iconDrawable != null) {
+                            iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
+                            tab.setIcon(iconDrawable);
+                        }
                     }
                 }
         ).attach();
     }
-    private String[] nombres = new String[]{"Inicio","Farola","EcoCoin","Perfil"};
+    //private String[] nombres = new String[]{"Inicio","Farola","EcoCoin","Perfil"};
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("AppActivity", "onCreateOptionsMenu called");
