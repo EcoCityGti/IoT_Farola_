@@ -2,12 +2,23 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/foto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="59dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_settings_24" />
 
         <TextView
             android:id="@+id/textView"
@@ -38,8 +49,8 @@
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/circulo"
             android:paddingTop="0dp"
-            android:src="@android:drawable/sym_def_app_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,11 +67,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
-            app:cardCornerRadius="30dp"
             android:layout_width="389dp"
             android:layout_height="609dp"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@id/card2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,17 +125,34 @@
             android:layout_width="391dp"
             android:layout_height="368dp"
             android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
+            app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card1">
 
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/LineChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout2">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout2"
-                style="@style/barra2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/menu"
                 app:layout_constraintBottom_toTopOf="@+id/LineChart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,29 +165,6 @@
 
             </com.google.android.material.tabs.TabLayout>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/LineChart"
-                android:layout_width="419dp"
-                android:layout_height="373dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout2">
-
-            </com.github.mikephil.charting.charts.LineChart>
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="59dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_settings_24" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
