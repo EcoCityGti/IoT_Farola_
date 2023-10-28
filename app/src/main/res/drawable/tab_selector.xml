@@ -4,8 +4,7 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="#1F9B9B9B" /><!-- Cambia el color de fondo cuando se selecciona -->
-                    <!--<corners android:radius="60dp" />--><!-- Cambia el radio de las esquinas -->
+                    <solid android:color="#1F9B9B9B" /> <!-- Cambia el color de fondo cuando se selecciona -->
                 </shape>
             </item>
         </layer-list>
@@ -15,7 +14,7 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="#727171" /> <!-- Cambia el color de fondo cuando no está seleccionada -->
+                    <solid android:color="#FFFFFF" /> <!-- Cambia el color de fondo cuando no está seleccionada -->
                 </shape>
             </item>
         </layer-list>

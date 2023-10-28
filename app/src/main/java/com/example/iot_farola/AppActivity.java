@@ -34,6 +34,7 @@ public class AppActivity extends AppCompatActivity {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
                         Drawable iconDrawable = null;
+                        int iconSizeInDp = 150; // Tamaño del icono en dp (ajusta este valor según tus necesidades)
 
                         switch (position) {
                             case 0:
@@ -50,6 +51,7 @@ public class AppActivity extends AppCompatActivity {
                                 break;
                         }
                         if (iconDrawable != null) {
+                            iconDrawable.setBounds(0, 0, (int) (iconSizeInDp * getResources().getDisplayMetrics().density), (int) (iconSizeInDp * getResources().getDisplayMetrics().density));
                             iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
                             tab.setIcon(iconDrawable);
                         }

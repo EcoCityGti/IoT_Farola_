@@ -24,6 +24,11 @@
         <item name="tabIndicatorColor">@color/white</item>
         <item name="tabIconTint">@color/my_dark_tertiary</item>
     </style>
+    <style name="TabLayoutStyle">
+        <item name="tabBackground">@drawable/shape</item>
+        <item name="backgroundTint">@color/menu</item>
+    </style>
+
     <style name="etiquetas" parent="Theme.AppCompat">
         <item name="fontFamily">@font/raleway</item>
         <item name="android:textSize">20dp</item>
