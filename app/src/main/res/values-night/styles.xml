@@ -29,7 +29,7 @@
         <item name="backgroundTint">@color/menu</item>
     </style>
     <style name="foto">
-        <item name="background">@drawable/shape</item>
+        <item name="background">@drawable/circulo</item>
     </style>
     <style name="etiquetas" parent="Theme.AppCompat">
         <item name="fontFamily">@font/raleway</item>
