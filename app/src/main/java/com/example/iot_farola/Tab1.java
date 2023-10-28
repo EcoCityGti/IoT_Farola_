@@ -2,8 +2,10 @@ package com.example.iot_farola;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.LruCache;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -58,9 +61,22 @@ public class Tab1 extends Fragment {
         TabLayout tabs = v.findViewById(R.id.tabs1);
         new TabLayoutMediator(tabs, viewpager,
                 new TabLayoutMediator.TabConfigurationStrategy() {
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
-                        tab.setText(nombres[position]);
+                        Drawable iconDrawable = null;
+                        int iconSizeInDp = 150; // Tamaño del icono en dp (ajusta este valor según tus necesidades)
+
+                        switch (position) {
+                            case 0:
+                                tab.setText("Lista");
+                                tab.setIcon(R.drawable.baseline_format_list_bulleted_24);
+                                break;
+                            case 1:
+                                tab.setText("Mapa");
+                                tab.setIcon(R.drawable.baseline_map_24);
+                                break;
+                        }
                     }
                 }
         ).attach();
