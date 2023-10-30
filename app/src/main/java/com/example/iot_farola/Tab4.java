@@ -12,8 +12,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -43,6 +48,8 @@ public class Tab4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.edicion_cuenta, container, false);
+        Toolbar toolbar = v.findViewById(R.id.toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
@@ -177,6 +184,27 @@ public class Tab4 extends Fragment {
         }
         return v;
 
+    }
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            // Manejar la selección del elemento de menú "action_settings".
+            return true;
+        }
+        if (id == R.id.acercaDe){
+            lanzarAcercaDe();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void lanzarAcercaDe() {
+        Intent i = new Intent(requireActivity(), AcercaDeActivity.class);
+        //mp.pause();
+        startActivity(i);
     }
 
     public void cerrarSesion(View view) {

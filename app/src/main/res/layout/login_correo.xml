@@ -23,7 +23,7 @@
             style="@style/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="35dp"
             android:text="Bienvenido de nuevo"
             android:textAlignment="center" />
 
@@ -32,7 +32,7 @@
             style="@style/etiquetas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="75dp"
             android:text="Inicia Sesión para continuar"
             android:textAlignment="center" />
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="290dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:text="Iniciar Sesión" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
             android:inputType="textEmailAddress" />
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
             android:inputType="textPassword" />

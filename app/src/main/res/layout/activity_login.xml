@@ -10,9 +10,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
         android:backgroundTint="@color/common_google_signin_btn_text_light"
+        android:drawableLeft="@drawable/fui_ic_googleg_color_24dp"
         android:text="Iniciar sesión con Google"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/imagen2"
-        android:layout_width="317dp"
-        android:layout_height="355dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="271dp"
+        android:layout_height="324dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +37,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:backgroundTint="@color/fui_bgEmail"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
         android:text="Iniciar sesión con Email"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -53,6 +54,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:backgroundTint="#36434345"
+        android:drawableLeft="@drawable/fui_ic_facebook_white_22dp"
         android:enabled="true"
         android:text="Iniciar sesión con Facebook"
         android:textColor="#FFFFFF"
@@ -94,6 +96,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:backgroundTint="@color/fui_bgTwitter"
+        android:drawableLeft="@drawable/fui_ic_twitter_bird_white_24dp"
         android:text="Iniciar sesión con Twitter"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -108,12 +111,37 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:backgroundTint="@color/fui_bgAnonymous"
+        android:drawableLeft="@drawable/fui_ic_anonymous_white_24dp"
         android:text="Iniciar sesión de invitado"
         android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithTwitter" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
+        android:text="-------------------o-------------------"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithAnonim" />
+
+    <Button
+        android:id="@+id/button3"
+        style="@style/boton"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Registrarme"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithTwitter"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView30"
+        app:layout_constraintVertical_bias="0.13" />
 </androidx.constraintlayout.widget.ConstraintLayout>
