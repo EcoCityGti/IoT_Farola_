@@ -2,22 +2,22 @@ package com.example.iot_farola.modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+//----------------------Clase Geopunto----------------------------------
 public class GeoPunto implements Serializable {
 
     private double longitud, latitud;
 
     static public GeoPunto SIN_POSICION = new GeoPunto(0.0,0.0);
-
+//---------------------Constructor--------------------------------------------
     public GeoPunto(double longitud, double latitud) {
         this.longitud= longitud;
         this.latitud= latitud;
     }
-
+//---------------------To String()--------------------------------------------
     public String toString() {
         return new String("longitud:" + longitud + ", latitud:"+ latitud);
     }
-
+//---------------------distancia()--------------------------------------------
     public double distancia(GeoPunto punto) {
         final double RADIO_TIERRA = 6371000; // en metros
         double dLat = Math.toRadians(latitud - punto.latitud);
@@ -30,7 +30,7 @@ public class GeoPunto implements Serializable {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         return c * RADIO_TIERRA;
     }
-
+//-----------------------Getters and Setters-------------------------------
     public double getLongitud() {
         return longitud;
     }
@@ -46,7 +46,7 @@ public class GeoPunto implements Serializable {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
-
+//---------------------equals()--------------------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

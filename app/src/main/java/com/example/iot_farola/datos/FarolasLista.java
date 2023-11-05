@@ -48,11 +48,11 @@ public class FarolasLista implements RepositorioFarolas {
         añade(new Farola("Escuela Politécnica Superior de Gandía",
                 "C/ Paranimf, 1 46730 Gandia (SPAIN)", -0.166093, 38.995656, 962849300, "http://www.epsg.upv.es",
                 "Uno de los mejores lugares para formarse.", 3));
-        /*añade(new Lugar("Al de siempre",
+        añade(new Farola("Al de siempre",
                 "P.Industrial Junto Molí Nou - 46722, Benifla (Valencia)",
-                -0.190642, 38.925857, TipoLugar.BAR, 636472405, "",
+                -0.190642, 38.925857, 636472405, "",
                 "No te pierdas el arroz en calabaza.", 3));
-        añade(new Lugar("androidcurso.com","ciberespacio", 0.0, 0.0, TipoLugar.EDUCACION,
+        /*añade(new Lugar("androidcurso.com","ciberespacio", 0.0, 0.0, TipoLugar.EDUCACION,
                 962849300,"http://androidcurso.com",
                 "Amplia tus conocimientos sobre Android.", 5));
         añade(new Lugar("Barranco del Infierno",

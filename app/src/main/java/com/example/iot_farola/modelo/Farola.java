@@ -3,7 +3,8 @@ package com.example.iot_farola.modelo;
 import com.example.iot_farola.modelo.GeoPunto;
 
 import java.io.Serializable;
-
+//-----Clase Farola-------------------------------------------------------------
+//------------------------------------------------------------------------------
 public class Farola implements Serializable {
     private String nombre;
     private String direccion;
@@ -15,7 +16,7 @@ public class Farola implements Serializable {
     private String comentario;
     private long fecha;
     private float valoracion;
-
+//---------------------Constructor--------------------------------------------
     public Farola(String nombre, String direccion, double longitud,
                   double latitud, int telefono, String url, String comentario,
                   int valoracion) {
@@ -35,7 +36,7 @@ public class Farola implements Serializable {
         posicion = new GeoPunto(0.0,0.0);
         //tipo = TipoLugar.OTROS;
     }
-
+//-----------------------Getters and Setters-------------------------------
     public String getNombre() {
         return nombre;
     }
@@ -68,7 +69,7 @@ public class Farola implements Serializable {
         this.foto = foto;
     }
 
-    public int getTelefono() {
+    /*public int getTelefono() {
         return telefono;
     }
 
@@ -98,7 +99,7 @@ public class Farola implements Serializable {
 
     public void setFecha(long fecha) {
         this.fecha = fecha;
-    }
+    }*/
 
     public float getValoracion() {
         return valoracion;
@@ -107,22 +108,12 @@ public class Farola implements Serializable {
     public void setValoracion(float valoracion) {
         this.valoracion = valoracion;
     }
-
-    /*public TipoLugar getTipo() {
-        return tipo;
-    }*/
-
-    /*public void setTipo(TipoLugar tipo) {
-        this.tipo = tipo;
-    }*/
-
     @Override
     public String toString() {
         return "Lugar{" +
                 "nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", posicion=" + posicion +
-               // ", tipo=" + tipo +
                 ", foto='" + foto + '\'' +
                 ", telefono=" + telefono +
                 ", url='" + url + '\'' +

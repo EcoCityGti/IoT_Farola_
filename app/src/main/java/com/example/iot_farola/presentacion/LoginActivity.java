@@ -33,9 +33,10 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private ImageView imageView;
     private FirebaseAuth auth;
-    private ProgressDialog dialog;
+   // private ProgressDialog dialog;
 
     private static final int RC_SIGN_IN = 123;
+//---------------------------onCreate()--------------------------------------------
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         login();
@@ -46,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         ImageButton btnSignInWithAnonim = findViewById(R.id.btnSignInWithAnonim);
         ImageButton btnSignInWithTwitter = findViewById(R.id.btnSignInWithTwitter);
         ImageButton btnSignInWithTelf = findViewById(R.id.btnSignInWithPhone);
+//-----------------------------Botones()--------------------------------------------
+//-----------------------------Boton Anonimo()--------------------------------------------
 
         btnSignInWithAnonim.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
             }
-        });
+        });//Boton Anonimo()
 
+//-----------------------------Boton Telefono()--------------------------------------------
 
         btnSignInWithTelf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                 /*Intent i = new Intent(getApplicationContext(),PhoneAuthHandler.class);
                 startActivity(i);*/
             }
-        });
+        });//Boton Telefono()
+//-----------------------------Boton Twitter()--------------------------------------------
+
         btnSignInWithTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                         RC_SIGN_IN
                 );
             }
-        });
+        });//Boton Twitter()
+//-----------------------------Boton Google()--------------------------------------------
 
         btnSignInWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                         RC_SIGN_IN
                 );
             }
-        });
+        });//Boton Google()
+//-----------------------------Boton Email()--------------------------------------------
         btnSignInWithEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +156,8 @@ public class LoginActivity extends AppCompatActivity {
                         RC_SIGN_IN
                 );*/
             }
-        });
+        });//BotonEmail()
+//-----------------------------Boton Facebook()--------------------------------------------
         btnSignInWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                         RC_SIGN_IN
                 );
             }
-        });
+        });//Boton Facebook()
         // Crear un ObjectAnimator para la propiedad de traslación en el eje Y (mueve hacia arriba y luego hacia abajo)
         ObjectAnimator translationY = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -50f, 0f); // Empieza en 0, sube 50px y vuelve a 0
         translationY.setDuration(2000);
@@ -190,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         // Iniciar la animación
         animatorSet.start();
 
-    }
+    }//onCreate()
     private void login() {
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();

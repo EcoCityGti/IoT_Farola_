@@ -16,24 +16,26 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.iot_farola.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
+//-------------------------App--------------------------------------------
 public class AppActivity extends AppCompatActivity {
-
+//---------------------On Create()--------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        //java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         setContentView(R.layout.tabs_barra);
         ViewPager2 viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new com.example.iot_farola.MiPageAdapter(this));
         TabLayout tabs = findViewById(R.id.tabs);
+        //---------------------Configuracion TabsBarra()--------------------------------------------
+
         new TabLayoutMediator(tabs, viewPager,
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position){
                         Drawable iconDrawable = null;
                         int iconSizeInDp = 150; // Tamaño del icono en dp (ajusta este valor según tus necesidades)
-
+//----------------------------------Insertar iconos en cada tab--------------------------------------------------------------
                         switch (position) {
                             case 0:
                                 iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.twotone_home_24);
@@ -48,6 +50,7 @@ public class AppActivity extends AppCompatActivity {
                                 iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.outline_account_circle_24);
                                 break;
                         }
+//--------------------------------------------------Resize Icon(ignorar)--------------------------------------------------------------------
                         if (iconDrawable != null) {
                             iconDrawable.setBounds(0, 0, (int) (iconSizeInDp * getResources().getDisplayMetrics().density), (int) (iconSizeInDp * getResources().getDisplayMetrics().density));
                             iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
@@ -55,10 +58,9 @@ public class AppActivity extends AppCompatActivity {
                         }
                     }
                 }
-        ).attach();
-    }
-    //private String[] nombres = new String[]{"Inicio","Farola","EcoCoin","Perfil"};
-    @Override
+        ).attach();//Configuracion TabBarra()
+    }//On create()
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d("AppActivity", "onCreateOptionsMenu called");
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -82,5 +84,5 @@ public class AppActivity extends AppCompatActivity {
         Intent i = new Intent(this, AcercaDeActivity.class);
         //mp.pause();
         startActivity(i);
-    }
+    }*/
 }
