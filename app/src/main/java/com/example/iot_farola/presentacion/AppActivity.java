@@ -1,4 +1,4 @@
-package com.example.iot_farola;
+package com.example.iot_farola.presentacion;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -7,24 +7,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.iot_farola.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class AppActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         setContentView(R.layout.tabs_barra);
         ViewPager2 viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new com.example.iot_farola.MiPageAdapter(this));

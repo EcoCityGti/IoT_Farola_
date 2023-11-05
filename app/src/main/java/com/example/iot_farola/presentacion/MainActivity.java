@@ -1,4 +1,4 @@
-package com.example.iot_farola;
+package com.example.iot_farola.presentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.iot_farola.R;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;

@@ -1,6 +1,4 @@
-package com.example.iot_farola;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+package com.example.iot_farola.presentacion;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +10,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,6 +30,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.example.iot_farola.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -159,7 +157,7 @@ public class Tab4 extends Fragment {
 
         btnAnonimo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(),Registro.class);
+                Intent i = new Intent(getActivity(), Registro.class);
                 i.putExtra("unificar",true);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                                 | Intent.FLAG_ACTIVITY_NEW_TASK

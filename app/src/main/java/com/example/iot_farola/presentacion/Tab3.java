@@ -1,4 +1,4 @@
-package com.example.iot_farola;
+package com.example.iot_farola.presentacion;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,7 +13,8 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,10 +22,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.example.iot_farola.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Tab2 extends Fragment {
+public class Tab3 extends Fragment {
+    private CheckBox checkBox3;
+    private CheckBox checkBox4;
+    private CheckBox checkBox5;
+    private CheckBox checkBox6;
+    private ImageButton imageButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +39,13 @@ public class Tab2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.tab2, container, false);
+        View v = inflater.inflate(R.layout.tab3, container, false);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        imageButton = v.findViewById(R.id.imageButton2);
+        checkBox3 = v.findViewById(R.id.checkBox3);
+        checkBox4 = v.findViewById(R.id.checkBox4);
+        checkBox5 = v.findViewById(R.id.checkBox5);
+        checkBox6 = v.findViewById(R.id.checkBox6);
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
                 new ImageLoader.ImageCache() {
@@ -73,14 +85,26 @@ public class Tab2 extends Fragment {
                         return circularBitmap;
                     }
 
+
                 });
 // Foto de usuario
         Uri urlImagen = usuario.getPhotoUrl();
         if (urlImagen != null) {
-            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen3);
+            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen4);
             foto.setImageUrl(urlImagen.toString(), lectorImagenes);
         }
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mostrar u ocultar las casillas de verificación al hacer clic en el ImageButton
+                int visibility = checkBox3.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+                checkBox3.setVisibility(visibility);
+                checkBox4.setVisibility(visibility);
+                checkBox5.setVisibility(visibility);
+                checkBox6.setVisibility(visibility);
+            }
+        });
         return v;
-
     }
+
 }

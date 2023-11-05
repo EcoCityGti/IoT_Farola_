@@ -1,10 +1,6 @@
-package com.example.iot_farola;
-
-import static android.opengl.ETC1.getHeight;
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+package com.example.iot_farola.presentacion;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,20 +15,20 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
+import com.example.iot_farola.datos.AdaptadorFarolas;
+import com.example.iot_farola.R;
+import com.example.iot_farola.datos.RepositorioFarolas;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -46,6 +42,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 public class Tab1 extends Fragment {
+    private RecyclerView recyclerView;
+    public AdaptadorFarolas adaptador;
+    private RepositorioFarolas farolas;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,6 @@ public class Tab1 extends Fragment {
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         TextView nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
-
         if(usuario.isAnonymous()){
             nombre.setText("Invitado/a");
         }
@@ -165,4 +166,5 @@ public class Tab1 extends Fragment {
         LineData lineData = new LineData(dataSets);
         lineChart.setData(lineData);
     }
+
 }

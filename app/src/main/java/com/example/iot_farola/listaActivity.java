@@ -15,7 +15,7 @@ public class listaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabs_barra_mapalista);
         ViewPager2 viewPager = findViewById(R.id.menu_visto);
-        viewPager.setAdapter(new com.example.iot_farola.MiPageAdapter(this));
+        viewPager.setAdapter(new com.example.iot_farola.barra_inicio(this));
         TabLayout tabs = findViewById(R.id.tabLayout);
         new TabLayoutMediator(tabs, viewPager,
                 new TabLayoutMediator.TabConfigurationStrategy() {

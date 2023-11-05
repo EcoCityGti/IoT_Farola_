@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".Aplicacion"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,7 +22,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="As3dumT7Ha5O88p15Mk7u-URCESmwaRfNNTeIwFF4Z5LE0WBTwOpf2lceXLLIBro" />
         <activity
-            android:name=".MainActivity"
+            android:name=".presentacion.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,29 +30,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AppActivity">
+        <activity android:name=".presentacion.AppActivity">
 
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".presentacion.LoginActivity">
 
         </activity>
-        <activity
-            android:name=".AppActivity">
-            <!-- Otras configuraciones de la actividad -->
-        </activity>
-        <activity android:name=".LoginCorreo">
+        <activity android:name=".presentacion.LoginCorreo">
 
         </activity>
-        <activity android:name=".Registro">
+        <activity android:name=".presentacion.Registro">
 
         </activity>
-        <activity android:name=".AcercaDeActivity"
+        <activity android:name=".presentacion.AcercaDeActivity"
             android:label="Acerca de ..."
             android:theme="@style/Theme.AppCompat.Light.Dialog"/>
-        <activity android:name=".Reestablecer">
+        <activity android:name=".presentacion.Reestablecer">
 
         </activity>
-        <activity android:name=".PhoneAuthHandler"/>
+        <activity android:name=".presentacion.PhoneAuthHandler"/>
+        <activity android:name=".Gráfico"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
+
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

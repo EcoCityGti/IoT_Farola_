@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.iot_farola.presentacion.Tab1;
+import com.example.iot_farola.presentacion.Tab2;
+import com.example.iot_farola.presentacion.Tab3;
+import com.example.iot_farola.presentacion.Tab4;
+
 public class MiPageAdapter extends FragmentStateAdapter {
     public MiPageAdapter(FragmentActivity activity){
         super(activity);

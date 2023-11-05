@@ -21,6 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView11">
 
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="300dp"
+                android:src="@drawable/baseline_keyboard_arrow_down_24" />
+
             <CheckBox
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
@@ -63,6 +70,7 @@
                 android:text="CheckBox" />
 
             <com.google.android.material.tabs.TabLayout
+                android:id="@+id/Tutorial"
                 style="@style/TabLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

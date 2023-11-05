@@ -1,6 +1,5 @@
-package com.example.iot_farola;
+package com.example.iot_farola.presentacion;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -13,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.iot_farola.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -56,7 +56,7 @@ public class LoginCorreo extends AppCompatActivity {
         Registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Registro.class);
+                Intent i = new Intent(getApplicationContext(), com.example.iot_farola.presentacion.Registro.class);
                 startActivity(i);
             }
         });
