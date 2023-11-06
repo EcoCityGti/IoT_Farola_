@@ -227,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response == null) s = "Cancelado";
                 else switch (response.getError().getErrorCode()) {
                     case ErrorCodes.NO_NETWORK: s="Sin conexión a Internet"; break;
-                    case ErrorCodes.PROVIDER_ERROR: s="Error en proveedor"; break;
+                    case ErrorCodes.PROVIDER_ERROR: s="Error en proveedor"+ response.getError().getLocalizedMessage(); break;
                     case ErrorCodes.DEVELOPER_ERROR: s="Error desarrollador"; break;
                     default: s="Otros errores de autentificación";
                 }
