@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Relleno del fondo negro -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M54,5 L5,30 L5,78 L54,103 L103,78 L103,30 Z"
+        />
+
+    <!-- Líneas que forman el hexágono en blanco en posición vertical -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M54,5 L5,30 L5,78 L54,103 L103,78 L103,30 Z"
+        android:strokeWidth="0.8"
+        android:strokeColor="#33FFFFFF" />
+</vector>
+

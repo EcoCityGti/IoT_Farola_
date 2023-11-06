@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="Bienvenido/a,"
+            android:text="@string/welcome"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

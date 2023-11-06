@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Nombre usuario:"
+            android:text="@string/Nombreusu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/correoE" />
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="80dp"
-            android:text="Nombre:"
+            android:text="@string/Nombre"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Correo electrónico:"
+            android:text="@string/Correo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Teléfono móvil:"
+            android:text="@string/phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Contraseña:"
+            android:text="@string/password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Uid" />
 
@@ -151,7 +151,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginBottom="80dp"
             android:padding="8dp"
-            android:text="Cerrar sesión"
+            android:text="@string/cerrarses"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBox" />
@@ -221,7 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Dirrección personal:"
+            android:text="@string/direccion"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contrasenya" />
 
@@ -244,7 +244,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="Guardar Cambios"
+            android:text="@string/guardar"
             app:layout_constraintBottom_toBottomOf="@id/btn_cerrar_sesion1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/btn_cerrar_sesion1" />
@@ -253,7 +253,7 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Acepto la Política de Privacidad de EcoCity"
+            android:text="@string/acepto"
             app:layout_constraintBottom_toTopOf="@+id/Guardar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

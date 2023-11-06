@@ -77,11 +77,11 @@ public class Tab1 extends Fragment {
 
                         switch (position) {
                             case 0:
-                                tab.setText("Lista");
+                                tab.setText(R.string.lista);
                                 tab.setIcon(R.drawable.baseline_format_list_bulleted_24);
                                 break;
                             case 1:
-                                tab.setText("Mapa");
+                                tab.setText(R.string.mapa);
                                 tab.setIcon(R.drawable.baseline_map_24);
                                 break;
                         }

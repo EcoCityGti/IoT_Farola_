@@ -9,54 +9,54 @@
     <!--aW41RVNNVnZObVFSOWRla3UzbGQ6MTpjaQ
     t_VgrmrqMPVnx9awE5fyr-QocifyPv-Ne9P1utuFWM-fxERw5P-->
     <string name="welcome" translatable="true">
-         Bienvenido/a
+         Welcome
     </string>
     <string name="main" translatable="true">
-        Ciudades mejores, futuro sostenible
+        Better cities, sustainable future
     </string>
     <string name="mainboton" translatable="true">
-        Empezar
+        Start
     </string>
     <string name="lista" translatable="true">
-        Lista
+        List
     </string>
     <string name="mapa" translatable="true">
-        Mapa
+        Map
     </string>
     <string name="farola" translatable="true">
-        Farola
+        STREETLIGHT
     </string>
     <string name="pref" translatable="true">
-        Preferencias
+        Preferences
     </string>
     <string name="acerca_de" translatable="true">
-        En EcoCity, nos dedicamos a la transformación de ciudades para hacerlas más inteligentes, sostenibles y conectadas. Somos una empresa pionera en soluciones tecnológicas que buscan mejorar la calidad de vida urbana y crear entornos más eficientes y habitables para todos.
+    At EcoCity, we are committed to transforming our cities in smart, sustainable and connected ways. We are a pioneering company in technological solutions that seek to improve the quality of urban life and create more efficient and habitable environments for everyone.
     </string>
     <string name="Nombre" translatable="true">
-        Nombre:
+        Name:
     </string>
     <string name="Correo" translatable="true">
-        Correo electrónico:
+        E-mail:
     </string>
     <string name="Nombreusu" translatable="true">
-        Nombre usuario:
+        Username:
     </string>
     <string name="phone" translatable="true">
-        Teléfono móvil:
+        Phone number:
     </string>
     <string name="password" translatable="true">
-        Contraseña:
+        Password:
     </string>
     <string name="direccion" translatable="true">
-        Direccción personal:
+        Address:
     </string>
     <string name="acepto" translatable="true">
-        Acepto la Política de Privacidad de EcoCity
+        I accept the EcoCity Privacy Policy
     </string>
     <string name="cerrarses" translatable="true">
-        Cerrar sesión
+        Sign off
     </string>
     <string name="guardar" translatable="true">
-        Guardar cambios
+        Save changes
     </string>
 </resources>

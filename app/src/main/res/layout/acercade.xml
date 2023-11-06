@@ -15,9 +15,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:padding="20dp"
-        android:text="En EcoCity, nos dedicamos a la transformación de ciudades para hacerlas más inteligentes, sostenibles y conectadas. Somos una empresa pionera en soluciones tecnológicas que buscan mejorar la calidad de vida urbana y crear entornos más eficientes y habitables para todos."
+        android:text="@string/acerca_de"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

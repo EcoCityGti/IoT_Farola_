@@ -191,7 +191,7 @@
         style="@style/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FAROLA"
+        android:text="@string/farola"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/searchView2"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
