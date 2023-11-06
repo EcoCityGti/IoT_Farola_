@@ -17,8 +17,7 @@
           "client_id": "516170744801-8278m0chnnk4q9ead6coiuc57f8j91kp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.iot_farola",
-            "certificate_hash": "f2d21a5e542991cc4af8bfa2a54fee27a9b1baa2"
+            "package_name": "com.example.iot_farola"
           }
         },
         {
