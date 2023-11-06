@@ -53,7 +53,7 @@ public class AppActivity extends AppCompatActivity {
 //--------------------------------------------------Resize Icon(ignorar)--------------------------------------------------------------------
                         if (iconDrawable != null) {
                             iconDrawable.setBounds(0, 0, (int) (iconSizeInDp * getResources().getDisplayMetrics().density), (int) (iconSizeInDp * getResources().getDisplayMetrics().density));
-                            iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
+                            //iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
                             tab.setIcon(iconDrawable);
                         }
                     }
