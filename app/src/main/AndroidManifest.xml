@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/img"
+        android:icon="@drawable/img_1"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/img"
+        android:roundIcon="@drawable/img_1"
         android:supportsRtl="true"
         android:theme="@style/Theme.IoT_Farola"
         tools:targetApi="31">
@@ -44,7 +44,7 @@
         </activity>
         <activity android:name=".presentacion.AcercaDeActivity"
             android:label="Acerca de ..."
-            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+            android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name=".presentacion.Reestablecer">
 
         </activity>

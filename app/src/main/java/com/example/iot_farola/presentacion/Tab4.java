@@ -28,7 +28,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.example.iot_farola.R;
 import com.firebase.ui.auth.AuthUI;
@@ -41,12 +40,14 @@ public class Tab4 extends Fragment {
     Button btnAnonimo;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.edicion_cuenta, container, false);
-        Toolbar toolbar = v.findViewById(R.id.toolbar);
+        Toolbar toolbar = v.findViewById(R.id.toolbar1);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
@@ -89,10 +90,10 @@ public class Tab4 extends Fragment {
                     }
                 });
         Uri urlImagen = usuario.getPhotoUrl();
-        if (urlImagen != null) {
-            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen5);
-            foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }
+       /* if (urlImagen != null) {
+           // NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen5);
+          //  foto.setImageUrl(urlImagen.toString(), lectorImagenes);
+        }*/
 
 
         btnAnonimo = v.findViewById(R.id.UnificarCuenta);
@@ -106,9 +107,6 @@ public class Tab4 extends Fragment {
         EditText correo = v.findViewById(R.id.correoE);
         correo.setText(usuario.getEmail());
 
-        /*TextView proveedor = v.findViewById(R.id.proveedor);
-        proveedor.setText(usuario.getProviderId());*/
-
         EditText telf = v.findViewById(R.id.telefono);
         EditText nusu = v.findViewById(R.id.usuario);
         EditText postal = v.findViewById(R.id.postal);
@@ -118,12 +116,12 @@ public class Tab4 extends Fragment {
         TextView uid = v.findViewById(R.id.Uid);
         uid.setText(usuario.getUid());
         Button button = v.findViewById(R.id.btn_cerrar_sesion1);
-        Button editar = v.findViewById(R.id.toggleButton);
+       // Button editar = v.findViewById(R.id.toggleButton);
         Button guardar = v.findViewById(R.id.Guardar);
 
 
 
-        editar.setOnClickListener(new View.OnClickListener() {
+        /*editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Call the cerrarSesion method when the button is clicked
@@ -143,7 +141,7 @@ public class Tab4 extends Fragment {
                    contr.setEnabled(true);
                }
             }
-        });
+        });*/
 
 
         // Set an OnClickListener for the button
@@ -171,17 +169,16 @@ public class Tab4 extends Fragment {
             // El usuario actual es anónimo, por lo que muestras el botón
             button.setVisibility(View.GONE);
             guardar.setVisibility(View.GONE);
-            editar.setVisibility(View.GONE);
+            //editar.setVisibility(View.GONE);
             btnAnonimo.setVisibility(View.VISIBLE);
         } else {
             // El usuario no es anónimo, ocultas el botón
             button.setVisibility(View.VISIBLE);
             btnAnonimo.setVisibility(View.GONE);
             guardar.setVisibility(View.VISIBLE);
-            editar.setVisibility(View.VISIBLE);
+           // editar.setVisibility(View.VISIBLE);
         }
         return v;
-
     }
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
