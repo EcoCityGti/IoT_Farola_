@@ -62,14 +62,14 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Autenticación anónima exitosa
                                     FirebaseUser user = auth.getCurrentUser();
-                                    Toast.makeText(LoginActivity.this, "Autenticación anónima exitosa", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.anonimtrue, Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(getApplicationContext(), AppActivity.class);
                                     startActivity(i);
 
                                     // Puedes redirigir al usuario a la siguiente actividad aquí si lo deseas
                                 } else {
                                     // Error en la autenticación anónima
-                                    Toast.makeText(LoginActivity.this, "Error en la autenticación anónima", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, R.string.anonimfalse, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         if (usuario != null) {
-            Toast.makeText(this, "Inicia sesión: " + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.iniciarses + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, AppActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK
@@ -224,12 +224,12 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 String s = "";
                 IdpResponse response = IdpResponse.fromResultIntent(data);
-                if (response == null) s = "Cancelado";
+                if (response == null) s = String.valueOf(R.string.cancelado);
                 else switch (response.getError().getErrorCode()) {
-                    case ErrorCodes.NO_NETWORK: s="Sin conexión a Internet"; break;
-                    case ErrorCodes.PROVIDER_ERROR: s="Error en proveedor"+ response.getError().getLocalizedMessage(); break;
-                    case ErrorCodes.DEVELOPER_ERROR: s="Error desarrollador"; break;
-                    default: s="Otros errores de autentificación";
+                    case ErrorCodes.NO_NETWORK: s= String.valueOf(R.string.nointernet); break;
+                    case ErrorCodes.PROVIDER_ERROR: s= R.string.errorprov+ response.getError().getLocalizedMessage(); break;
+                    case ErrorCodes.DEVELOPER_ERROR: s= String.valueOf(R.string.errordesarroll); break;
+                    default: s= String.valueOf(R.string.otros_errores);
                 }
                 Toast.makeText(this, s, Toast.LENGTH_LONG).show();
             }

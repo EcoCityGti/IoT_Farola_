@@ -1,5 +1,6 @@
 package com.example.iot_farola;
 
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.app.ActivityCompat;
@@ -33,7 +36,8 @@ public class mapa extends Fragment {
         if (checkLocationPermissions()) {
             loadMapView();
         } else {
-            requestLocationPermissions();
+            showLocationPermissionExplanationDialog();
+            //requestLocationPermissions();
         }
 
         return v;
@@ -72,5 +76,23 @@ public class mapa extends Fragment {
         ActivityCompat.requestPermissions(requireActivity(),
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                 LOCATION_PERMISSION_REQUEST_CODE);
+    }
+    private void showLocationPermissionExplanationDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireContext());
+        dialogBuilder.setMessage(R.string.localiz);
+        dialogBuilder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                requestLocationPermissions(); // Solicitar permiso después de la aceptación.
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Manejar la negación del permiso aquí.
+            }
+        });
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
     }
 }

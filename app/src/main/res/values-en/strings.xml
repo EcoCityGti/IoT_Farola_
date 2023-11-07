@@ -59,4 +59,87 @@
     <string name="guardar" translatable="true">
         Save changes
     </string>
+    <string name="iniciarses" translatable="true">
+        Sign in:
+    </string>
+    <string name="iniciarsesion" translatable="true">
+        Sign in
+    </string>
+    <string name="bienvenido" translatable="true">
+        Welcome back
+    </string>
+    <string name="inicpara" translatable="true">
+        Sign in to continue
+    </string>
+    <string name="nocuenta" translatable="true">
+        Don\'t have any account?
+    </string>
+    <string name="registro" translatable="true">
+        Register
+    </string>
+    <string name="olvidaste" translatable="true">
+        Forgot your password?
+    </string>
+    <string name="localiz" translatable="true">
+        We need to access your location to provide you with personalized information. Do you want to allow access to your location?
+    </string>  <string name="si" translatable="true">
+        Yes
+    </string>
+    <string name="no" translatable="true">
+        No
+    </string>
+    <string name="anonimtrue" translatable="true">
+        Anonymous authentication successful
+    </string>
+    <string name="anonimfalse" translatable="true">
+        Anonymous authentication failed
+    </string>
+    <string name="cancelado" translatable="true">
+        Cancelled
+    </string>
+    <string name="nointernet" translatable="true">
+        No Internet connection
+    </string>
+    <string name="errorprov" translatable="true">
+        Provider error
+    </string>
+    <string name="errordesarroll" translatable="true">
+        Developer error
+    </string>
+    <string name="otros_errores" translatable="true">
+        Other authentication errors
+    </string>
+    <string name="loginerr1" translatable="true">
+        Enter an email
+    </string>
+    <string name="loginerr2" translatable="true">
+        Invalid email
+    </string>
+    <string name="loginerr3" translatable="true">
+        Enter a password
+    </string>
+    <string name="loginerr4" translatable="true">
+        It must contain at least 6 characters
+    </string>
+    <string name="loginerr5" translatable="true">
+        It must contain a number
+    </string>
+    <string name="loginerr6" translatable="true">
+        It must contain a capital letter
+    </string>
+    <string name="recontr" translatable="true">
+        Reset password
+    </string>
+    <string name="recontr1"  translatable="true">
+        Enter an email address to reset your password
+    </string>
+    <string name="recontr2"  translatable="true">
+        Sending password reset email…
+    </string>
+    <string name="recontr3"  translatable="true">
+        A password reset email has been sent to your email address.
+    </string>
+    <string name="recontr4"  translatable="true">
+        The password reset email could not be sent. Verify the email address.
+    </string>
 </resources>

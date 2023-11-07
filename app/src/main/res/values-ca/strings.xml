@@ -1,87 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Eco City</string>
+    <string name="app_name">Eco City</string>
     <string name="twitter_consumer_key"
         translatable="false">WVdst82QUVxUjfn66YzfD9ql7
     </string>
     <string name="twitter_consumer_secret"
         translatable="false">fT3PEEqcSRkkGu6Gh5mU75WOMKxjpIdk5LbwhQwHTOTcUy8xDU
     </string>
-    <!--aW41RVNNVnZObVFSOWRla3UzbGQ6MTpjaQ
-    t_VgrmrqMPVnx9awE5fyr-QocifyPv-Ne9P1utuFWM-fxERw5P-->
-    <string name="welcome" translatable="true">
-         Bienvenido/a
-    </string>
     <string name="main" translatable="true">
-        Ciudades mejores, futuro sostenible
+        Ciutats millors, futur sostenible
     </string>
     <string name="mainboton" translatable="true">
-        Empezar
+        Començar
+    </string>
+    <string name="welcome" translatable="true">
+         Benveningut/da
     </string>
     <string name="lista" translatable="true">
-        Lista
+        Llista
     </string>
     <string name="mapa" translatable="true">
         Mapa
     </string>
     <string name="farola" translatable="true">
-        Farola
+        Farol·la
     </string>
     <string name="pref" translatable="true">
-        Preferencias
+        Preferències
     </string>
     <string name="acerca_de" translatable="true">
-        En EcoCity, nos dedicamos a la transformación de ciudades para hacerlas más inteligentes, sostenibles y conectadas. Somos una empresa pionera en soluciones tecnológicas que buscan mejorar la calidad de vida urbana y crear entornos más eficientes y habitables para todos.
+        A EcoCity, ens dediquem a la transformació de ciutats per fer-les més intel·ligents, sostenibles i connectades. Som una empresa pionera en solucions tecnològiques que busquen millorar la qualitat de vida urbana i crear entorns més eficients i habitables per a tothom.
+        va poder enviar el correu de restabliment de contrasenya. Verifiqueu l\'adreça de correu.
     </string>
     <string name="Nombre" translatable="true">
-        Nombre:
+        Nom:
     </string>
     <string name="Correo" translatable="true">
-        Correo electrónico:
+        Correu electrnòic:
     </string>
     <string name="Nombreusu" translatable="true">
-        Nombre usuario:
+        Nom d\'usuari:
     </string>
     <string name="phone" translatable="true">
-        Teléfono móvil:
+        Telèfon móvil:
     </string>
     <string name="password" translatable="true">
-        Contraseña:
+        Contrasenya:
     </string>
     <string name="direccion" translatable="true">
-        Direccción personal:
+        Direccciò personal:
     </string>
     <string name="acepto" translatable="true">
-        Acepto la Política de Privacidad de EcoCity
+        Acepte la Política de Privacitat d\'EcoCity
     </string>
     <string name="cerrarses" translatable="true">
-        Cerrar sesión
+        Tancar sessió
     </string>
     <string name="guardar" translatable="true">
-        Guardar cambios
+        Guardar canvis
     </string>
     <string name="iniciarses" translatable="true">
-        Inicia sesion:
+        Inicia sessió:
     </string>
     <string name="iniciarsesion" translatable="true">
-        Inicia sesion
+        Inicia sessió
     </string>
     <string name="bienvenido" translatable="true">
-        Bienvenido de nuevo
+        Bienvingut de nou
     </string>
     <string name="inicpara" translatable="true">
-        Inicia sesión para continuar
+        Inicia sessió per continuar
     </string>
     <string name="nocuenta" translatable="true">
-        No tienes cuenta?
+        No tens compte?
     </string>
     <string name="registro" translatable="true">
-        Registrarte
+        Registrar-te
     </string>
     <string name="olvidaste" translatable="true">
-        Olvidaste tu contraseña?
+        Has oblidat la teua contrasenya?
     </string>
     <string name="localiz" translatable="true">
-        Necesitamos acceder a tu ubicación para proporcionarte información personalizada. ¿Deseas permitir el acceso a tu ubicación?
+        Necessitem accedir a la vostra ubicació per proporcionar informació personalitzada. Voleu permetre l\'accés a la vostra ubicació?
     </string>
     <string name="si" translatable="true">
         Sí
@@ -90,57 +90,57 @@
         No
     </string>
     <string name="anonimtrue" translatable="true">
-        Autenticación anónima exitosa
+        Autenticació anònima exitosa
     </string>
     <string name="anonimfalse" translatable="true">
-        Autenticación anónima fallida
+        Autenticació anònima fallida
     </string>
     <string name="cancelado" translatable="true">
-        Cancelado
+        Cancel·lat
     </string>
     <string name="nointernet" translatable="true">
-        Sin conexión a Internet
+        Sense connexió a Internet
     </string>
     <string name="errorprov" translatable="true">
         Error en proveedor
     </string>
     <string name="errordesarroll" translatable="true">
-        Error desarrollador
+        Error desenvolupador
     </string>
     <string name="otros_errores" translatable="true">
-        Otros errores de autentificación
+        Altres errors de autentificació
     </string>
     <string name="loginerr1" translatable="true">
-        Introduce un correo
+        Introdueix un correu
     </string>
     <string name="loginerr2" translatable="true">
-        Correo no válido
+        Correu no vàlid
     </string>
     <string name="loginerr3" translatable="true">
-        Introduce una contraseña
+        Introdueix una contrasenya
     </string>
     <string name="loginerr4" translatable="true">
-        Ha de contener al menos 6 caracteres
+        Ha de contenir almenys 6 caràcters
     </string>
     <string name="loginerr5" translatable="true">
-        Ha de contener un número
+        Ha de contenir un nombre
     </string>
     <string name="loginerr6" translatable="true">
-        Ha de contener una letra mayúscula
+        Ha de contenir una letra majúscula
     </string>
     <string name="recontr" translatable="true">
-        Reestablecer contraseña
+        Reestablir contrasenya
     </string>
     <string name="recontr1"  translatable="true">
-        Introduzca una direccion de correo para reestablecer su contraseña
+        Introdueix una direcció de correu per reestablir la contrasenya
     </string>
     <string name="recontr2"  translatable="true">
-        Enviando correo de restablecimiento de contraseña…
+        Enviant corru de reestabliment de contrasenya…
     </string>
     <string name="recontr3"  translatable="true">
-        Se ha enviado un correo de restablecimiento de contraseña a su dirección de correo.
+        S\'ha enviat un correu de reestabliment de contrasenya a la seua direcció de correu.
     </string>
     <string name="recontr4"  translatable="true">
-        No se pudo enviar el correo de restablecimiento de contraseña. Verifique la dirección de correo.
+        No s\'ha pogut enviar el correu de restabliment de contrasenya. Verifiqueu l\'adreça de correu.
     </string>
 </resources>

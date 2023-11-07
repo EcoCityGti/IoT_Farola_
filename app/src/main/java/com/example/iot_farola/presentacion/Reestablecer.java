@@ -47,13 +47,13 @@ public class Reestablecer extends AppCompatActivity {
         String correo = etCorreo.getText().toString();
 
         if (correo.isEmpty()) {
-            etCorreo.setError("Introduce un correo");
+            etCorreo.setError(getString(R.string.loginerr1));
             return;
         }
 
         // Mostrar un cuadro de diálogo de carga
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Enviando correo de restablecimiento de contraseña...");
+        progressDialog.setMessage(getString(R.string.recontr2));
         progressDialog.show();
 
         // Utiliza FirebaseAuth para enviar el correo de restablecimiento
@@ -65,10 +65,10 @@ public class Reestablecer extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             // Envío de correo exitoso
-                            mensaje("Se ha enviado un correo de restablecimiento de contraseña a su dirección de correo.");
+                            mensaje(getString(R.string.recontr3));
                         } else {
                             // Fallo en el envío del correo
-                            mensaje("No se pudo enviar el correo de restablecimiento de contraseña. Verifique la dirección de correo.");
+                            mensaje(getString(R.string.recontr4));
                         }
                     }
                 });

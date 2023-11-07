@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:text="Bienvenido de nuevo"
+            android:text="@string/bienvenido"
             android:textAlignment="center" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="75dp"
-            android:text="Inicia Sesión para continuar"
+            android:text="@string/inicpara"
             android:textAlignment="center" />
 
         <Button
@@ -45,7 +45,7 @@
             android:layout_marginTop="290dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Iniciar Sesión" />
+            android:text="@string/iniciarsesion" />
 
         <EditText
             android:id="@+id/corr"
@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="No tienes cuenta?"
+        android:text="@string/nocuenta"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
-        android:text="Olvidaste la contraseña?"
+        android:text="@string/olvidaste"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,7 @@
         android:layout_width="84dp"
         android:layout_height="21dp"
         android:lineSpacingExtra="8sp"
-        android:text="Registrarte"
+        android:text="@string/registro"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

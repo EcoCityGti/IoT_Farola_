@@ -65,7 +65,7 @@ public class Tab1 extends Fragment {
             nombre.setText("Invitado/a");
         }
 
-        String[] nombres = new String[]{"Listas","Mapa de la zona"};
+        //String[] nombres = new String[]{"Listas","Mapa de la zona"};
         TabLayout tabs = v.findViewById(R.id.tabs1);
         new TabLayoutMediator(tabs, viewpager,
                 new TabLayoutMediator.TabConfigurationStrategy() {

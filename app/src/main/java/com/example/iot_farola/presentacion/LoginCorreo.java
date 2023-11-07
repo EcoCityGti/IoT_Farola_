@@ -77,17 +77,17 @@ public class LoginCorreo extends AppCompatActivity {
         String contraseña = etContraseña.getText().toString();
 
         if (correo.isEmpty()) {
-            etCorreo.setError("Introduce un correo");
+            etCorreo.setError(getString(R.string.loginerr1));
         } else if (!correo.matches(".+@.+[.].+")) {
-            etCorreo.setError("Correo no válido");
+            etCorreo.setError(getString(R.string.loginerr2));
         } else if (contraseña.isEmpty()) {
-            etContraseña.setError("Introduce una contraseña");
+            etContraseña.setError(getString(R.string.loginerr3));
         } else if (contraseña.length() < 6) {
-            etContraseña.setError("Ha de contener al menos 6 caracteres");
+            etContraseña.setError(getString(R.string.loginerr4));
         } else if (!contraseña.matches(".*[0-9].*")) {
-            etContraseña.setError("Ha de contener un número");
+            etContraseña.setError(getString(R.string.loginerr5));
         } else if (!contraseña.matches(".*[A-Z].*")) {
-            etContraseña.setError("Ha de contener una letra mayúscula");
+            etContraseña.setError(getString(R.string.loginerr6));
         } else {
             return true;
         }
