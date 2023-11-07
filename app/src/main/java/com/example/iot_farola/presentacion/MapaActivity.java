@@ -46,13 +46,6 @@ public class MapaActivity extends Fragment
         farolas = ((Aplicacion) requireActivity().getApplication()).farolas;
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
-        if (checkLocationPermissions()) {
-            onMapReady(mapa);
-        } else {
-            showLocationPermissionExplanationDialog();
-            //requestLocationPermissions();
-        }
-
         return view;
     }
     @Override public void onMapReady(GoogleMap googleMap) {
