@@ -52,7 +52,7 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation ("com.google.android.gms:play-services-location:18.0.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("androidx.cardview:cardview:1.0.0")
     //noinspection GradleCompatible

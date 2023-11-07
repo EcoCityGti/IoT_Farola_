@@ -30,7 +30,7 @@ public class mapa extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.mapa, container, false);
-        webView = v.findViewById(R.id.WebView);
+        //webView = v.findViewById(R.id.WebView);
 
         // Check and request location permissions if not granted
         if (checkLocationPermissions()) {
