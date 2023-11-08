@@ -67,7 +67,7 @@ public class MapaActivity extends Fragment
         if (farolas.tamaño() > 0) {
             GeoPunto p = farolas.elemento(0).getPosicion();
             mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(p.getLatitud(), p.getLongitud()), 12));
+                    new LatLng(p.getLatitud(), p.getLongitud()), 15));
         }
         for (int n=0; n<farolas.tamaño(); n++) {
             Farola lugar = farolas.elemento(n);
