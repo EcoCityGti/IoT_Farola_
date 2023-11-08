@@ -46,6 +46,10 @@ public class MapaActivity extends Fragment
         farolas = ((Aplicacion) requireActivity().getApplication()).farolas;
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
+        if (!checkLocationPermissions()) {
+            // Mostrar un diálogo explicativo antes de solicitar permiso
+            showLocationPermissionExplanationDialog();
+        }
         return view;
     }
     @Override public void onMapReady(GoogleMap googleMap) {
@@ -104,4 +108,5 @@ public class MapaActivity extends Fragment
         AlertDialog dialog = dialogBuilder.create();
         dialog.show();
     }
+
 }
