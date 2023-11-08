@@ -8,7 +8,7 @@
         android:layout_width="?android:attr/listPreferredItemHeight"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:contentDescription="fotografía"
-        android:src="@drawable/baseline_light_24"
+        android:src="@drawable/farolasin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView android:id="@+id/nombre"

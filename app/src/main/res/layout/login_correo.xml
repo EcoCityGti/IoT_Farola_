@@ -55,6 +55,7 @@
             android:layout_marginTop="120dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
+            android:drawableStart="@drawable/round_person_24"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -65,6 +66,7 @@
             android:layout_marginTop="200dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
+            android:drawableLeft="@drawable/baseline_remove_red_eye_24"
             android:inputType="textPassword" />
 
         <CheckBox

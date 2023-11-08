@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         if (usuario != null) {
-            Toast.makeText(this, R.string.iniciarses + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.iniciarses) + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, AppActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK

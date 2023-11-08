@@ -41,7 +41,7 @@ public class AppActivity extends AppCompatActivity {
                                 iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.twotone_home_24);
                                 break;
                             case 1:
-                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.baseline_light_24);
+                                iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.farolasin);
                                 break;
                             case 2:
                                 iconDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.baseline_electric_bolt_24);

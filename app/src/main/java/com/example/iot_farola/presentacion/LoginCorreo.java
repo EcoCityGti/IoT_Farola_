@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginCorreo extends AppCompatActivity {
-
+    private boolean passwordVisible = false;
     private FirebaseAuth auth;
     private EditText etCorreo;
     private EditText etContraseña;
@@ -34,6 +36,19 @@ public class LoginCorreo extends AppCompatActivity {
         etContraseña = findViewById(R.id.password);
         Button inicio = findViewById(R.id.iniciar_sesion);
         TextView reestablecer = findViewById(R.id.Reestableecer);
+        etContraseña.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int leftDrawableWidth = etContraseña.getCompoundDrawables()[0].getBounds().width();
+                    if (event.getRawX() <= (etContraseña.getLeft() + leftDrawableWidth)) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         reestablecer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +86,14 @@ public class LoginCorreo extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+    }
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            etContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            etContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        passwordVisible = !passwordVisible;
     }
     private boolean verificaCampos() {
         String correo = etCorreo.getText().toString();

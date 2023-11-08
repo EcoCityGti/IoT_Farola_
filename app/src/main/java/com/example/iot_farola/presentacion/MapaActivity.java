@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ public class MapaActivity extends Fragment
         }
         return view;
     }
+
     @Override public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
         mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -70,13 +73,13 @@ public class MapaActivity extends Fragment
             Farola lugar = farolas.elemento(n);
             GeoPunto p = lugar.getPosicion();
             if (p != null && p.getLatitud() != 0) {
-                //Bitmap iGrande = BitmapFactory.decodeResource(getResources(), R.drawable.baseline_map_24);
-               // Bitmap icono = Bitmap.createScaledBitmap(iGrande,
-                        //iGrande.getWidth() / 7, iGrande.getHeight() / 7, false);
+                Bitmap iGrande = BitmapFactory.decodeResource(getResources(), R.drawable.marcador);
+                Bitmap icono = Bitmap.createScaledBitmap(iGrande,
+                        iGrande.getWidth() / 20, iGrande.getHeight() / 20, false);
                 mapa.addMarker(new MarkerOptions()
                         .position(new LatLng(p.getLatitud(), p.getLongitud()))
-                        .title(lugar.getNombre()).snippet(lugar.getDireccion()));
-                        //.icon(BitmapDescriptorFactory.fromBitmap(icono)));
+                        .title(lugar.getNombre()).snippet(lugar.getDireccion())
+                        .icon(BitmapDescriptorFactory.fromBitmap(icono)));
             }
         }
     }

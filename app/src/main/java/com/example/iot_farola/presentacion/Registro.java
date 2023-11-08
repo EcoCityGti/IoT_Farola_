@@ -3,6 +3,8 @@ package com.example.iot_farola.presentacion;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registro extends AppActivity {
+    private boolean passwordVisible = false;
 
     private FirebaseAuth auth;
     private EditText etCorreo;
@@ -41,6 +44,32 @@ public class Registro extends AppActivity {
         confContraseña = findViewById(R.id.editTextTextPassword2);
         nombre = findViewById(R.id.editTextText);
         acepto = findViewById(R.id.checkBox2);
+        confContraseña.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int leftDrawableWidth = confContraseña.getCompoundDrawables()[0].getBounds().width();
+                    if (event.getRawX() <= (confContraseña.getLeft() + leftDrawableWidth)) {
+                        togglePasswordVisibility1();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        etContraseña.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int leftDrawableWidth = etContraseña.getCompoundDrawables()[0].getBounds().width();
+                    if (event.getRawX() <= (etContraseña.getLeft() + leftDrawableWidth)) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         Button registro = findViewById(R.id.Registrarse);
         /*if(!acepto.isChecked()){
             registro.setEnabled(false);
@@ -151,6 +180,21 @@ public class Registro extends AppActivity {
                     });
         }
     }
-
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            etContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            etContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        passwordVisible = !passwordVisible;
+    }
+    private void togglePasswordVisibility1() {
+        if (passwordVisible) {
+            confContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            confContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        passwordVisible = !passwordVisible;
+    }
 
 }
