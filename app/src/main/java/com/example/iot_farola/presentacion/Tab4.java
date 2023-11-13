@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,14 +32,24 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.example.iot_farola.R;
+import com.example.iot_farola.modelo.Usuario;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tab4 extends Fragment {
     Button btnAnonimo;
+    private  EditText correo, telf, nusu, postal, contr, nombre;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
@@ -95,31 +107,52 @@ public class Tab4 extends Fragment {
           //  foto.setImageUrl(urlImagen.toString(), lectorImagenes);
         }*/
 
-
         btnAnonimo = v.findViewById(R.id.UnificarCuenta);
-        EditText nombre = v.findViewById(R.id.nombre);
+        nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
 
         if(usuario.isAnonymous()){
             nombre.setText("Invitado/a");
         }
 
-        EditText correo = v.findViewById(R.id.correoE);
+        correo = v.findViewById(R.id.correoE);
         correo.setText(usuario.getEmail());
 
-        EditText telf = v.findViewById(R.id.telefono);
-        EditText nusu = v.findViewById(R.id.usuario);
-        EditText postal = v.findViewById(R.id.postal);
-        EditText contr = v.findViewById(R.id.contrasenya);
+        telf = v.findViewById(R.id.telefono);
+        nusu = v.findViewById(R.id.usuario);
+        postal = v.findViewById(R.id.postal);
+        contr = v.findViewById(R.id.contrasenya);
         telf.setText(usuario.getPhoneNumber());
 
         TextView uid = v.findViewById(R.id.Uid);
         uid.setText(usuario.getUid());
+
         Button button = v.findViewById(R.id.btn_cerrar_sesion1);
        // Button editar = v.findViewById(R.id.toggleButton);
         Button guardar = v.findViewById(R.id.Guardar);
 
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the updated data from EditText fields
+                String nuevoNombre = nombre.getText().toString();
+                String nuevoTelefono = telf.getText().toString();
+                String nuevoCorreo = correo.getText().toString();
+                String nuevaDireccion = postal.getText().toString();
+                String nuevoNombreUsu = nusu.getText().toString();
+                String nuevaContraseña = contr.getText().toString();
 
+
+
+                // Update user data in the database (Firestore, Realtime Database, etc.)
+                // You may need to call a method to update the user data in your database
+                // For example:
+                updateUserData(usuario.getUid(), nuevoNombre, nuevoTelefono, nuevoCorreo, nuevaDireccion, nuevoNombreUsu, nuevaContraseña);
+
+                // Display a message indicating the update
+                Toast.makeText(requireActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*editar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,12 +211,18 @@ public class Tab4 extends Fragment {
             guardar.setVisibility(View.VISIBLE);
            // editar.setVisibility(View.VISIBLE);
         }
+        if (usuario != null) {
+            obtenerYMostrarTelefono(usuario.getUid());
+            obtenerYMostrarNombreUsuario(usuario.getUid());
+            obtenerYMostrarDireccion(usuario.getUid());
+        } else {
+            // Manejar el caso en el que el usuario es nulo
+        }
         return v;
     }
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
     }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
@@ -194,6 +233,10 @@ public class Tab4 extends Fragment {
             lanzarAcercaDe();
             return true;
         }
+        if (id == R.id.action_editar){
+            editar();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
     private void lanzarAcercaDe() {
@@ -201,7 +244,6 @@ public class Tab4 extends Fragment {
         //mp.pause();
         startActivity(i);
     }
-
     public void cerrarSesion(View view) {
         AuthUI.getInstance().signOut(requireContext())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -214,5 +256,149 @@ public class Tab4 extends Fragment {
                     }
                 });
     }
+    private void updateUserData(String uid, String nuevoNombre, String nuevoTelefono, String nuevoCorreo,String nuevaDireccion, String nuevoNombreUsu, String nuevaContraseña) {
+        // Get the reference to the Firestore collection
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference userRef = db.collection("usuarios").document(uid);
+
+        // Create a map with the updated user data
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("nombre", nuevoNombre);
+        userData.put("telefono", nuevoTelefono);
+        userData.put("correo", nuevoCorreo);
+        userData.put("direccion", nuevaDireccion);
+        userData.put("nombreUsuario", nuevoNombreUsu);
+        userData.put("contrasenya", nuevaContraseña);
+
+        // Update the document in Firestore
+        userRef.update(userData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Document updated successfully
+                        Toast.makeText(requireActivity(), "Datos actualizados en Firestore", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle the error
+                        Toast.makeText(requireActivity(), "Error al actualizar datos en Firestore", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    public void editar(){
+     if(nombre.isEnabled()){
+         nombre.setEnabled(false);
+         correo.setEnabled(false);
+         telf.setEnabled(false);
+         nusu.setEnabled(false);
+         postal.setEnabled(false);
+         contr.setEnabled(false);
+     }else{
+         nombre.setEnabled(true);
+         correo.setEnabled(true);
+         telf.setEnabled(true);
+         nusu.setEnabled(true);
+         postal.setEnabled(true);
+         contr.setEnabled(true);
+     }
+ }
+    private void obtenerYMostrarTelefono(String uidUsuario) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("usuarios")
+                .document(uidUsuario)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Obtener el número de teléfono del documento
+                                String numeroTelefono = document.getString("telefono");
+
+                                if (numeroTelefono != null) {
+                                    // Establecer el número de teléfono en tu TextView
+                                    telf.setText(numeroTelefono);
+                                } else {
+                                    // Manejar el caso en el que el campo de teléfono es nulo
+                                    telf.setText("Número de teléfono no disponible");
+                                }
+                            } else {
+                                // Manejar el caso en el que el documento no existe
+                                Log.d("TAG", "No such document");
+                            }
+                        } else {
+                            // Manejar errores en la obtención del documento
+                            Log.d("TAG", "Error getting document", task.getException());
+                        }
+                    }
+                });
+    }
+    private void obtenerYMostrarNombreUsuario(String uidUsuario) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("usuarios")
+                .document(uidUsuario)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Obtener el número de teléfono del documento
+                                String nombreUsuario = document.getString("nombreUsuario");
+
+                                if (nombreUsuario != null) {
+                                    // Establecer el número de teléfono en tu TextView
+                                    nusu.setText(nombreUsuario);
+                                } else {
+                                    // Manejar el caso en el que el campo de teléfono es nulo
+                                    nusu.setText("Nombre de usuario no disponible");
+                                }
+                            } else {
+                                // Manejar el caso en el que el documento no existe
+                                Log.d("Nombre Usuario", "No such document");
+                            }
+                        } else {
+                            // Manejar errores en la obtención del documento
+                            Log.d("Nombre Usuario", "Error getting document", task.getException());
+                        }
+                    }
+                });
+    }
+    private void obtenerYMostrarDireccion(String uidUsuario) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("usuarios")
+                .document(uidUsuario)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Obtener el número de teléfono del documento
+                                String direccion = document.getString("direccion");
+                                if (direccion != null) {
+                                    // Establecer el número de teléfono en tu TextView
+                                    postal.setText(direccion);
+                                } else {
+                                    // Manejar el caso en el que el campo de teléfono es nulo
+                                    postal.setText("Direccion no disponible");
+                                }
+                            } else {
+                                // Manejar el caso en el que el documento no existe
+                                Log.d("direccion", "No such document");
+                            }
+                        } else {
+                            // Manejar errores en la obtención del documento
+                            Log.d("direccion", "Error getting document", task.getException());
+                        }
+                    }
+                });
+    }
+
 
 }

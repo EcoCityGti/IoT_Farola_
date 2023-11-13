@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.iot_farola.R;
+import com.example.iot_farola.datos.Usuarios;
+import com.example.iot_farola.modelo.Usuario;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -204,6 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         if (usuario != null) {
+            Usuarios.guardarUsuario(usuario);
             Toast.makeText(this, getString(R.string.iniciarses) + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, AppActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
