@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IoT_Farola"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:screenOrientation="portrait">
         <activity
             android:name=".presentacion.MainActivity"
             android:exported="true">
@@ -45,7 +46,7 @@
 
         </activity>
         <activity android:name=".presentacion.AcercaDeActivity"
-            android:label="Acerca de ..."
+            android:label="Eco City"
             android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name=".presentacion.Reestablecer">
 

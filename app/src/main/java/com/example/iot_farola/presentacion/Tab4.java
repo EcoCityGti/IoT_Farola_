@@ -50,6 +50,8 @@ import java.util.Map;
 public class Tab4 extends Fragment {
     Button btnAnonimo;
     private  EditText correo, telf, nusu, postal, contr, nombre;
+    private DocumentReference userRef;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
@@ -146,36 +148,43 @@ public class Tab4 extends Fragment {
 
                 // Update user data in the database (Firestore, Realtime Database, etc.)
                 // You may need to call a method to update the user data in your database
-                // For example:
                 updateUserData(usuario.getUid(), nuevoNombre, nuevoTelefono, nuevoCorreo, nuevaDireccion, nuevoNombreUsu, nuevaContraseña);
 
                 // Display a message indicating the update
                 Toast.makeText(requireActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
             }
         });
+        userRef = FirebaseFirestore.getInstance().collection("usuarios").document(usuario.getUid());
 
-        /*editar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Call the cerrarSesion method when the button is clicked
-               if(nombre.isEnabled()){
-                   nombre.setEnabled(false);
-                   correo.setEnabled(false);
-                   telf.setEnabled(false);
-                   nusu.setEnabled(false);
-                   postal.setEnabled(false);
-                   contr.setEnabled(false);
-               }else{
-                   nombre.setEnabled(true);
-                   correo.setEnabled(true);
-                   telf.setEnabled(true);
-                   nusu.setEnabled(true);
-                   postal.setEnabled(true);
-                   contr.setEnabled(true);
-               }
+        // Establece un Listener para escuchar cambios en tiempo real
+        userRef.addSnapshotListener((documentSnapshot, e) -> {
+            if (e != null) {
+                // Maneja el error aquí
+                Log.w("Firestore", "Error al escuchar cambios en el documento", e);
+                return;
             }
-        });*/
 
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                // Maneja los datos actualizados del usuario aquí
+                String nuevoNombre = documentSnapshot.getString("nombre");
+                String nuevoTelefono = documentSnapshot.getString("telefono");
+                String nuevoCorreo = documentSnapshot.getString("correo");
+                String nuevaDireccion = documentSnapshot.getString("direccion");
+                String nuevoNombreUsu = documentSnapshot.getString("nombreUsuario");
+                String nuevaContraseña = documentSnapshot.getString("contrasenya");
+
+                // Actualiza los campos de la interfaz de usuario con los nuevos datos
+                nombre.setText(nuevoNombre);
+                telf.setText(nuevoTelefono);
+                correo.setText(nuevoCorreo);
+                postal.setText(nuevaDireccion);
+                nusu.setText(nuevoNombreUsu);
+                contr.setText(nuevaContraseña);
+            } else {
+                // Maneja el caso en que el documento no existe
+                Log.d("Firestore", "El documento no existe");
+            }
+        });
 
         // Set an OnClickListener for the button
         button.setOnClickListener(new View.OnClickListener() {

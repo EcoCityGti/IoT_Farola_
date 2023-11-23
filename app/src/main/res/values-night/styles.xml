@@ -44,4 +44,7 @@
         <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabIndicatorColor">@color/white</item>
     </style>
+    <style name="icono">
+        <item name="tint">@color/white</item>
+    </style>
 </resources>

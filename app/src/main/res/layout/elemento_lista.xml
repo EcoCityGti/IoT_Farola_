@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/foto"
+        style="@style/icono"
         android:layout_width="?android:attr/listPreferredItemHeight"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:contentDescription="fotografía"

@@ -15,16 +15,13 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="153dp"
-            android:layout_height="153dp"
-            android:layout_marginLeft="85dp"
-            android:layout_marginRight="110dp"
-            android:background="@drawable/circulo"
-            android:padding="20dp"
-            app:srcCompat="@drawable/farolasin" />
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:src="@drawable/farolaicono" />
 
         <TextView
             android:id="@+id/nombre"
+            style="@style/etiquetas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -42,14 +39,16 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="logo del tipo"
-                android:src="@drawable/farolasin" />
+                android:src="@drawable/farolasin"
+                android:tint="@color/white" />
 
             <TextView
                 android:id="@+id/tipo"
+                style="@style/etiquetas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="tipo del lugar"
+                android:text="@string/farola"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
         ...
@@ -67,6 +66,7 @@
 
             <TextView
                 android:id="@+id/direccion"
+                style="@style/etiquetas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -86,6 +86,7 @@
 
             <TextView
                 android:id="@+id/telefono"
+                style="@style/etiquetas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
