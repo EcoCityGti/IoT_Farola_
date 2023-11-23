@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!--<uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />-->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".Aplicacion"
@@ -51,6 +56,10 @@
 
         </activity>
         <activity android:name=".presentacion.MapaActivity">
+
+        </activity>
+        <activity android:name=".presentacion.VistaFarolaActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
 
         </activity>
         <meta-data

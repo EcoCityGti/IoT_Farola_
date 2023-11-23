@@ -9,32 +9,22 @@ public class Farola implements Serializable {
     private String nombre;
     private String direccion;
     private GeoPunto posicion;
-    //private TipoLugar tipo;
     private String foto;
     private int telefono;
-    private String url;
-    private String comentario;
-    private long fecha;
-    private float valoracion;
+
 //---------------------Constructor--------------------------------------------
     public Farola(String nombre, String direccion, double longitud,
-                  double latitud, int telefono, String url, String comentario,
-                  int valoracion) {
-        fecha = System.currentTimeMillis();
+                  double latitud, int telefono, String foto) {
+        //fecha = System.currentTimeMillis();
         posicion = new GeoPunto(longitud, latitud);
         this.nombre = nombre;
         this.direccion = direccion;
-        //this.tipo = tipo;
         this.telefono = telefono;
-        this.url = url;
-        this.comentario = comentario;
-        this.valoracion = valoracion;
+        this.foto = foto;
     }
 
     public Farola() {
-        fecha = System.currentTimeMillis();
         posicion = new GeoPunto(0.0,0.0);
-        //tipo = TipoLugar.OTROS;
     }
 //-----------------------Getters and Setters-------------------------------
     public String getNombre() {
@@ -69,44 +59,12 @@ public class Farola implements Serializable {
         this.foto = foto;
     }
 
-    /*public int getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public long getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(long fecha) {
-        this.fecha = fecha;
-    }*/
-
-    public float getValoracion() {
-        return valoracion;
-    }
-
-    public void setValoracion(float valoracion) {
-        this.valoracion = valoracion;
     }
     @Override
     public String toString() {
@@ -116,10 +74,6 @@ public class Farola implements Serializable {
                 ", posicion=" + posicion +
                 ", foto='" + foto + '\'' +
                 ", telefono=" + telefono +
-                ", url='" + url + '\'' +
-                ", comentario='" + comentario + '\'' +
-                ", fecha=" + fecha +
-                ", valoracion=" + valoracion +
                 '}';
     }
 

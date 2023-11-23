@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.iot_farola.datos.AdaptadorFarolas;
 import com.example.iot_farola.datos.RepositorioFarolas;
 import com.example.iot_farola.modelo.Farola;
+import com.example.iot_farola.presentacion.VistaFarolaActivity;
 
 public class Lista extends Fragment {
     private RecyclerView recyclerView;
@@ -56,8 +57,8 @@ public class Lista extends Fragment {
         Farola farolaSeleccionada = ((Aplicacion) requireContext().getApplicationContext()).farolas.elemento(pos);
 
         // Crea un intent para abrir la actividad Gráfico
-        Intent intent = new Intent(requireContext(), Gráfico.class);
-        intent.putExtra("farola", farolaSeleccionada); // Puedes pasar la farola como extra para que Gráfico la muestre en el gráfico
+        Intent intent = new Intent(requireContext(), VistaFarolaActivity.class);
+        intent.putExtra("pos", pos);
         startActivity(intent);
     }
 

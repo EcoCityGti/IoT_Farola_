@@ -50,22 +50,7 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
         public void personaliza(Farola lugar) {
             nombre.setText(lugar.getNombre());
             direccion.setText(lugar.getDireccion());
-            //int id = R.drawable.otros;
-            /*switch(lugar.getTipo()) {
-                case RESTAURANTE:id = R.drawable.restaurante; break;
-                case BAR:    id = R.drawable.bar;     break;
-                case COPAS:   id = R.drawable.copas;    break;
-                case ESPECTACULO:id = R.drawable.espectaculos; break;
-                case HOTEL:   id = R.drawable.hotel;    break;
-                case COMPRAS:  id = R.drawable.compras;   break;
-                case EDUCACION: id = R.drawable.educacion;  break;
-                case DEPORTE:  id = R.drawable.deporte;   break;
-                case NATURALEZA: id = R.drawable.naturaleza; break;
-                case GASOLINERA: id = R.drawable.gasolinera; break;  }*/
-            //foto.setImageResource(id);
             foto.setScaleType(ImageView.ScaleType.FIT_END);
-            valoracion.setRating(lugar.getValoracion());
-
             GeoPunto pos=((Aplicacion) itemView.getContext().getApplicationContext())
                     .posicionActual;
             if (pos.equals(GeoPunto.SIN_POSICION) ||
