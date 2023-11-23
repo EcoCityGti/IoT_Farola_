@@ -9,6 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:backgroundTint="#9CD2D3"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,27 +22,35 @@
             style="@style/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="145dp"
             android:text="C/ La Font nº9"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/textView25"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="180dp"
             android:fontFamily="@font/raleway_bold"
             android:text="ID - 3333"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="16dp" />
 
         <ImageView
             android:id="@+id/imageView6"
             style="@style/foto"
-            android:layout_width="match_parent"
+            android:layout_width="104dp"
             android:layout_height="104dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="150dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/circulo"
+            android:padding="15dp"
             android:textAlignment="center"
+            android:tint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/farolasin" />
@@ -51,7 +60,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
+            android:layout_marginTop="220dp"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:progress="50" />

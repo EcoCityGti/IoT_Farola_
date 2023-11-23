@@ -26,7 +26,7 @@
     </style>
     <style name="TabLayoutStyle">
         <item name="tabBackground">@drawable/shape</item>
-        <item name="backgroundTint">@color/menu</item>
+        <item name="backgroundTint">@color/azul</item>
     </style>
     <style name="foto">
         <item name="background">@drawable/circulo</item>

@@ -2,14 +2,14 @@
     <!-- Forma del fondo (círculo) -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="#FFFFFF" /> <!-- Color de fondo -->
+            <solid android:color="@color/naranja" /> <!-- Color de fondo -->
             <size android:width="50dp" android:height="50dp" /> <!-- Tamaño del círculo -->
         </shape>
     </item>
     <!-- Marco circular -->
     <item android:right="1dp" android:left="1dp" android:top="1dp" android:bottom="1dp">
         <shape android:shape="oval">
-            <stroke android:width="1dp" android:color="#FF0000" /> <!-- Ancho y color del marco -->
+            <stroke android:width="1dp" android:color="@color/white" /> <!-- Ancho y color del marco -->
         </shape>
     </item>
 </layer-list>

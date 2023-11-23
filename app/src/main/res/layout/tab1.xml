@@ -23,12 +23,14 @@
             android:layout_height="49dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:tint="@color/azul"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_settings_24" />
 
         <TextView
             android:id="@+id/textView"
+            style="@style/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -67,6 +69,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="10dp"
+            android:foregroundTint="@color/azul"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nombre" />
@@ -88,12 +91,13 @@
                 style="@style/TabLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#332E2E2E"
-                android:backgroundTint="#2E2E2E"
+                android:backgroundTint="@color/naranja"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchView"
-                app:tabIndicator="@color/menu">
+                app:tabIndicator="@color/naranja"
+                app:tabSelectedTextColor="@color/black"
+                app:tabTextColor="@color/white">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -113,6 +117,7 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPaGer"
+                style="@style/titulo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="0dp"
@@ -135,6 +140,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="80dp"
+            android:visibility="gone"
             app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
