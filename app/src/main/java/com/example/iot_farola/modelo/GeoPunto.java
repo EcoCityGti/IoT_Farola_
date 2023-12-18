@@ -9,6 +9,7 @@ public class GeoPunto implements Serializable {
 
     static public GeoPunto SIN_POSICION = new GeoPunto(0.0,0.0);
 //---------------------Constructor--------------------------------------------
+    public GeoPunto(){}
     public GeoPunto(double longitud, double latitud) {
         this.longitud= longitud;
         this.latitud= latitud;

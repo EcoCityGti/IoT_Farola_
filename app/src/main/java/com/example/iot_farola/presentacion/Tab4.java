@@ -142,13 +142,13 @@ public class Tab4 extends Fragment {
                 String nuevoCorreo = correo.getText().toString();
                 String nuevaDireccion = postal.getText().toString();
                 String nuevoNombreUsu = nusu.getText().toString();
-                String nuevaContraseña = contr.getText().toString();
+                //String nuevaContraseña = contr.getText().toString();
 
 
 
                 // Update user data in the database (Firestore, Realtime Database, etc.)
                 // You may need to call a method to update the user data in your database
-                updateUserData(usuario.getUid(), nuevoNombre, nuevoTelefono, nuevoCorreo, nuevaDireccion, nuevoNombreUsu, nuevaContraseña);
+                updateUserData(usuario.getUid(), nuevoNombre, nuevoTelefono, nuevoCorreo, nuevaDireccion, nuevoNombreUsu);
 
                 // Display a message indicating the update
                 Toast.makeText(requireActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
@@ -171,7 +171,7 @@ public class Tab4 extends Fragment {
                 String nuevoCorreo = documentSnapshot.getString("correo");
                 String nuevaDireccion = documentSnapshot.getString("direccion");
                 String nuevoNombreUsu = documentSnapshot.getString("nombreUsuario");
-                String nuevaContraseña = documentSnapshot.getString("contrasenya");
+                //String nuevaContraseña = documentSnapshot.getString("contrasenya");
 
                 // Actualiza los campos de la interfaz de usuario con los nuevos datos
                 nombre.setText(nuevoNombre);
@@ -179,7 +179,7 @@ public class Tab4 extends Fragment {
                 correo.setText(nuevoCorreo);
                 postal.setText(nuevaDireccion);
                 nusu.setText(nuevoNombreUsu);
-                contr.setText(nuevaContraseña);
+                //contr.setText(nuevaContraseña);
             } else {
                 // Maneja el caso en que el documento no existe
                 Log.d("Firestore", "El documento no existe");
@@ -265,7 +265,7 @@ public class Tab4 extends Fragment {
                     }
                 });
     }
-    private void updateUserData(String uid, String nuevoNombre, String nuevoTelefono, String nuevoCorreo,String nuevaDireccion, String nuevoNombreUsu, String nuevaContraseña) {
+    private void updateUserData(String uid, String nuevoNombre, String nuevoTelefono, String nuevoCorreo,String nuevaDireccion, String nuevoNombreUsu) {
         // Get the reference to the Firestore collection
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference userRef = db.collection("usuarios").document(uid);
@@ -277,7 +277,7 @@ public class Tab4 extends Fragment {
         userData.put("correo", nuevoCorreo);
         userData.put("direccion", nuevaDireccion);
         userData.put("nombreUsuario", nuevoNombreUsu);
-        userData.put("contrasenya", nuevaContraseña);
+        //userData.put("contrasenya", nuevaContraseña);
 
         // Update the document in Firestore
         userRef.update(userData)

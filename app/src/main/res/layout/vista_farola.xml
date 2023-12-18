@@ -95,6 +95,12 @@
         </LinearLayout>
 
 
+        <ImageView
+            android:id="@+id/imageFarola"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -137,21 +143,6 @@
                     android:src="@android:drawable/ic_menu_close_clear_cancel" />
             </LinearLayout>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/LineChart"
-                android:layout_width="match_parent"
-                android:layout_height="342dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="57dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout2">
-
-            </com.github.mikephil.charting.charts.LineChart>
         </FrameLayout>
     </LinearLayout>
 </ScrollView>

@@ -10,47 +10,6 @@ import com.google.firebase.firestore.core.Query;
 
 public class Usuarios {
 
-//    public static void guardarUsuario(final FirebaseUser user) {
-//        Usuario usuario = new Usuario(user.getDisplayName(),user.getEmail(),user.getPhoneNumber(),user.get);
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("usuarios").document(user.getUid()).set(usuario);
-//    }
-//public static void guardarUsuario(final FirebaseUser user) {
-//    FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    CollectionReference usuariosRef = db.collection("usuarios");
-//
-//    // Verificar si el correo electrónico ya está en la base de datos
-//    usuariosRef.whereEqualTo("email", user.getEmail())
-//            .get()
-//            .addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    QuerySnapshot querySnapshot = task.getResult();
-//
-//                    if (querySnapshot != null && !querySnapshot.isEmpty()) {
-//                        // El usuario ya existe, puedes cargar la información si es necesario
-//                        DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-//                        Usuario usuarioExistente = document.toObject(Usuario.class);
-//
-//                        // Puedes hacer algo con el usuario existente si lo necesitas
-//                    } else {
-//                        // El usuario no existe, crea un nuevo usuario
-//                        Usuario nuevoUsuario = new Usuario(user.getDisplayName(), user.getEmail(),user.getPhoneNumber(),"","","");
-//                        usuariosRef.document(user.getUid()).set(nuevoUsuario)
-//                                .addOnSuccessListener(aVoid -> {
-//                                    // El usuario se ha guardado correctamente
-//                                    // Puedes realizar acciones adicionales si es necesario
-//                                })
-//                                .addOnFailureListener(e -> {
-//                                    // Ocurrió un error al guardar el usuario
-//                                    // Manejar el error según tus necesidades
-//                                });
-//                    }
-//                } else {
-//                    // Ocurrió un error al realizar la consulta
-//                    // Manejar el error según tus necesidades
-//                }
-//            });
-//}
 public static void guardarUsuario(final FirebaseUser user) {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference usuariosRef = db.collection("usuarios");
@@ -69,7 +28,7 @@ public static void guardarUsuario(final FirebaseUser user) {
                         // Puedes hacer algo con el usuario existente si lo necesitas
                     } else {
                         // El usuario no existe, crea un nuevo usuario
-                        Usuario nuevoUsuario = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhoneNumber(),"","" /* Otros campos si es necesario */);
+                        Usuario nuevoUsuario = new Usuario(user.getDisplayName(), user.getEmail(), user.getPhoneNumber(),"","","" /* Otros campos si es necesario */);
                         usuariosRef.document(user.getUid()).set(nuevoUsuario)
                                 .addOnSuccessListener(aVoid -> {
                                     // El usuario se ha guardado correctamente

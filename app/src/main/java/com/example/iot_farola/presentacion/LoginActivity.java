@@ -27,6 +27,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import java.util.Arrays;
@@ -208,11 +211,12 @@ public class LoginActivity extends AppCompatActivity {
         if (usuario != null) {
             Usuarios.guardarUsuario(usuario);
             Toast.makeText(this, getString(R.string.iniciarses) + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, AppActivity.class);
+            checkUserRoleAndStartActivity();
+            /*Intent i = new Intent(this, AppActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     | Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            startActivity(i);*/
         } else {
             // Mostrar la pantalla de inicio de sesión personalizada en activity_login.xml
             setContentView(R.layout.activity_login);
@@ -238,4 +242,46 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+    private void checkUserRoleAndStartActivity() {
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (usuario != null) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference userRef = db.collection("usuarios").document(usuario.getUid());
+
+            userRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Obtén el valor del campo "rol" del documento
+                        String rol = document.getString("rol");
+
+                        // Comprueba el valor del campo "rol" y inicia la actividad correspondiente
+                        if ("tecnico".equals(rol)) {
+                            // Inicia la actividad de administrador
+                            Intent adminIntent = new Intent(this, TecnicoActivity.class);
+                            startActivity(adminIntent);
+                        }else if("admin".equals(rol)){
+                            Intent adminIntent = new Intent(this, AdminActivity.class);
+                            startActivity(adminIntent);
+                        } else {
+                            // Por defecto, inicia la actividad estándar
+                            Intent defaultIntent = new Intent(this, AppActivity.class);
+                            startActivity(defaultIntent);
+                        }
+                    } else {
+                        // El documento no existe
+                        // Aquí puedes manejar la situación de acuerdo a tus necesidades
+                    }
+                } else {
+                    // Error al obtener el documento
+                    // Aquí puedes manejar el error de acuerdo a tus necesidades
+                }
+            });
+        } else {
+            // Usuario no autenticado
+            // Puedes manejar esta situación de acuerdo a tus necesidades
+        }
+    }
+
 } //Para cerrar la clase

@@ -60,29 +60,4 @@ public class AppActivity extends AppCompatActivity {
                 }
         ).attach();//Configuracion TabBarra()
     }//On create()
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d("AppActivity", "onCreateOptionsMenu called");
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            // Handle the settings action here.
-            return true;
-        }
-        if (id == R.id.acercaDe) {
-            // Handle the "Acerca de" action by launching the AcercaDeActivity.
-            lanzarAcercaDe();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    private void lanzarAcercaDe() {
-        Intent i = new Intent(this, AcercaDeActivity.class);
-        //mp.pause();
-        startActivity(i);
-    }*/
 }

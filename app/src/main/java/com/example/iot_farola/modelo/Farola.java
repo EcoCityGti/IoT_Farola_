@@ -3,30 +3,36 @@ package com.example.iot_farola.modelo;
 import com.example.iot_farola.modelo.GeoPunto;
 
 import java.io.Serializable;
-//-----Clase Farola-------------------------------------------------------------
-//------------------------------------------------------------------------------
+
 public class Farola implements Serializable {
     private String nombre;
     private String direccion;
     private GeoPunto posicion;
     private String foto;
-    private int telefono;
+    private Double humedad;
+    private Double temperatura;
+    private Double ruido;
+    private int luminosidad;
+    private double humo;
 
-//---------------------Constructor--------------------------------------------
+    // Constructor modificado
     public Farola(String nombre, String direccion, double longitud,
-                  double latitud, int telefono, String foto) {
-        //fecha = System.currentTimeMillis();
-        posicion = new GeoPunto(longitud, latitud);
+                  double latitud, String foto, Double humedad, Double temperatura, Double ruido, int luminosidad, double humo) {
+        this.posicion = new GeoPunto(longitud, latitud);
         this.nombre = nombre;
         this.direccion = direccion;
-        this.telefono = telefono;
+        this.humedad = humedad;
+        this.temperatura = temperatura;
+        this.ruido = ruido;
+        this.luminosidad = luminosidad;
+        this.humo = humo;
         this.foto = foto;
     }
-
     public Farola() {
         posicion = new GeoPunto(0.0,0.0);
     }
-//-----------------------Getters and Setters-------------------------------
+    // Getters y Setters
+
     public String getNombre() {
         return nombre;
     }
@@ -59,22 +65,57 @@ public class Farola implements Serializable {
         this.foto = foto;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public Double getHumedad() {
+        return humedad;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setHumedad(Double humedad) {
+        this.humedad = humedad;
     }
+
+    public Double getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(Double temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    public Double getRuido() {
+        return ruido;
+    }
+
+    public void setRuido(Double ruido) {
+        this.ruido = ruido;
+    }
+
+    public int getLuminosidad() {
+        return luminosidad;
+    }
+
+    public void setLuminosidad(int luminosidad) {
+        this.luminosidad = luminosidad;
+    }
+
+    public double getHumo() {
+        return humo;
+    }
+
+    public void setHumo(double humo) {
+        this.humo = humo;
+    }
+
     @Override
     public String toString() {
-        return "Lugar{" +
+        return "Farola{" +
                 "nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", posicion=" + posicion +
                 ", foto='" + foto + '\'' +
-                ", telefono=" + telefono +
+                ", humedad=" + humedad +
+                ", temperatura=" + temperatura +
+                ", ruido=" + ruido +
+                ", luminosidad=" + luminosidad +
                 '}';
     }
-
 }

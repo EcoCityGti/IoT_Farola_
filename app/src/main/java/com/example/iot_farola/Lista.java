@@ -8,21 +8,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.iot_farola.datos.AdaptadorFarolas;
+import com.example.iot_farola.datos.AdaptadorFarolasFirestoreUI;
 import com.example.iot_farola.datos.RepositorioFarolas;
 import com.example.iot_farola.modelo.Farola;
 import com.example.iot_farola.presentacion.VistaFarolaActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Lista extends Fragment {
     private RecyclerView recyclerView;
-    private AdaptadorFarolas adaptador;
+    private AdaptadorFarolasFirestoreUI adaptador;
     private RepositorioFarolas farolas;
-
+    private String id;
 
     public Lista() {
         // Constructor vacío requerido
@@ -36,30 +38,50 @@ public class Lista extends Fragment {
         // Inicializar RecyclerView y adaptador
         // Configura el adaptador con los datos que deseas mostrar
         // adaptador.setDatos(datos);
-        adaptador = ((Aplicacion) getApplicationContext()).adaptador;
-        farolas = ((Aplicacion) getApplicationContext()).farolas;
+        adaptador = ((Aplicacion) requireActivity().getApplication()).adaptador;
+        id = ((Aplicacion) requireActivity().getApplication()).farolaId;
+        farolas = ((Aplicacion) requireActivity().getApplication()).farolas;
         recyclerView = view.findViewById(R.id.RecyclerView);
         recyclerView.setAdapter(adaptador);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        recyclerView.setAdapter(adaptador);
+        adaptador.startListening();
         adaptador.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos= recyclerView.getChildAdapterPosition(v);
+                int pos = recyclerView.getChildAdapterPosition(v);
                 mostrarFarola(pos);
             }
         });
         return view;
     }
     void mostrarFarola(int pos) {
-        // Obtén la farola seleccionada
-        Farola farolaSeleccionada = ((Aplicacion) requireContext().getApplicationContext()).farolas.elemento(pos);
+        // Obtén el ID del documento de Firestore correspondiente a la posición
+        String documentId = adaptador.getSnapshots().getSnapshot(pos).getId();
 
-        // Crea un intent para abrir la actividad Gráfico
-        Intent intent = new Intent(requireContext(), VistaFarolaActivity.class);
-        intent.putExtra("pos", pos);
-        startActivity(intent);
+        // Accede a Firestore para obtener el campo "nombre" de la farola seleccionada
+        FirebaseFirestore.getInstance().collection("farolas").document(documentId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        // Obtiene el valor del campo "nombre" del documento
+                        String nombreFarola = documentSnapshot.getString("nombre");
+
+                        // Crea un intent para abrir la actividad VistaFarolaActivity
+                        Intent intent = new Intent(requireContext(), VistaFarolaActivity.class);
+                        // Pasa el nombre como un extra al intent
+                        intent.putExtra("nombreFarola", nombreFarola);
+                        startActivity(intent);
+                    } else {
+                        // El documento no existe
+                        Toast.makeText(requireContext(), "Documento no encontrado", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Maneja errores de lectura de Firestore
+                    Toast.makeText(requireContext(), "Error al obtener datos de Firestore", Toast.LENGTH_SHORT).show();
+                });
     }
+
 
 }

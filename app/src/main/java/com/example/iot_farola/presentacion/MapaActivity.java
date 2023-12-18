@@ -34,6 +34,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class MapaActivity extends Fragment
         implements OnMapReadyCallback {
@@ -55,33 +57,47 @@ public class MapaActivity extends Fragment
         return view;
     }
 
-    @Override public void onMapReady(GoogleMap googleMap) {
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
         mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        // Verificar y solicitar permisos de ubicación
         if (ActivityCompat.checkSelfPermission(requireActivity(),
                 ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mapa.setMyLocationEnabled(true);
             mapa.getUiSettings().setZoomControlsEnabled(true);
             mapa.getUiSettings().setCompassEnabled(true);
+        } else {
+            // Solicitar permisos si no están disponibles
+            requestLocationPermissions();
         }
-        if (farolas.tamaño() > 0) {
-            GeoPunto p = farolas.elemento(0).getPosicion();
-            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(p.getLatitud(), p.getLongitud()), 15));
-        }
-        for (int n=0; n<farolas.tamaño(); n++) {
-            Farola lugar = farolas.elemento(n);
-            GeoPunto p = lugar.getPosicion();
-            if (p != null && p.getLatitud() != 0) {
-                Bitmap iGrande = BitmapFactory.decodeResource(getResources(), R.drawable.marcador);
-                Bitmap icono = Bitmap.createScaledBitmap(iGrande,
-                        iGrande.getWidth() / 20, iGrande.getHeight() / 20, false);
-                mapa.addMarker(new MarkerOptions()
-                        .position(new LatLng(p.getLatitud(), p.getLongitud()))
-                        .title(lugar.getNombre()).snippet(lugar.getDireccion())
-                        .icon(BitmapDescriptorFactory.fromBitmap(icono)));
-            }
-        }
+
+        // Obtener datos de farolas desde Firebase
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("farolas")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Farola farola = document.toObject(Farola.class);
+                            GeoPunto p = farola.getPosicion();
+                            if (p != null && p.getLatitud() != 0) {
+                                // Crear marcador y agregar al mapa
+                                Bitmap iGrande = BitmapFactory.decodeResource(getResources(), R.drawable.marcador);
+                                Bitmap icono = Bitmap.createScaledBitmap(iGrande,
+                                        iGrande.getWidth() / 20, iGrande.getHeight() / 20, false);
+
+                                mapa.addMarker(new MarkerOptions()
+                                        .position(new LatLng(p.getLatitud(), p.getLongitud()))
+                                        .title(farola.getNombre()).snippet(farola.getDireccion())
+                                        .icon(BitmapDescriptorFactory.fromBitmap(icono)));
+                            }
+                        }
+                    } else {
+                        // Manejar errores al obtener datos de Firestore
+                    }
+                });
     }
     private boolean checkLocationPermissions() {
         return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED

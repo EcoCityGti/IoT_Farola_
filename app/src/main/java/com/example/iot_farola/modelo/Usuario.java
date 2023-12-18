@@ -9,24 +9,26 @@ public class Usuario {
     private String direccion;
     private String nombreUsuario;
     private long inicioSesion;
+    private String rol;
 
     // Empty constructor
     public Usuario() {
     }
 
     // Constructor with all parameters
-    public Usuario(String nombre, String correo, long inicioSesion, String telefono, String direccion, String nombreUsuario) {
+    public Usuario(String nombre, String correo, long inicioSesion, String telefono, String direccion, String nombreUsuario, String rol) {
         this.nombre = nombre;
         this.correo = correo;
         this.inicioSesion = inicioSesion;
         this.telefono = telefono;
         this.direccion = direccion;
         this.nombreUsuario = nombreUsuario;
+        this.rol = rol;
     }
 
     // Constructor with two parameters, using System.currentTimeMillis() for inicioSesion
-    public Usuario(String nombre, String correo, String telefono, String direccion, String nombreUsuario) {
-        this(nombre, correo, System.currentTimeMillis(),telefono, direccion, nombreUsuario);
+    public Usuario(String nombre, String correo, String telefono, String direccion, String nombreUsuario, String rol) {
+        this(nombre, correo, System.currentTimeMillis(),telefono, direccion, nombreUsuario, rol);
     }
 
     // Getter and setter methods for each attribute
@@ -77,5 +79,13 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

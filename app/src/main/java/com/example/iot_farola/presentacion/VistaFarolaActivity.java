@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,6 +43,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,15 +54,17 @@ import java.util.Date;
 
 public class VistaFarolaActivity extends AppCompatActivity {
     private static int RESQUEST_CODE =1234;
+    private StorageReference storageRef;
 
     private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 15485;
 
     private RepositorioFarolas farolas;
     private Uri uriUltimaFoto;
-    private int pos;
+    private String id;
     private Farola farola;
     private ImageView foto;
     private ImageView borrar;
+    private TextView nombre;
 
     ActivityResultLauncher<Intent> edicionLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -106,16 +112,16 @@ public class VistaFarolaActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_farola);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar);*/
         farolas = ((Aplicacion) getApplication()).farolas;
         Bundle extras = getIntent().getExtras();
-        pos = extras.getInt("pos", 0);
-        farola = farolas.elemento(pos);
+        id = extras.getString("nombreFarola", "id");
+        nombre = findViewById(R.id.nombre);
+        nombre.setText(id);
+        //farola = farolas.elemento(pos);
         foto = findViewById(R.id.foto);
         borrar =findViewById(R.id.borrar);
-        LineChart lineChart = findViewById(R.id.LineChart);
-        setupLineChart(lineChart);
+        storageRef = FirebaseStorage.getInstance().getReference();
+
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,89 +129,22 @@ public class VistaFarolaActivity extends AppCompatActivity {
             }
         });
     }
-    /*public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d("MainActivity", "onCreateOptionsMenu called");
-        getMenuInflater().inflate(R.menu.vista_lugar, menu);
-        return true;
-    }
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.action_settings) {
-            // Handle the settings action here.
-            return true;
-        } else if (itemId == R.id.acercaDe) {
-            // Handle the "Acerca de" action by launching the AcercaDeActivity.
-            lanzarAcercaDe();
-            return true;
-        } else if (itemId == R.id.accion_compartir) {
-            compartir(lugar);
-            return true;
-        } else if (itemId == R.id.accion_llegar) {
-            verMapa(lugar);
-            return true;
-        }else if (itemId == R.id.accion_borrar) {
-            borrarLugar(pos);
-            return true;
-        }else if(itemId == R.id.accion_editar){
-            editarLugar(pos,edicionLauncher);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     public void actualizaVistas() {
-        TextView nombre = findViewById(R.id.nombre);
+        nombre = findViewById(R.id.nombre);
         ImageView logoTipo = findViewById(R.id.logo_tipo);
         TextView tipo = findViewById(R.id.tipo);
         TextView direccion = findViewById(R.id.direccion);
         TextView telefono = findViewById(R.id.telefono);
         RatingBar valoracion = findViewById(R.id.valoracion);
         ImageView foto = findViewById(R.id.foto);
-        ponerFoto(foto, farola.getFoto());
+        //ponerFoto(foto, farola.getFoto());
 
-        nombre.setText(farola.getNombre());
-        direccion.setText(farola.getDireccion());
-        telefono.setText(Integer.toString(farola.getTelefono()));
-    }
-    /*void editarLugar(int pos,ActivityResultLauncher<Intent> launcher) {
-        Intent i = new Intent(this, EdicionLugarActivity.class);
-        i.putExtra("pos", pos);
-        launcher.launch(i);
-        //startActivity(i);
-        Toast.makeText(this, "Editar: " +
-                        ((Aplicacion) getApplication()).lugares.elemento(pos).getNombre(),
-                Toast.LENGTH_SHORT).show();
-    }
-    public void borrarLugar(int id) {
-        new AlertDialog.Builder(this)
-                .setTitle("Borrado de lugar")
-                .setMessage("¿Estás seguro que quieres eliminar este lugar?")
-                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        lugares.borrar(id);
-                        finish();
-                    }
-                })
-                .setNegativeButton("NO", null)
-                .show();
-    }*/
-    /*public void compartir(Farola farola) {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, farola.getNombre() + " - " + lugar.getUrl());
-        startActivity(i);
-    }*/
+        nombre.setText(id);
+        //direccion.setText(farola.getDireccion());
+        descargarYMostrarImagen();
 
-    public void llamarTelefono(Farola farola) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + farola.getTelefono())));
-        } else {
-            // Si no tienes permiso, solicita permiso antes de realizar la llamada
-            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, TU_CODIGO_DE_SOLICITUD_DE_PERMISO);
-        }
     }
-
 
     private void lanzarAcercaDe() {
         Intent i = new Intent(this, AcercaDeActivity.class);
@@ -214,9 +153,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
     }
 
 
-    public void llamarTelefono(View view) {
-        llamarTelefono(farola);
-    }
 
     public void fotoDeGaleria(View view) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT,
@@ -280,32 +216,42 @@ public class VistaFarolaActivity extends AppCompatActivity {
                 .setNegativeButton("NO", null)
                 .show();
     }
-    private void setupLineChart(LineChart lineChart) {
-        // Configuración del gráfico
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.getDescription().setEnabled(false);
 
-        // Agregar datos al gráfico de líneas (puedes llamar a tu método addDataToLineChart aquí)
-        addDataToLineChart(lineChart);
+    public void descargarYMostrarImagen() {
+        // Reemplaza "imagenes/imagen.jpg" con la referencia correcta en tu Firebase Storage
+        String name = nombre.getText().toString();
+        String referenciaFirebase = "farolas/"+name+"/"+name;
+
+        // Crear una referencia a la ubicación del archivo en Firebase Storage
+        StorageReference ficheroRef = storageRef.child(referenciaFirebase);
+
+        try {
+            // Crear un archivo temporal local donde se guardará la imagen descargada
+            File localFile = File.createTempFile("imagen", "jpg");
+
+            // Descargar la imagen en el archivo temporal local
+            ficheroRef.getFile(localFile)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // La descarga fue exitosa
+                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
+                        // como mostrar la imagen en tu interfaz de usuario
+                        mostrarImagen(localFile.getAbsolutePath());
+                    })
+                    .addOnFailureListener(exception -> {
+                        // La descarga falló. Maneja el error aquí.
+                        // Puedes mostrar un mensaje de error o realizar acciones de recuperación.
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    private void addDataToLineChart(LineChart lineChart) {
-        ArrayList<Entry> entries = new ArrayList<>();
+    private void mostrarImagen(String filePath) {
+        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
+        // Por ejemplo, puedes establecer la imagen en un ImageView.
+        // Aquí hay un ejemplo básico:
 
-        // Agregar datos de ejemplo (puedes reemplazarlos con tus propios datos)
-        entries.add(new Entry(1f, 10f));
-        entries.add(new Entry(2f, 25f));
-        entries.add(new Entry(3f, 15f));
-        entries.add(new Entry(4f, 32f));
-        entries.add(new Entry(5f, 18f));
-
-        LineDataSet dataSet = new LineDataSet(entries, "Datos de Ejemplo");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSet);
-
-        LineData lineData = new LineData(dataSets);
-        lineChart.setData(lineData);
+        ImageView imageView = findViewById(R.id.imageFarola); // Reemplaza con el ID de tu ImageView
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        imageView.setImageBitmap(bitmap);
     }
-
 }

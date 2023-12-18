@@ -14,7 +14,6 @@ import com.example.iot_farola.modelo.Farola;
 import com.example.iot_farola.modelo.GeoPunto;
 import com.example.iot_farola.R;
 
-
 public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.ViewHolder> {
 
     protected RepositorioFarolas farolas;
@@ -26,40 +25,45 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
 
     public AdaptadorFarolas(RepositorioFarolas farolas) {
         this.farolas = farolas;
-        this.numItems=farolas.tamaño();
+        this.numItems = farolas.tamaño();
     }
 
-    //Creamos nuestro ViewHolder, con los tipos de elementos a modificar
+    // Creamos nuestro ViewHolder, con los tipos de elementos a modificar
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView nombre,direccion;
-            public ImageView foto;
-            public RatingBar valoracion;
-            public ViewHolder(View itemView){
-                super(itemView);
-                nombre = (TextView) itemView.findViewById(R.id.nombre);
-                direccion = (TextView) itemView.findViewById(R.id.direccion);;
-                foto = (ImageView) itemView.findViewById(R.id.foto);
-                valoracion = (RatingBar) itemView.findViewById(R.id.valoracion);
-                distancia = (TextView) itemView.findViewById(R.id.distancia);
-            }
+        public TextView nombre, direccion, humedad, temperatura, ruido, luminosidad;
+        public ImageView foto;
+        public RatingBar valoracion;
 
-
+        public ViewHolder(View itemView) {
+            super(itemView);
+            nombre = itemView.findViewById(R.id.nombre);
+            direccion = itemView.findViewById(R.id.direccion);
+            /*humedad = itemView.findViewById(R.id.humedad);
+            temperatura = itemView.findViewById(R.id.temperatura);
+            ruido = itemView.findViewById(R.id.ruido);
+            luminosidad = itemView.findViewById(R.id.luminosidad);*/
+            foto = itemView.findViewById(R.id.foto);
+            //valoracion = itemView.findViewById(R.id.valoracion);
+            distancia = itemView.findViewById(R.id.distancia);
+        }
 
         // Personalizamos un ViewHolder a partir de un lugar
-        public void personaliza(Farola lugar) {
-            nombre.setText(lugar.getNombre());
-            direccion.setText(lugar.getDireccion());
+        public void personaliza(Farola farola) {
+            nombre.setText(farola.getNombre());
+            direccion.setText(farola.getDireccion());
+            /*humedad.setText("Humedad: " + farola.getHumedad());
+            temperatura.setText("Temperatura: " + farola.getTemperatura());
+            ruido.setText("Ruido: " + farola.getRuido());
+            luminosidad.setText("Luminosidad: " + farola.getLuminosidad());*/
             foto.setScaleType(ImageView.ScaleType.FIT_END);
-            GeoPunto pos=((Aplicacion) itemView.getContext().getApplicationContext())
-                    .posicionActual;
-            if (pos.equals(GeoPunto.SIN_POSICION) ||
-                    lugar.getPosicion().equals(GeoPunto.SIN_POSICION)) {
+            GeoPunto pos = ((Aplicacion) itemView.getContext().getApplicationContext()).posicionActual;
+            if (pos.equals(GeoPunto.SIN_POSICION) || farola.getPosicion().equals(GeoPunto.SIN_POSICION)) {
                 distancia.setText("... Km");
             } else {
-                int d=(int) pos.distancia(lugar.getPosicion());
+                int d = (int) pos.distancia(farola.getPosicion());
                 if (d < 2000) distancia.setText(d + " m");
-                else          distancia.setText(d / 1000 + " Km");
+                else distancia.setText(d / 1000 + " Km");
             }
         }
     }
@@ -75,25 +79,27 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
 
     // Usando como base el ViewHolder y lo personalizamos
     @Override
-    public void onBindViewHolder(ViewHolder holder, int posicion) {
-        Farola farola = farolas.elemento(posicion);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Farola farola = farolas.elemento(position);
         holder.personaliza(farola);
     }
 
     // Indicamos el número de elementos de la lista
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return numItems;
     }
 
     public void setOnItemClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-    public void setNumItems(int numItems){
+
+    public void setNumItems(int numItems) {
         this.numItems = numItems;
     }
+
     public void updateNumItems(int newNumItems) {
         numItems = newNumItems;
         notifyDataSetChanged();
     }
-
 }

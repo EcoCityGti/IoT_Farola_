@@ -89,7 +89,7 @@ public class Tab1 extends Fragment {
                 }
         ).attach();
         LineChart lineChart = v.findViewById(R.id.LineChart);
-        setupLineChart(lineChart);
+        //setupLineChart(lineChart);
 
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
@@ -139,32 +139,4 @@ public class Tab1 extends Fragment {
         }
         return v;
     }
-    private void setupLineChart(LineChart lineChart) {
-        // Configuración del gráfico
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.getDescription().setEnabled(false);
-
-        // Agregar datos al gráfico de líneas (puedes llamar a tu método addDataToLineChart aquí)
-        addDataToLineChart(lineChart);
-    }
-    private void addDataToLineChart(LineChart lineChart) {
-        ArrayList<Entry> entries = new ArrayList<>();
-
-        // Agregar datos de ejemplo (puedes reemplazarlos con tus propios datos)
-        entries.add(new Entry(1f, 10f));
-        entries.add(new Entry(2f, 25f));
-        entries.add(new Entry(3f, 15f));
-        entries.add(new Entry(4f, 32f));
-        entries.add(new Entry(5f, 18f));
-
-        LineDataSet dataSet = new LineDataSet(entries, "Datos de Ejemplo");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSet);
-
-        LineData lineData = new LineData(dataSets);
-        lineChart.setData(lineData);
-    }
-
 }

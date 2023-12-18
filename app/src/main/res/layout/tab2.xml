@@ -56,6 +56,27 @@
             android:progress="50"
             android:progressTint="@color/black" />
 
+        <Button
+            android:id="@+id/Emergencias"
+            style="@style/boton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="500dp"
+            android:layout_marginRight="48dp"
+            android:drawableLeft="@drawable/fui_ic_phone_white_24dp"
+            android:text="112"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="30dp" />
+
+        <GridView
+            android:id="@+id/tabla_sensores"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_marginTop="245dp"
+            android:numColumns="2" />
+
     </androidx.cardview.widget.CardView>
 
     <com.android.volley.toolbox.NetworkImageView
