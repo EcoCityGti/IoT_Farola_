@@ -1,7 +1,9 @@
 package com.example.iot_farola.presentacion;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +46,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +58,9 @@ public class Tab4 extends Fragment {
     Button btnAnonimo;
     private  EditText correo, telf, nusu, postal, contr, nombre;
     private DocumentReference userRef;
-
+    private StorageReference storageRef;
+    private FirebaseUser usuario;
+    private ImageView fotoUsuario;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
@@ -63,7 +72,32 @@ public class Tab4 extends Fragment {
         View v = inflater.inflate(R.layout.edicion_cuenta, container, false);
         Toolbar toolbar = v.findViewById(R.id.toolbar1);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        usuario = FirebaseAuth.getInstance().getCurrentUser();
+        storageRef = FirebaseStorage.getInstance().getReference();
+        fotoUsuario = v.findViewById(R.id.imageView8);
+        Button subirFoto = v.findViewById(R.id.subirFoto);
+        subirFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    subirArchivo(v);
+                    Log.d("Subir foto perfil","va bien");
+                }catch (Exception e){
+                    Log.d("Subir foto perfil",e.toString());
+                }
+            }
+        });
+        fotoUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    descargarYMostrarImagen(v);
+                    Log.d("Subir foto perfil","va bien");
+                }catch (Exception e){
+                    Log.d("Subir foto perfil",e.toString());
+                }
+            }
+        });
         RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
         ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
                 new ImageLoader.ImageCache() {
@@ -408,6 +442,78 @@ public class Tab4 extends Fragment {
                     }
                 });
     }
+    public void subirArchivo(View v){
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+        startActivityForResult(i, 1234);
+    }
+    @Override
+    public void onActivityResult(final int requestCode,
+                                 final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String name = usuario.getUid().toString();
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 1234) {
+                subirFichero(data.getData(), "usuarios/"+name+"/"+name);
+            }
+        }
+    }
+    public void subirFichero(Uri uri, String referenciaFirebase) {
+        if (uri != null) {
+            // Obtener la referencia de Firebase Storage utilizando la referencia proporcionada
+            StorageReference ficheroRef = storageRef.child(referenciaFirebase);
 
+            // Subir el archivo a Firebase Storage
+            ficheroRef.putFile(uri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // La subida fue exitosa
+                        // Aquí puedes realizar acciones adicionales después de la subida exitosa
+                        // como mostrar un mensaje de éxito o actualizar la interfaz de usuario
+                    })
+                    .addOnFailureListener(exception -> {
+                        // La subida falló. Maneja el error aquí.
+                        // Puedes mostrar un mensaje de error o realizar acciones de recuperación.
+                    });
+        } else {
+            // El URI es nulo, maneja este caso según sea necesario
+        }
+    }
+    public void descargarYMostrarImagen(View v) {
+        // Reemplaza "imagenes/imagen.jpg" con la referencia correcta en tu Firebase Storage
+        String name = usuario.getUid().toString();
+        String referenciaFirebase = "usuarios/"+name+"/"+name;
+
+        // Crear una referencia a la ubicación del archivo en Firebase Storage
+        StorageReference ficheroRef = storageRef.child(referenciaFirebase);
+
+        try {
+            // Crear un archivo temporal local donde se guardará la imagen descargada
+            File localFile = File.createTempFile("imagen", "jpg");
+
+            // Descargar la imagen en el archivo temporal local
+            ficheroRef.getFile(localFile)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // La descarga fue exitosa
+                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
+                        // como mostrar la imagen en tu interfaz de usuario
+                        mostrarImagen(localFile.getAbsolutePath());
+                    })
+                    .addOnFailureListener(exception -> {
+                        // La descarga falló. Maneja el error aquí.
+                        // Puedes mostrar un mensaje de error o realizar acciones de recuperación.
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarImagen(String filePath) {
+        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
+        // Por ejemplo, puedes establecer la imagen en un ImageView.
+        // Aquí hay un ejemplo básico:
+
+        // Reemplaza con el ID de tu ImageView
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        fotoUsuario.setImageBitmap(bitmap);
+    }
 
 }

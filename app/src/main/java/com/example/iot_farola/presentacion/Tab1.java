@@ -2,6 +2,7 @@ package com.example.iot_farola.presentacion;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -15,9 +16,11 @@ import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -38,19 +41,25 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tab1 extends Fragment {
     private RecyclerView recyclerView;
     public AdaptadorFarolas adaptador;
     private RepositorioFarolas farolas;
-
-
+    private StorageReference storageRef;
+    private ImageView fotoUsuario;
+    private FirebaseUser usuario;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,8 +67,10 @@ public class Tab1 extends Fragment {
         View v = inflater.inflate(R.layout.tab1, container, false);
         ViewPager2 viewpager = v.findViewById(R.id.viewPaGer);
         viewpager.setAdapter(new com.example.iot_farola.MiPageAdapter1(requireActivity()));
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+        usuario = FirebaseAuth.getInstance().getCurrentUser();
         TextView nombre = v.findViewById(R.id.nombre);
+        storageRef = FirebaseStorage.getInstance().getReference();
+        fotoUsuario = v.findViewById(R.id.perfil);
         nombre.setText(usuario.getDisplayName());
         if(usuario.isAnonymous()){
             nombre.setText("Invitado/a");
@@ -88,55 +99,45 @@ public class Tab1 extends Fragment {
                     }
                 }
         ).attach();
-        LineChart lineChart = v.findViewById(R.id.LineChart);
-        //setupLineChart(lineChart);
 
-        RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
-        ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
-                new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache =
-                            new LruCache<String, Bitmap>(10);
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-                    public Bitmap getBitmap(String url) {
-                        Bitmap output = cache.get(url);
-
-                        if (output == null) {
-                            // La imagen no está en la caché, no podemos aplicar el recorte circular.
-                            return null;
-                        }
-
-                        int width = output.getWidth();
-                        int height = output.getHeight();
-                        int diameter = Math.min(width, height);
-                        Bitmap circularBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-
-                        Canvas canvas = new Canvas(circularBitmap);
-                        final int color = 0xff424242;
-                        final Paint paint = new Paint();
-                        final Rect rect = new Rect(0, 0, diameter, diameter);
-                        final RectF rectF = new RectF(rect);
-                        final float roundPx = diameter / 2;
-
-                        paint.setAntiAlias(true);
-                        canvas.drawARGB(0, 0, 0, 0);
-                        paint.setColor(color);
-                        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-                        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-                        canvas.drawBitmap(output, rect, rect, paint);
-
-                        return circularBitmap;
-                    }
-
-                });
-// Foto de usuario
-        Uri urlImagen = usuario.getPhotoUrl();
-        if (urlImagen != null) {
-            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen1);
-            foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }
+        descargarYMostrarImagen();
         return v;
+    }
+    public void descargarYMostrarImagen() {
+        // Reemplaza "imagenes/imagen.jpg" con la referencia correcta en tu Firebase Storage
+        String name = usuario.getUid().toString();
+        String referenciaFirebase = "usuarios/"+name+"/"+name;
+
+        // Crear una referencia a la ubicación del archivo en Firebase Storage
+        StorageReference ficheroRef = storageRef.child(referenciaFirebase);
+
+        try {
+            // Crear un archivo temporal local donde se guardará la imagen descargada
+            File localFile = File.createTempFile("imagen", "jpg");
+
+            // Descargar la imagen en el archivo temporal local
+            ficheroRef.getFile(localFile)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // La descarga fue exitosa
+                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
+                        // como mostrar la imagen en tu interfaz de usuario
+                        mostrarImagen(localFile.getAbsolutePath());
+                    })
+                    .addOnFailureListener(exception -> {
+                        // La descarga falló. Maneja el error aquí.
+                        // Puedes mostrar un mensaje de error o realizar acciones de recuperación.
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarImagen(String filePath) {
+        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
+        // Por ejemplo, puedes establecer la imagen en un ImageView.
+        // Aquí hay un ejemplo básico:
+
+        // Reemplaza con el ID de tu ImageView
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        fotoUsuario.setImageBitmap(bitmap);
     }
 }
