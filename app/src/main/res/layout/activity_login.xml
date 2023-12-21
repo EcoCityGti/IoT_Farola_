@@ -58,7 +58,7 @@
         android:text="Iniciar sesión con Facebook"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/btnSignInWithEmail"
         app:layout_constraintEnd_toStartOf="@+id/btnSignInWithTwitter"
         app:layout_constraintHorizontal_bias="0.5"
