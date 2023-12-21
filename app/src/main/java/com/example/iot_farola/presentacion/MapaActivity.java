@@ -57,6 +57,7 @@ public class MapaActivity extends Fragment
         return view;
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
@@ -72,6 +73,12 @@ public class MapaActivity extends Fragment
             // Solicitar permisos si no están disponibles
             requestLocationPermissions();
         }
+
+        // Centrar el mapa en la Comunidad Valenciana
+        LatLng comunidadValenciana = new LatLng(39.4699, -0.3763); // Coordenadas aproximadas de la Comunidad Valenciana
+        float zoomLevel = 7.0f; // Puedes ajustar el nivel de zoom según tus preferencias
+
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(comunidadValenciana, zoomLevel));
 
         // Obtener datos de farolas desde Firebase
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -99,6 +106,7 @@ public class MapaActivity extends Fragment
                     }
                 });
     }
+
     private boolean checkLocationPermissions() {
         return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;

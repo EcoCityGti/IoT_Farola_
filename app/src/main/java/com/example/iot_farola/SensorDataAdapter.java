@@ -28,14 +28,14 @@ public class SensorDataAdapter extends ArrayAdapter<String> {
         // Change the icon based on the data type
         String sensorData = getItem(position);
         if (iconImageView != null && sensorData != null) {
-            if (sensorData.contains("25°C")) {
+            if (sensorData.contains("ºC")) {
                 iconImageView.setImageResource(R.drawable.baseline_thermostat_24);
-            } else if (sensorData.contains("60%")) {
+            } else if (sensorData.contains("%")) {
                 iconImageView.setImageResource(R.drawable.baseline_water_drop_24);
-            } else if (sensorData.contains("50dB")) {
+            } else if (sensorData.contains("dB")) {
                 iconImageView.setImageResource(R.drawable.baseline_volume_up_24);
-            } else if (sensorData.contains("800l")) {
-                iconImageView.setImageResource(R.drawable.baseline_light_24);
+            } else if (sensorData.contains("l")) {
+                iconImageView.setImageResource(R.drawable.baseline_local_fire_department_24);
             } else {
                 // Default icon
                 iconImageView.setImageResource(R.drawable.farolasin);

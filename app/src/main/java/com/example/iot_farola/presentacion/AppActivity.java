@@ -150,5 +150,4 @@ public class AppActivity extends AppCompatActivity {
         // Desregistrar el BroadcastReceiver al destruir la actividad
         unregisterReceiver(chargingStateReceiver);
     }
-
 }

@@ -60,6 +60,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 1; // Puedes elegir cualquier número
     private TextView nombre;
     private FirebaseFirestore db;
+    private List<String> dataList = new ArrayList<>();  // Declara tu lista de datos como un miembro de la clase
+    SensorDataAdapter sensorAdapter;
     private TextView luz;
     private int valorNumerico;
     private Button mas,menos;
@@ -81,7 +83,11 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         nombre.setText(aplicacion.farolaId);
         db = FirebaseFirestore.getInstance();
         valorNumerico=50;
+        obtenerValorTemperatura();
+        obtenerValorRuido();
+        obtenerValorHumedad();
         actualizarTextView();
+        obtenerValorHumo();
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +121,7 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         List<String> sensorDataList = DataList();
 
 // Create a custom adapter with the data
-        SensorDataAdapter sensorAdapter = new SensorDataAdapter(requireContext(), sensorDataList);
+        sensorAdapter = new SensorDataAdapter(requireContext(), sensorDataList);
 
 // Set the adapter for the GridView
         gridView.setAdapter(sensorAdapter);
@@ -146,13 +152,14 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         }
     }
     private List<String> DataList() {
-        List<String> Data = new ArrayList<>();
-        Data.add("25°C");
-        Data.add("60%");
-        Data.add("50dB");
-        Data.add("800l");
-        // Add more dummy data as needed
-        return Data;
+        // Llena tu lista de datos con los valores actuales o inicia con valores predeterminados
+        dataList.clear();  // Limpia la lista antes de agregar nuevos elementos
+        dataList.add("25°C");
+        dataList.add("60%");
+        dataList.add("50dB");
+        dataList.add("800l");
+        // Puedes agregar más elementos o realizar cualquier otra lógica necesaria
+        return dataList;
     }
 
 
@@ -246,7 +253,10 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     @Override
     public void onResume() {
         super.onResume();
-
+        obtenerValorHumedad();
+        obtenerValorTemperatura();
+        obtenerValorHumo();
+        obtenerValorRuido();
         // Actualiza el texto de nombre cada vez que el fragmento está en primer plano
         actualizarNombre();
     }
@@ -256,5 +266,165 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
 
         // Actualiza el texto de nombre con el valor de farolaId
         nombre.setText(aplicacion.farolaId);
+    }
+    private void obtenerValorHumedad() {
+        // Obtén el nombre de la farola
+        String nombreFarola = nombre.getText().toString();
+
+        // Accede a la colección "medidas" en Firestore
+        CollectionReference medidasCollection = FirebaseFirestore.getInstance().collection("medidas");
+
+        // Obtiene una referencia al documento específico
+        DocumentReference documentoRef = medidasCollection.document(nombreFarola);
+
+        // Realiza la lectura del documento
+        documentoRef.addSnapshotListener((documentSnapshot, e) -> {
+            if (e != null) {
+                // Manejar el error
+                Log.e(TAG, "Error al obtener el valor de humedad: ", e);
+                return;
+            }
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                // El documento existe, ahora verifica si contiene el campo "humedad"
+                if (documentSnapshot.contains("humedad")) {
+                    // Obtiene el valor de "humedad"
+                    double valorHumedad = documentSnapshot.getDouble("humedad");
+                    // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
+                    Log.d(TAG, "Valor de humedad: " + valorHumedad);
+
+                    // Actualiza la lista de datos con el nuevo valor de humedad
+                    dataList.set(1, String.valueOf(valorHumedad) + "%");
+                    // Actualiza la interfaz de usuario con la nueva lista de datos
+                    sensorAdapter.notifyDataSetChanged();
+                } else {
+                    // El documento no contiene el campo "humedad"
+                    Log.d(TAG, "El documento no contiene el campo 'humedad'");
+                }
+            } else {
+                // El documento no existe
+                Log.d(TAG, "El documento no existe");
+            }
+        });
+    }
+    private void obtenerValorTemperatura() {
+        // Obtén el nombre de la farola
+        String nombreFarola = nombre.getText().toString();
+
+        // Accede a la colección "medidas" en Firestore
+        CollectionReference medidasCollection = FirebaseFirestore.getInstance().collection("medidas");
+
+        // Obtiene una referencia al documento específico
+        DocumentReference documentoRef = medidasCollection.document(nombreFarola);
+
+        // Realiza la lectura del documento
+        documentoRef.addSnapshotListener((documentSnapshot, e) -> {
+            if (e != null) {
+                // Manejar el error
+                Log.e(TAG, "Error al obtener el valor de temperatura: ", e);
+                return;
+            }
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                // El documento existe, ahora verifica si contiene el campo "humedad"
+                if (documentSnapshot.contains("temperatura")) {
+                    // Obtiene el valor de "humedad"
+                    double valorHumedad = documentSnapshot.getDouble("temperatura");
+                    // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
+                    Log.d(TAG, "Valor de temperatura: " + valorHumedad);
+
+                    // Actualiza la lista de datos con el nuevo valor de humedad
+                    dataList.set(0, String.valueOf(valorHumedad) + "ºC");
+                    // Actualiza la interfaz de usuario con la nueva lista de datos
+                    sensorAdapter.notifyDataSetChanged();
+                } else {
+                    // El documento no contiene el campo "humedad"
+                    Log.d(TAG, "El documento no contiene el campo 'temperatura'");
+                }
+            } else {
+                // El documento no existe
+                Log.d(TAG, "El documento no existe");
+            }
+        });
+    }
+    private void obtenerValorRuido() {
+        // Obtén el nombre de la farola
+        String nombreFarola = nombre.getText().toString();
+
+        // Accede a la colección "medidas" en Firestore
+        CollectionReference medidasCollection = FirebaseFirestore.getInstance().collection("medidas");
+
+        // Obtiene una referencia al documento específico
+        DocumentReference documentoRef = medidasCollection.document(nombreFarola);
+
+        // Realiza la lectura del documento
+        documentoRef.addSnapshotListener((documentSnapshot, e) -> {
+            if (e != null) {
+                // Manejar el error
+                Log.e(TAG, "Error al obtener el valor de temperatura: ", e);
+                return;
+            }
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                // El documento existe, ahora verifica si contiene el campo "humedad"
+                if (documentSnapshot.contains("ruido")) {
+                    // Obtiene el valor de "humedad"
+                    double valorHumedad = documentSnapshot.getDouble("ruido");
+                    // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
+                    Log.d(TAG, "Valor de ruido: " + valorHumedad);
+
+                    // Actualiza la lista de datos con el nuevo valor de humedad
+                    dataList.set(2, String.valueOf(valorHumedad) + "dB");
+                    // Actualiza la interfaz de usuario con la nueva lista de datos
+                    sensorAdapter.notifyDataSetChanged();
+                } else {
+                    // El documento no contiene el campo "humedad"
+                    Log.d(TAG, "El documento no contiene el campo 'ruido'");
+                }
+            } else {
+                // El documento no existe
+                Log.d(TAG, "El documento no existe");
+            }
+        });
+    }
+    private void obtenerValorHumo() {
+        // Obtén el nombre de la farola
+        String nombreFarola = nombre.getText().toString();
+
+        // Accede a la colección "medidas" en Firestore
+        CollectionReference medidasCollection = FirebaseFirestore.getInstance().collection("medidas");
+
+        // Obtiene una referencia al documento específico
+        DocumentReference documentoRef = medidasCollection.document(nombreFarola);
+
+        // Realiza la lectura del documento
+        documentoRef.addSnapshotListener((documentSnapshot, e) -> {
+            if (e != null) {
+                // Manejar el error
+                Log.e(TAG, "Error al obtener el valor de humo: ", e);
+                return;
+            }
+
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                // El documento existe, ahora verifica si contiene el campo "humedad"
+                if (documentSnapshot.contains("humo")) {
+                    // Obtiene el valor de "humedad"
+                    double valorHumedad = documentSnapshot.getDouble("humo");
+                    // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
+                    Log.d(TAG, "Valor de humo: " + valorHumedad);
+
+                    // Actualiza la lista de datos con el nuevo valor de humedad
+                    dataList.set(3, String.valueOf(valorHumedad) + "l");
+                    // Actualiza la interfaz de usuario con la nueva lista de datos
+                    sensorAdapter.notifyDataSetChanged();
+                } else {
+                    // El documento no contiene el campo "humedad"
+                    Log.d(TAG, "El documento no contiene el campo 'humo'");
+                }
+            } else {
+                // El documento no existe
+                Log.d(TAG, "El documento no existe");
+            }
+        });
     }
 }

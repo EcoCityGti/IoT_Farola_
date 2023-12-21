@@ -225,7 +225,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
     public void descargarYMostrarImagen() {
         // Reemplaza "imagenes/imagen.jpg" con la referencia correcta en tu Firebase Storage
         String name = nombre.getText().toString();
-        String referenciaFirebase = "farolas/"+name+"/"+name+"/foto.jpg";
+        String referenciaFirebase = "farolas/"+name+"/"+name;
 
         // Crear una referencia a la ubicación del archivo en Firebase Storage
         StorageReference ficheroRef = storageRef.child(referenciaFirebase);
