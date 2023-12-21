@@ -20,7 +20,7 @@ public class Aplicacion extends Application {
     public RepositorioFarolas farolas;
 
     public AdaptadorFarolasFirestoreUI adaptador;
-    public String farolaId="";
+    public String farolaId="id";
 
 
 

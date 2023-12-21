@@ -41,10 +41,13 @@ import com.example.iot_farola.Aplicacion;
 import com.example.iot_farola.R;
 import com.example.iot_farola.SensorDataAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -56,7 +59,12 @@ import java.util.List;
 public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 1; // Puedes elegir cualquier número
     private TextView nombre;
+    private FirebaseFirestore db;
+
     private String id;
+    private TextView luz;
+    private int valorNumerico;
+    private Button mas,menos;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +73,16 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab2, container, false);
+        Aplicacion aplicacion = (Aplicacion) requireActivity().getApplication();
         FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         Button emergency = v.findViewById(R.id.Emergencias);
         nombre = v.findViewById(R.id.textView24);  // Asegúrate de inicializar farolas
-
-        nombre.setText("id");
+        luz = v.findViewById(R.id.luminosidad);
+        mas = v.findViewById(R.id.btnmas);
+        menos = v.findViewById(R.id.btnmenos);
+        nombre.setText(aplicacion.farolaId);
+        db = FirebaseFirestore.getInstance();
+        valorNumerico=0;
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,53 +96,20 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 }
             }
         });
-
-        RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
-        ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
-                new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache =
-                            new LruCache<String, Bitmap>(10);
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-                    public Bitmap getBitmap(String url) {
-                        Bitmap output = cache.get(url);
-
-                        if (output == null) {
-                            // La imagen no está en la caché, no podemos aplicar el recorte circular.
-                            return null;
-                        }
-
-                        int width = output.getWidth();
-                        int height = output.getHeight();
-                        int diameter = Math.min(width, height);
-                        Bitmap circularBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-
-                        Canvas canvas = new Canvas(circularBitmap);
-                        final int color = 0xff424242;
-                        final Paint paint = new Paint();
-                        final Rect rect = new Rect(0, 0, diameter, diameter);
-                        final RectF rectF = new RectF(rect);
-                        final float roundPx = diameter / 2;
-
-                        paint.setAntiAlias(true);
-                        canvas.drawARGB(0, 0, 0, 0);
-                        paint.setColor(color);
-                        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-                        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-                        canvas.drawBitmap(output, rect, rect, paint);
-
-                        return circularBitmap;
-                    }
-
-                });
-// Foto de usuario
-        Uri urlImagen = usuario.getPhotoUrl();
-        if (urlImagen != null) {
-            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen3);
-            foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }
+        mas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_mas(v);
+                //subirLuminosidad(v);
+            }
+        });
+        menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_menos(v);
+                //subirLuminosidad(v);
+            }
+        });
         GridView gridView = v.findViewById(R.id.tabla_sensores);
 
 // Create a list of dummy sensor data
@@ -208,6 +188,37 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 }
             }
         });
+    }
+    public void btn_menos(View v) {
+        // Resta 5 al valor numérico
+        valorNumerico -= 5;
+
+        // Asegúrate de que el valor no sea menor que 0
+        if (valorNumerico < 0) {
+            valorNumerico = 0;
+        }
+
+        // Actualiza el TextView
+        actualizarTextView();
+        //subirLuminosidad();
+    }
+    public void btn_mas(View v) {
+        // Suma 5 al valor numérico
+        valorNumerico += 5;
+
+        // Asegúrate de que el valor no supere el límite superior
+        if (valorNumerico > 100) {
+            valorNumerico = 100;
+        }
+
+        // Actualiza el TextView
+        actualizarTextView();
+        //subirLuminosidad();
+    }
+
+    private void actualizarTextView() {
+        // Muestra el valor numérico actual en el TextView
+        luz.setText(String.valueOf(valorNumerico));
     }
 
 }

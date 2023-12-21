@@ -30,44 +30,44 @@
 
             <CheckBox
                 android:id="@+id/checkBox3"
-                android:layout_width="match_parent"
+                android:layout_width="329dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="220dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Lee los detalles de los 4 sensores" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
-                android:layout_width="match_parent"
+                android:layout_width="276dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="110dp"
                 android:layout_marginEnd="220dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Cambia de Apodoen tu perfil" />
 
             <CheckBox
                 android:id="@+id/checkBox5"
-                android:layout_width="match_parent"
+                android:layout_width="307dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="160dp"
                 android:layout_marginEnd="220dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Canjea EcoCoins para obtener beneficios" />
 
             <CheckBox
                 android:id="@+id/checkBox6"
-                android:layout_width="match_parent"
+                android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="210dp"
                 android:layout_marginEnd="220dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Bájale la intensidad a una Farola Inteligente" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/Tutorial"
@@ -207,7 +207,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Completa el resto de desafíos" />
 
             <CheckBox
                 android:id="@+id/checkBox14"
@@ -216,7 +216,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="110dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Visita 4 farolas distintas" />
 
             <CheckBox
                 android:id="@+id/checkBox13"
@@ -225,7 +225,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="160dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Inicia sesión en la App durante 5 días seguidos" />
 
             <CheckBox
                 android:id="@+id/checkBox12"
@@ -235,7 +235,7 @@
                 android:layout_marginTop="210dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/raleway"
-                android:text="CheckBox" />
+                android:text="Comparte la App con 3 amigos distintos" />
         </androidx.cardview.widget.CardView>
 
         <com.android.volley.toolbox.NetworkImageView

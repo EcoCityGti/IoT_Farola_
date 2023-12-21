@@ -117,7 +117,8 @@ public class VistaFarolaActivity extends AppCompatActivity {
         id = extras.getString("nombreFarola", "id");
         nombre = findViewById(R.id.nombre);
         nombre.setText(id);
-        //farola = farolas.elemento(pos);
+        Aplicacion aplicacion = (Aplicacion) getApplication();
+        aplicacion.farolaId=nombre.getText().toString();
         foto = findViewById(R.id.foto);
         borrar =findViewById(R.id.borrar);
         storageRef = FirebaseStorage.getInstance().getReference();
