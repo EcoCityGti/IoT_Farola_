@@ -1,5 +1,7 @@
 package com.example.iot_farola.presentacion;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -43,6 +45,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -64,7 +71,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
     private Farola farola;
     private ImageView foto;
     private ImageView borrar;
-    private TextView nombre;
+    private TextView nombre,direcciontxt;
 
     ActivityResultLauncher<Intent> edicionLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -135,7 +142,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
         nombre = findViewById(R.id.nombre);
         ImageView logoTipo = findViewById(R.id.logo_tipo);
         TextView tipo = findViewById(R.id.tipo);
-        TextView direccion = findViewById(R.id.direccion);
+        direcciontxt = findViewById(R.id.direccion);
         TextView telefono = findViewById(R.id.telefono);
         RatingBar valoracion = findViewById(R.id.valoracion);
         ImageView foto = findViewById(R.id.foto);
@@ -144,7 +151,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
         nombre.setText(id);
         //direccion.setText(farola.getDireccion());
         descargarYMostrarImagen();
-
+        obtenerDireccion();
     }
 
     private void lanzarAcercaDe() {
@@ -152,9 +159,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
         //mp.pause();
         startActivity(i);
     }
-
-
-
     public void fotoDeGaleria(View view) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -246,6 +250,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void mostrarImagen(String filePath) {
         // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
         // Por ejemplo, puedes establecer la imagen en un ImageView.
@@ -255,4 +260,34 @@ public class VistaFarolaActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         imageView.setImageBitmap(bitmap);
     }
+    private void obtenerDireccion() {
+        // Obtiene una referencia al documento dentro de la colección "farola" con el nombre proporcionado
+        String nombreFarola = nombre.getText().toString();
+        DocumentReference farolaRef = FirebaseFirestore.getInstance().collection("farolas").document(nombreFarola);
+
+        // Realiza la lectura del documento
+        farolaRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Verifica si el documento existe
+                    if (task.getResult().exists()) {
+                        // Obtiene el valor del campo "direccion"
+                        String direccion = task.getResult().getString("direccion");
+                        direcciontxt.setText(direccion);
+                        // Utiliza la dirección como sea necesario (por ejemplo, actualiza un TextView)
+                        // Ejemplo: textViewDireccion.setText(direccion);
+                    } else {
+                        // El documento no existe
+                        // Puedes manejar esta situación según tus necesidades
+                    }
+                } else {
+                    // Maneja cualquier error que pueda ocurrir durante la lectura
+                    Log.e(TAG, "Error al obtener la dirección: " + task.getException());
+                }
+            }
+        });
+    }
+
+
 }

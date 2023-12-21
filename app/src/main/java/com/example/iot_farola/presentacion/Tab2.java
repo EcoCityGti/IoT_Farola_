@@ -60,8 +60,6 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 1; // Puedes elegir cualquier número
     private TextView nombre;
     private FirebaseFirestore db;
-
-    private String id;
     private TextView luz;
     private int valorNumerico;
     private Button mas,menos;
@@ -82,7 +80,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         menos = v.findViewById(R.id.btnmenos);
         nombre.setText(aplicacion.farolaId);
         db = FirebaseFirestore.getInstance();
-        valorNumerico=0;
+        valorNumerico=50;
+        actualizarTextView();
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,20 +190,20 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
     }
     public void btn_menos(View v) {
         // Resta 5 al valor numérico
-        valorNumerico -= 5;
+        valorNumerico -= 50;
 
         // Asegúrate de que el valor no sea menor que 0
-        if (valorNumerico < 0) {
-            valorNumerico = 0;
+        if (valorNumerico < 50) {
+            valorNumerico = 50;
         }
 
         // Actualiza el TextView
         actualizarTextView();
-        //subirLuminosidad();
+        subirLuminosidad();
     }
     public void btn_mas(View v) {
         // Suma 5 al valor numérico
-        valorNumerico += 5;
+        valorNumerico += 50;
 
         // Asegúrate de que el valor no supere el límite superior
         if (valorNumerico > 100) {
@@ -213,12 +212,49 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
 
         // Actualiza el TextView
         actualizarTextView();
-        //subirLuminosidad();
+        subirLuminosidad();
     }
 
     private void actualizarTextView() {
         // Muestra el valor numérico actual en el TextView
         luz.setText(String.valueOf(valorNumerico));
     }
+    public void subirLuminosidad() {
+        // Obtiene el valor de luminosidad del EditText
+        String nombredoc = nombre.getText().toString();
+        if (!nombredoc.equals("id")) {
+            // Obtiene una referencia a la colección "farolas" y un nuevo documento con nombre "luminosidad"
+            DocumentReference farolaRef = db.collection("farolas").document(nombredoc);
 
+            // Actualiza el campo "luminosidad" en el documento
+            farolaRef.update("luminosidad", valorNumerico)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Operación exitosa
+                            // Puedes agregar aquí cualquier lógica adicional después de subir la luminosidad
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Manejo de errores
+                        }
+                    });
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Actualiza el texto de nombre cada vez que el fragmento está en primer plano
+        actualizarNombre();
+    }
+    private void actualizarNombre() {
+        // Obtiene la instancia de la aplicación
+        Aplicacion aplicacion = (Aplicacion) requireActivity().getApplication();
+
+        // Actualiza el texto de nombre con el valor de farolaId
+        nombre.setText(aplicacion.farolaId);
+    }
 }

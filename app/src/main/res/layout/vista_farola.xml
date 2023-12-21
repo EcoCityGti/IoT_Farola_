@@ -82,7 +82,8 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_call" />
+                android:src="@android:drawable/ic_menu_call"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/telefono"
@@ -90,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="telef" />
+                android:text="telef"
+                android:visibility="gone" />
 
         </LinearLayout>
 
