@@ -289,7 +289,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 // El documento existe, ahora verifica si contiene el campo "humedad"
                 if (documentSnapshot.contains("humedad")) {
                     // Obtiene el valor de "humedad"
-                    double valorHumedad = documentSnapshot.getDouble("humedad");
+                    Double valorHumedad = documentSnapshot.getDouble("humedad");
+                    if(valorHumedad!=null){
                     // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
                     Log.d(TAG, "Valor de humedad: " + valorHumedad);
 
@@ -297,6 +298,10 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                     dataList.set(1, String.valueOf(valorHumedad) + "%");
                     // Actualiza la interfaz de usuario con la nueva lista de datos
                     sensorAdapter.notifyDataSetChanged();
+                } else {
+                        // El valor de humo es nulo, maneja la situación según tus necesidades
+                        Log.d(TAG, "El valor de humo es nulo");
+                    }
                 } else {
                     // El documento no contiene el campo "humedad"
                     Log.d(TAG, "El documento no contiene el campo 'humedad'");
@@ -329,7 +334,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 // El documento existe, ahora verifica si contiene el campo "humedad"
                 if (documentSnapshot.contains("temperatura")) {
                     // Obtiene el valor de "humedad"
-                    double valorHumedad = documentSnapshot.getDouble("temperatura");
+                    Double valorHumedad = documentSnapshot.getDouble("temperatura");
+                    if(valorHumedad!=null){
                     // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
                     Log.d(TAG, "Valor de temperatura: " + valorHumedad);
 
@@ -337,6 +343,10 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                     dataList.set(0, String.valueOf(valorHumedad) + "ºC");
                     // Actualiza la interfaz de usuario con la nueva lista de datos
                     sensorAdapter.notifyDataSetChanged();
+                } else {
+                        // El valor de humo es nulo, maneja la situación según tus necesidades
+                        Log.d(TAG, "El valor de temperatura es nulo");
+                    }
                 } else {
                     // El documento no contiene el campo "humedad"
                     Log.d(TAG, "El documento no contiene el campo 'temperatura'");
@@ -369,7 +379,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 // El documento existe, ahora verifica si contiene el campo "humedad"
                 if (documentSnapshot.contains("ruido")) {
                     // Obtiene el valor de "humedad"
-                    double valorHumedad = documentSnapshot.getDouble("ruido");
+                    Double valorHumedad = documentSnapshot.getDouble("ruido");
+                    if(valorHumedad!=null){
                     // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
                     Log.d(TAG, "Valor de ruido: " + valorHumedad);
 
@@ -377,6 +388,10 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                     dataList.set(2, String.valueOf(valorHumedad) + "dB");
                     // Actualiza la interfaz de usuario con la nueva lista de datos
                     sensorAdapter.notifyDataSetChanged();
+                }else {
+                        // El valor de humo es nulo, maneja la situación según tus necesidades
+                        Log.d(TAG, "El valor de ruido es nulo");
+                    }
                 } else {
                     // El documento no contiene el campo "humedad"
                     Log.d(TAG, "El documento no contiene el campo 'ruido'");
@@ -409,7 +424,8 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                 // El documento existe, ahora verifica si contiene el campo "humedad"
                 if (documentSnapshot.contains("humo")) {
                     // Obtiene el valor de "humedad"
-                    double valorHumedad = documentSnapshot.getDouble("humo");
+                    Double valorHumedad = documentSnapshot.getDouble("humo");
+                    if(valorHumedad!=null){
                     // Haz algo con el valor de humedad, por ejemplo, imprímelo en el log
                     Log.d(TAG, "Valor de humo: " + valorHumedad);
 
@@ -417,6 +433,10 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                     dataList.set(3, String.valueOf(valorHumedad) + "l");
                     // Actualiza la interfaz de usuario con la nueva lista de datos
                     sensorAdapter.notifyDataSetChanged();
+                    }else {
+                        // El valor de humo es nulo, maneja la situación según tus necesidades
+                        Log.d(TAG, "El valor de humo es nulo");
+                    }
                 } else {
                     // El documento no contiene el campo "humedad"
                     Log.d(TAG, "El documento no contiene el campo 'humo'");

@@ -148,6 +148,9 @@ public class AppActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // Desregistrar el BroadcastReceiver al destruir la actividad
-        unregisterReceiver(chargingStateReceiver);
+        if (chargingStateReceiver != null) {
+            unregisterReceiver(chargingStateReceiver);
+            chargingStateReceiver = null;  // Set it to null after unregistering
+        }
     }
 }

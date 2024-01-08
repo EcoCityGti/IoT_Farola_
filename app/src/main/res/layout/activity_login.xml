@@ -12,6 +12,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/circulo"
         android:backgroundTint="@color/common_google_signin_btn_text_light"
+        android:contentDescription="Sign in with Google"
         android:src="@drawable/fui_ic_googleg_color_24dp"
         android:text="Iniciar sesión con Google"
         android:textColor="#FFFFFF"
@@ -37,33 +38,16 @@
         android:layout_height="wrap_content"
         android:background="@drawable/circulo"
         android:backgroundTint="@color/fui_bgEmail"
+        android:contentDescription="Sign in with Email"
         android:src="@drawable/fui_ic_mail_white_24dp"
         android:text="Iniciar sesión con Email"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnSignInWithGoogle"
-        app:layout_constraintEnd_toStartOf="@+id/btnSignInWithFacebook"
+        app:layout_constraintEnd_toStartOf="@+id/btnSignInWithTwitter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSignInWithGoogle"
         app:layout_constraintTop_toTopOf="@+id/btnSignInWithGoogle" />
-
-    <ImageButton
-        android:id="@+id/btnSignInWithFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/circulo"
-        android:backgroundTint="#36434345"
-        android:enabled="true"
-        android:src="@drawable/fui_ic_facebook_white_22dp"
-        android:text="Iniciar sesión con Facebook"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSignInWithEmail"
-        app:layout_constraintEnd_toStartOf="@+id/btnSignInWithTwitter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSignInWithEmail"
-        app:layout_constraintTop_toTopOf="@+id/btnSignInWithEmail" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -73,36 +57,21 @@
         app:layout_constraintGuide_begin="48dp" />
 
     <ImageButton
-        android:id="@+id/btnSignInWithPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/circulo"
-        android:backgroundTint="@color/fui_bgPhone"
-        android:text="Iniciar sesión con Teléfono"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignInWithFacebook" />
-
-    <ImageButton
         android:id="@+id/btnSignInWithTwitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/circulo"
         android:backgroundTint="@color/fui_bgTwitter"
+        android:contentDescription="Sign in with Twitter"
         android:src="@drawable/fui_ic_twitter_bird_white_24dp"
         android:text="Iniciar sesión con Twitter"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSignInWithFacebook"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSignInWithEmail"
         app:layout_constraintEnd_toStartOf="@+id/btnSignInWithAnonim"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSignInWithFacebook"
-        app:layout_constraintTop_toTopOf="@+id/btnSignInWithFacebook" />
+        app:layout_constraintStart_toEndOf="@+id/btnSignInWithEmail"
+        app:layout_constraintTop_toTopOf="@+id/btnSignInWithEmail" />
 
     <ImageButton
         android:id="@+id/btnSignInWithAnonim"
@@ -110,6 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/circulo"
         android:backgroundTint="@color/fui_bgAnonymous"
+        android:contentDescription="Sign in with Anonim"
         android:src="@drawable/fui_ic_anonymous_white_24dp"
         android:text="Iniciar sesión de invitado"
         android:textColor="#FFFFFF"
@@ -118,8 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnSignInWithTwitter"
-        app:layout_constraintTop_toTopOf="@+id/btnSignInWithTwitter"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/btnSignInWithTwitter" />
 
     <TextView
         android:id="@+id/textView30"

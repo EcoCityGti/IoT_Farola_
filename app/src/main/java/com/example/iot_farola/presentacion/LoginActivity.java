@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -48,11 +49,17 @@ public class LoginActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imagen2);
         ImageButton btnSignInWithGoogle = findViewById(R.id.btnSignInWithGoogle);
         ImageButton btnSignInWithEmail = findViewById(R.id.btnSignInWithEmail);
-        ImageButton btnSignInWithFacebook = findViewById(R.id.btnSignInWithFacebook);
         ImageButton btnSignInWithAnonim = findViewById(R.id.btnSignInWithAnonim);
         ImageButton btnSignInWithTwitter = findViewById(R.id.btnSignInWithTwitter);
-        ImageButton btnSignInWithTelf = findViewById(R.id.btnSignInWithPhone);
+        Button registrar = findViewById(R.id.button3);
 //-----------------------------Botones()--------------------------------------------
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this,Registro.class);
+                startActivity(i);
+            }
+        });
 //-----------------------------Boton Anonimo()--------------------------------------------
 
         btnSignInWithAnonim.setOnClickListener(new View.OnClickListener() {
@@ -80,29 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });//Boton Anonimo()
-
-//-----------------------------Boton Telefono()--------------------------------------------
-
-        btnSignInWithTelf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.PhoneBuilder().build()
-                );
-
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .setIsSmartLockEnabled(false)
-                                .build(),
-                        RC_SIGN_IN
-                );
-
-                /*Intent i = new Intent(getApplicationContext(),PhoneAuthHandler.class);
-                startActivity(i);*/
-            }
-        });//Boton Telefono()
 //-----------------------------Boton Twitter()--------------------------------------------
 
         btnSignInWithTwitter.setOnClickListener(new View.OnClickListener() {
@@ -162,24 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 );*/
             }
         });//BotonEmail()
-//-----------------------------Boton Facebook()--------------------------------------------
-        btnSignInWithFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.FacebookBuilder().build()
-                );
 
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .setIsSmartLockEnabled(false)
-                                .build(),
-                        RC_SIGN_IN
-                );
-            }
-        });//Boton Facebook()
         // Crear un ObjectAnimator para la propiedad de traslación en el eje Y (mueve hacia arriba y luego hacia abajo)
         ObjectAnimator translationY = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -50f, 0f); // Empieza en 0, sube 50px y vuelve a 0
         translationY.setDuration(2000);
