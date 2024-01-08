@@ -62,9 +62,6 @@ import java.util.Date;
 public class VistaFarolaActivity extends AppCompatActivity {
     private static int RESQUEST_CODE =1234;
     private StorageReference storageRef;
-
-    private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 15485;
-
     private RepositorioFarolas farolas;
     private Uri uriUltimaFoto;
     private String id;
@@ -72,17 +69,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
     private ImageView foto;
     private ImageView borrar;
     private TextView nombre,direcciontxt;
-
-    ActivityResultLauncher<Intent> edicionLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        actualizaVistas();
-                    }
-                }
-            });
     ActivityResultLauncher<Intent> tomarFotoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -137,7 +123,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
             }
         });
     }
-
     public void actualizaVistas() {
         nombre = findViewById(R.id.nombre);
         ImageView logoTipo = findViewById(R.id.logo_tipo);
@@ -146,18 +131,9 @@ public class VistaFarolaActivity extends AppCompatActivity {
         TextView telefono = findViewById(R.id.telefono);
         RatingBar valoracion = findViewById(R.id.valoracion);
         ImageView foto = findViewById(R.id.foto);
-        //ponerFoto(foto, farola.getFoto());
-
         nombre.setText(id);
-        //direccion.setText(farola.getDireccion());
         descargarYMostrarImagen();
         obtenerDireccion();
-    }
-
-    private void lanzarAcercaDe() {
-        Intent i = new Intent(this, AcercaDeActivity.class);
-        //mp.pause();
-        startActivity(i);
     }
     public void fotoDeGaleria(View view) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT,
@@ -238,8 +214,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
             ficheroRef.getFile(localFile)
                     .addOnSuccessListener(taskSnapshot -> {
                         // La descarga fue exitosa
-                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
-                        // como mostrar la imagen en tu interfaz de usuario
                         mostrarImagen(localFile.getAbsolutePath());
                     })
                     .addOnFailureListener(exception -> {
@@ -250,13 +224,8 @@ public class VistaFarolaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     private void mostrarImagen(String filePath) {
-        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
-        // Por ejemplo, puedes establecer la imagen en un ImageView.
-        // Aquí hay un ejemplo básico:
-
-        ImageView imageView = findViewById(R.id.imageFarola); // Reemplaza con el ID de tu ImageView
+        ImageView imageView = findViewById(R.id.imageFarola);
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         imageView.setImageBitmap(bitmap);
     }
@@ -275,8 +244,6 @@ public class VistaFarolaActivity extends AppCompatActivity {
                         // Obtiene el valor del campo "direccion"
                         String direccion = task.getResult().getString("direccion");
                         direcciontxt.setText(direccion);
-                        // Utiliza la dirección como sea necesario (por ejemplo, actualiza un TextView)
-                        // Ejemplo: textViewDireccion.setText(direccion);
                     } else {
                         // El documento no existe
                         // Puedes manejar esta situación según tus necesidades

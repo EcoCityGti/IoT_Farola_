@@ -23,18 +23,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registro extends AppActivity {
     private boolean passwordVisible = false;
-
     private FirebaseAuth auth;
     private EditText etCorreo;
     private EditText etContraseña;
-
     private EditText confContraseña;
-
     private EditText nombre;
-
     private CheckBox acepto;
-
-
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
@@ -71,11 +65,6 @@ public class Registro extends AppActivity {
             }
         });
         Button registro = findViewById(R.id.Registrarse);
-        /*if(!acepto.isChecked()){
-            registro.setEnabled(false);
-        }else if (acepto.isChecked()){
-            registro.setEnabled(true);
-        }*/
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -37,7 +37,6 @@ public class AppActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         setContentView(R.layout.tabs_barra);
         ViewPager2 viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new com.example.iot_farola.MiPageAdapter(this));
@@ -68,7 +67,6 @@ public class AppActivity extends AppCompatActivity {
 //--------------------------------------------------Resize Icon(ignorar)--------------------------------------------------------------------
                         if (iconDrawable != null) {
                             iconDrawable.setBounds(0, 0, (int) (iconSizeInDp * getResources().getDisplayMetrics().density), (int) (iconSizeInDp * getResources().getDisplayMetrics().density));
-                            //iconDrawable.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.my_dark_tertiary), PorterDuff.Mode.SRC_ATOP);
                             tab.setIcon(iconDrawable);
                         }
                     }

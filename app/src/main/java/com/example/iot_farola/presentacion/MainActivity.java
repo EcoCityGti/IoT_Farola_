@@ -110,6 +110,4 @@ public class MainActivity extends AppCompatActivity {
             // Puedes manejar esta situación de acuerdo a tus necesidades
         }
     }
-
-
 }

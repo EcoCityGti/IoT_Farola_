@@ -46,7 +46,6 @@ public class MapaActivity extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mapa, container, false);
-
         farolas = ((Aplicacion) requireActivity().getApplication()).farolas;
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
@@ -56,8 +55,6 @@ public class MapaActivity extends Fragment
         }
         return view;
     }
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
@@ -73,7 +70,6 @@ public class MapaActivity extends Fragment
             // Solicitar permisos si no están disponibles
             requestLocationPermissions();
         }
-
         // Centrar el mapa en la Comunidad Valenciana
         LatLng comunidadValenciana = new LatLng(39.4699, -0.3763); // Coordenadas aproximadas de la Comunidad Valenciana
         float zoomLevel = 7.0f; // Puedes ajustar el nivel de zoom según tus preferencias

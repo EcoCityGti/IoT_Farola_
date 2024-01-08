@@ -55,7 +55,6 @@ public class Tab1 extends Fragment {
     private StorageReference storageRef;
     private ImageView fotoUsuario;
     private FirebaseUser usuario;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +98,6 @@ public class Tab1 extends Fragment {
                     }
                 }
         ).attach();
-
         descargarYMostrarImagen();
         return v;
     }
@@ -132,11 +130,6 @@ public class Tab1 extends Fragment {
         }
     }
     private void mostrarImagen(String filePath) {
-        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
-        // Por ejemplo, puedes establecer la imagen en un ImageView.
-        // Aquí hay un ejemplo básico:
-
-        // Reemplaza con el ID de tu ImageView
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         fotoUsuario.setImageBitmap(bitmap);
     }

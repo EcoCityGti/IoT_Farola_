@@ -39,8 +39,6 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private ImageView imageView;
     private FirebaseAuth auth;
-   // private ProgressDialog dialog;
-
     private static final int RC_SIGN_IN = 123;
 //---------------------------onCreate()--------------------------------------------
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 //-----------------------------Boton Anonimo()--------------------------------------------
-
         btnSignInWithAnonim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });//Boton Anonimo()
 //-----------------------------Boton Twitter()--------------------------------------------
-
         btnSignInWithTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });//Boton Twitter()
 //-----------------------------Boton Google()--------------------------------------------
-
         btnSignInWithGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,11 +174,6 @@ public class LoginActivity extends AppCompatActivity {
             Usuarios.guardarUsuario(usuario);
             Toast.makeText(this, getString(R.string.iniciarses) + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
             checkUserRoleAndStartActivity();
-            /*Intent i = new Intent(this, AppActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    | Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);*/
         } else {
             // Mostrar la pantalla de inicio de sesión personalizada en activity_login.xml
             setContentView(R.layout.activity_login);

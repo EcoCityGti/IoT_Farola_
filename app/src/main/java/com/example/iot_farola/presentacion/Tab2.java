@@ -161,8 +161,6 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         // Puedes agregar más elementos o realizar cualquier otra lógica necesaria
         return dataList;
     }
-
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;

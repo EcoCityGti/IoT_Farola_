@@ -31,20 +31,16 @@ import java.io.IOException;
 import java.util.Map;
 
 public class RegistrarFarolaActivity extends AppCompatActivity {
-
     private EditText etNombreFarola, etDireccionFarola, etAtributo1, etAtributo2;
     private Button btnRegistrarFarola,btnSubirImagen,btnBuscarFarola;
     private FirebaseFirestore db;
     private RepositorioFarolas farolas;
     private StorageReference storageRef;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_farola);
         db = FirebaseFirestore.getInstance();
-
         // Initialize EditText and Button
         etNombreFarola = findViewById(R.id.etNombreFarola);
         etDireccionFarola = findViewById(R.id.etDireccionFarola);
@@ -77,7 +73,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
             }
         });
         btnSubirImagen.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 try{
@@ -105,7 +100,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
             }
         });
     }
-
     // Helper method to create a Farola object from EditText values
     private Farola crearFarolaDesdeEditTexts() {
         String nombre = etNombreFarola.getText().toString();
@@ -115,7 +109,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
         double atributo2 = Double.parseDouble(etAtributo2.getText().toString());
         String atributo3 = "farolas/"+nombre+"/"+nombre;
 
-
         // Assuming default values for the other attributes, you can modify as needed
         Farola farola = new Farola(nombre, direccion, atributo1, atributo2, atributo3, 0.0, 0.0, 0.0, 0, 0.0);
         farolas.añade(farola);
@@ -123,7 +116,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
     }
     private void agregarFarolaAFirebase(Farola farola) {
         String nombreDocumento = farola.getNombre();
-
         // Access the "farolas" collection in Firestore
         db.collection("farolas")
                 .document(nombreDocumento)
@@ -140,12 +132,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
     private void buscarYMostrarFarola() {
         // Obtener el nombre de la farola desde el EditText
         String nombreFarola = etNombreFarola.getText().toString();
-
-        // Aquí debes implementar la lógica para buscar la farola en la base de datos
-        // y cargar los datos encontrados en los otros EditText
-
-        // Por ejemplo, puedes usar Firebase Firestore para realizar la consulta.
-        // Aquí se muestra un ejemplo básico:
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("farolas")
@@ -246,9 +232,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
             // Descargar la imagen en el archivo temporal local
             ficheroRef.getFile(localFile)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // La descarga fue exitosa
-                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
-                        // como mostrar la imagen en tu interfaz de usuario
                         mostrarImagen(localFile.getAbsolutePath());
                     })
                     .addOnFailureListener(exception -> {
@@ -260,10 +243,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
         }
     }
     private void mostrarImagen(String filePath) {
-        // Este método puede ser personalizado según la forma en que desees mostrar la imagen.
-        // Por ejemplo, puedes establecer la imagen en un ImageView.
-        // Aquí hay un ejemplo básico:
-
         ImageView imageView = findViewById(R.id.fotoFarola); // Reemplaza con el ID de tu ImageView
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
         imageView.setImageBitmap(bitmap);

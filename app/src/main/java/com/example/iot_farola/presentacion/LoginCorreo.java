@@ -25,7 +25,6 @@ public class LoginCorreo extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText etCorreo;
     private EditText etContraseña;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

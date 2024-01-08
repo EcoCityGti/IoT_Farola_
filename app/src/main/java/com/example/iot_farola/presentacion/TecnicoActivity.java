@@ -12,7 +12,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class TecnicoActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,5 +54,5 @@ public class TecnicoActivity extends AppCompatActivity {
         startActivity(openFileIntent);
 
         finish(); // Puedes cerrar la actividad después de abrir el archivo
-}
+    }
 }

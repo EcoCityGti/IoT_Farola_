@@ -16,10 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Reestablecer extends AppCompatActivity {
-
     private FirebaseAuth auth;
     private EditText etCorreo;
-
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recontrasenya);
@@ -73,5 +71,4 @@ public class Reestablecer extends AppCompatActivity {
                     }
                 });
     }
-
 }
