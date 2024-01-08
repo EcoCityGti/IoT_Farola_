@@ -49,9 +49,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Tab1 extends Fragment {
-    private RecyclerView recyclerView;
-    public AdaptadorFarolas adaptador;
-    private RepositorioFarolas farolas;
     private StorageReference storageRef;
     private ImageView fotoUsuario;
     private FirebaseUser usuario;
