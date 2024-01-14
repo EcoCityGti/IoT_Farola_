@@ -125,12 +125,7 @@ public class VistaFarolaActivity extends AppCompatActivity {
     }
     public void actualizaVistas() {
         nombre = findViewById(R.id.nombre);
-        ImageView logoTipo = findViewById(R.id.logo_tipo);
-        TextView tipo = findViewById(R.id.tipo);
         direcciontxt = findViewById(R.id.direccion);
-        TextView telefono = findViewById(R.id.telefono);
-        RatingBar valoracion = findViewById(R.id.valoracion);
-        ImageView foto = findViewById(R.id.foto);
         nombre.setText(id);
         descargarYMostrarImagen();
         obtenerDireccion();

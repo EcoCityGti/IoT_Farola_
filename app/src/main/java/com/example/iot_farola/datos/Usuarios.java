@@ -42,8 +42,4 @@ public static void guardarUsuario(final FirebaseUser user) {
                 } else {
                     // Ocurrió un error al realizar la consulta
                     // Manejar el error según tus necesidades
-
-
-
-
 }});}}

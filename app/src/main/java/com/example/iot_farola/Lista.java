@@ -37,7 +37,6 @@ public class Lista extends Fragment {
 
         // Inicializar RecyclerView y adaptador
         // Configura el adaptador con los datos que deseas mostrar
-        // adaptador.setDatos(datos);
         adaptador = ((Aplicacion) requireActivity().getApplication()).adaptador;
         id = ((Aplicacion) requireActivity().getApplication()).farolaId;
         farolas = ((Aplicacion) requireActivity().getApplication()).farolas;

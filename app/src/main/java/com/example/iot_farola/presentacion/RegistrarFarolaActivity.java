@@ -46,7 +46,6 @@ public class RegistrarFarolaActivity extends AppCompatActivity {
         etDireccionFarola = findViewById(R.id.etDireccionFarola);
         etAtributo1 = findViewById(R.id.etAtributo1);
         etAtributo2 = findViewById(R.id.etAtributo2);
-        //etAtributo3 = findViewById(R.id.etAtributo3);
         farolas = ((Aplicacion) getApplication()).farolas;  // Asegúrate de inicializar farolas
         storageRef = FirebaseStorage.getInstance().getReference();
 

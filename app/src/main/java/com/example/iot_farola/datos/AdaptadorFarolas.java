@@ -31,20 +31,14 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
     // Creamos nuestro ViewHolder, con los tipos de elementos a modificar
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nombre, direccion, humedad, temperatura, ruido, luminosidad;
+        public TextView nombre, direccion;
         public ImageView foto;
-        public RatingBar valoracion;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.nombre);
             direccion = itemView.findViewById(R.id.direccion);
-            /*humedad = itemView.findViewById(R.id.humedad);
-            temperatura = itemView.findViewById(R.id.temperatura);
-            ruido = itemView.findViewById(R.id.ruido);
-            luminosidad = itemView.findViewById(R.id.luminosidad);*/
             foto = itemView.findViewById(R.id.foto);
-            //valoracion = itemView.findViewById(R.id.valoracion);
             distancia = itemView.findViewById(R.id.distancia);
         }
 
@@ -52,10 +46,6 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
         public void personaliza(Farola farola) {
             nombre.setText(farola.getNombre());
             direccion.setText(farola.getDireccion());
-            /*humedad.setText("Humedad: " + farola.getHumedad());
-            temperatura.setText("Temperatura: " + farola.getTemperatura());
-            ruido.setText("Ruido: " + farola.getRuido());
-            luminosidad.setText("Luminosidad: " + farola.getLuminosidad());*/
             foto.setScaleType(ImageView.ScaleType.FIT_END);
             GeoPunto pos = ((Aplicacion) itemView.getContext().getApplicationContext()).posicionActual;
             if (pos.equals(GeoPunto.SIN_POSICION) || farola.getPosicion().equals(GeoPunto.SIN_POSICION)) {

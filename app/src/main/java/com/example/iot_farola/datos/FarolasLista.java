@@ -11,7 +11,6 @@ public class FarolasLista implements RepositorioFarolas {
     protected List<Farola> listaFarolas ;//= añadeEjemplos();//ejemploLugares();
 
     public FarolasLista() {
-        //listaLugares = ejemploLugares();
         listaFarolas = new ArrayList<Farola>();
         añadeEjemplos();
     }

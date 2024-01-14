@@ -126,19 +126,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), LoginCorreo.class);
                 startActivity(i);
-                /*List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.EmailBuilder().build()
-                );
-
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .setIsSmartLockEnabled(false)
-                                //.setTheme(R.style.CustomFirebaseUI) // Establece el tema personalizado
-                                .build(),
-                        RC_SIGN_IN
-                );*/
             }
         });//BotonEmail()
 

@@ -22,8 +22,6 @@ public class Aplicacion extends Application {
     public AdaptadorFarolasFirestoreUI adaptador;
     public String farolaId="id";
 
-
-
     @Override public void onCreate() {
         super.onCreate();
         farolas = (RepositorioFarolas) new FarolasLista();

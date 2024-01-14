@@ -171,53 +171,6 @@ public class Tab3 extends Fragment {
                 // No es necesario implementar nada aquí, pero puedes hacerlo si es necesario.
             }
         });
-        RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
-        ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
-                new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache =
-                            new LruCache<String, Bitmap>(10);
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-                    public Bitmap getBitmap(String url) {
-                        Bitmap output = cache.get(url);
-
-                        if (output == null) {
-                            // La imagen no está en la caché, no podemos aplicar el recorte circular.
-                            return null;
-                        }
-
-                        int width = output.getWidth();
-                        int height = output.getHeight();
-                        int diameter = Math.min(width, height);
-                        Bitmap circularBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-
-                        Canvas canvas = new Canvas(circularBitmap);
-                        final int color = 0xff424242;
-                        final Paint paint = new Paint();
-                        final Rect rect = new Rect(0, 0, diameter, diameter);
-                        final RectF rectF = new RectF(rect);
-                        final float roundPx = diameter / 2;
-
-                        paint.setAntiAlias(true);
-                        canvas.drawARGB(0, 0, 0, 0);
-                        paint.setColor(color);
-                        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-                        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-                        canvas.drawBitmap(output, rect, rect, paint);
-
-                        return circularBitmap;
-                    }
-
-
-                });
-// Foto de usuario
-        Uri urlImagen = usuario.getPhotoUrl();
-        if (urlImagen != null) {
-            NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen4);
-            foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

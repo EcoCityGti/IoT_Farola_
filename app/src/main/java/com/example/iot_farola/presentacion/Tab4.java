@@ -55,7 +55,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Tab4 extends Fragment {
-    Button btnAnonimo;
+    Button btnAnonimo,subirFoto,guardar;
     private  EditText correo, telf, nusu, postal, contr, nombre;
     private DocumentReference userRef;
     private StorageReference storageRef;
@@ -75,7 +75,7 @@ public class Tab4 extends Fragment {
         usuario = FirebaseAuth.getInstance().getCurrentUser();
         storageRef = FirebaseStorage.getInstance().getReference();
         fotoUsuario = v.findViewById(R.id.imageView8);
-        Button subirFoto = v.findViewById(R.id.subirFoto);
+        subirFoto = v.findViewById(R.id.subirFoto);
         subirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,51 +98,6 @@ public class Tab4 extends Fragment {
                 }
             }
         });
-        RequestQueue colaPeticiones = Volley.newRequestQueue(requireActivity());
-        ImageLoader lectorImagenes = new ImageLoader(colaPeticiones,
-                new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap> cache =
-                            new LruCache<String, Bitmap>(10);
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-                    public Bitmap getBitmap(String url) {
-                        Bitmap output = cache.get(url);
-
-                        if (output == null) {
-                            // La imagen no está en la caché, no podemos aplicar el recorte circular.
-                            return null;
-                        }
-
-                        int width = output.getWidth();
-                        int height = output.getHeight();
-                        int diameter = Math.min(width, height);
-                        Bitmap circularBitmap = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
-
-                        Canvas canvas = new Canvas(circularBitmap);
-                        final int color = 0xff424242;
-                        final Paint paint = new Paint();
-                        final Rect rect = new Rect(0, 0, diameter, diameter);
-                        final RectF rectF = new RectF(rect);
-                        final float roundPx = diameter / 2;
-
-                        paint.setAntiAlias(true);
-                        canvas.drawARGB(0, 0, 0, 0);
-                        paint.setColor(color);
-                        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-                        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-                        canvas.drawBitmap(output, rect, rect, paint);
-
-                        return circularBitmap;
-                    }
-                });
-        Uri urlImagen = usuario.getPhotoUrl();
-       /* if (urlImagen != null) {
-           // NetworkImageView foto = (NetworkImageView) v.findViewById(R.id.imagen5);
-          //  foto.setImageUrl(urlImagen.toString(), lectorImagenes);
-        }*/
-
         btnAnonimo = v.findViewById(R.id.UnificarCuenta);
         nombre = v.findViewById(R.id.nombre);
         nombre.setText(usuario.getDisplayName());
@@ -165,7 +120,7 @@ public class Tab4 extends Fragment {
 
         Button button = v.findViewById(R.id.btn_cerrar_sesion1);
        // Button editar = v.findViewById(R.id.toggleButton);
-        Button guardar = v.findViewById(R.id.Guardar);
+        guardar = v.findViewById(R.id.Guardar);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,9 +131,6 @@ public class Tab4 extends Fragment {
                 String nuevoCorreo = correo.getText().toString();
                 String nuevaDireccion = postal.getText().toString();
                 String nuevoNombreUsu = nusu.getText().toString();
-                //String nuevaContraseña = contr.getText().toString();
-
-
 
                 // Update user data in the database (Firestore, Realtime Database, etc.)
                 // You may need to call a method to update the user data in your database
@@ -338,6 +290,8 @@ public class Tab4 extends Fragment {
          nusu.setEnabled(false);
          postal.setEnabled(false);
          contr.setEnabled(false);
+         subirFoto.setEnabled(false);
+         guardar.setEnabled(false);
      }else{
          nombre.setEnabled(true);
          correo.setEnabled(true);
@@ -345,6 +299,8 @@ public class Tab4 extends Fragment {
          nusu.setEnabled(true);
          postal.setEnabled(true);
          contr.setEnabled(true);
+         subirFoto.setEnabled(true);
+         guardar.setEnabled(true);
      }
  }
     private void obtenerYMostrarTelefono(String uidUsuario) {

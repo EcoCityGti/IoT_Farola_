@@ -238,14 +238,14 @@
                 android:text="Comparte la App con 3 amigos distintos" />
         </androidx.cardview.widget.CardView>
 
-        <com.android.volley.toolbox.NetworkImageView
+        <ImageView
             android:id="@+id/imagen4"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:paddingTop="0dp"
-            android:src="@android:drawable/sym_def_app_icon"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toTopOf="@+id/searchView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
