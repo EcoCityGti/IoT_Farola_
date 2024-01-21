@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -15,16 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iot_farola.datos.AdaptadorFarolasFirestoreUI;
+import com.example.iot_farola.datos.AdaptadorFarolasResultadosFirestoreUI;
 import com.example.iot_farola.datos.RepositorioFarolas;
 import com.example.iot_farola.modelo.Farola;
 import com.example.iot_farola.presentacion.VistaFarolaActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Lista extends Fragment {
+public class Lista extends Fragment implements SearchView.OnQueryTextListener {
     private RecyclerView recyclerView;
-    private AdaptadorFarolasFirestoreUI adaptador;
+    private AdaptadorFarolasResultadosFirestoreUI adaptador1;
     private RepositorioFarolas farolas;
     private String id;
+    SearchView searchView;
 
     public Lista() {
         // Constructor vacío requerido
@@ -37,15 +40,17 @@ public class Lista extends Fragment {
 
         // Inicializar RecyclerView y adaptador
         // Configura el adaptador con los datos que deseas mostrar
-        adaptador = ((Aplicacion) requireActivity().getApplication()).adaptador;
-        id = ((Aplicacion) requireActivity().getApplication()).farolaId;
+        searchView = view.findViewById(R.id.searchView3);
+        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        adaptador1 = ((Aplicacion) requireActivity().getApplication()).adaptador1;
+        //id = ((Aplicacion) requireActivity().getApplication()).farolaId;
         farolas = ((Aplicacion) requireActivity().getApplication()).farolas;
         recyclerView = view.findViewById(R.id.RecyclerView);
-        recyclerView.setAdapter(adaptador);
+        recyclerView.setAdapter(adaptador1);
         //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        adaptador.startListening();
-        adaptador.setOnItemClickListener(new View.OnClickListener() {
+        adaptador1.startListening();
+        adaptador1.setOnItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = recyclerView.getChildAdapterPosition(v);
@@ -56,7 +61,7 @@ public class Lista extends Fragment {
     }
     void mostrarFarola(int pos) {
         // Obtén el ID del documento de Firestore correspondiente a la posición
-        String documentId = adaptador.getSnapshots().getSnapshot(pos).getId();
+        String documentId = adaptador1.getSnapshots().getSnapshot(pos).getId();
 
         // Accede a Firestore para obtener el campo "nombre" de la farola seleccionada
         FirebaseFirestore.getInstance().collection("farolas").document(documentId)
@@ -83,4 +88,14 @@ public class Lista extends Fragment {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adaptador1.filtrar(newText);
+        return false;
+    }
 }

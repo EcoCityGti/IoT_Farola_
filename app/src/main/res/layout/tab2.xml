@@ -10,13 +10,14 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#9CD2D3"
         android:textAlignment="center"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView2">
+        app:layout_constraintTop_toBottomOf="@id/textView28">
 
 
         <ImageView
@@ -115,12 +116,12 @@
             android:id="@+id/tabla_sensores"
             android:layout_width="match_parent"
             android:layout_height="290dp"
-            android:layout_marginTop="245dp"
+            android:layout_marginTop="270dp"
             android:numColumns="2" />
 
     </androidx.cardview.widget.CardView>
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/imagen3"
         style="@style/foto"
         android:layout_width="50dp"
@@ -139,10 +140,10 @@
         android:layout_height="49dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:tint="@color/azul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_settings_24" />
+        app:srcCompat="@drawable/baseline_settings_24"
+        app:tint="@color/azul" />
 
     <SearchView
         android:id="@+id/searchView2"
@@ -151,16 +152,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewResultados"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

@@ -3,12 +3,14 @@ package com.example.iot_farola.presentacion;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -128,6 +130,35 @@ public class Tab1 extends Fragment {
     }
     private void mostrarImagen(String filePath) {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-        fotoUsuario.setImageBitmap(bitmap);
+        Bitmap roundedBitmap = redondearImagen(bitmap);
+        fotoUsuario.setImageBitmap(roundedBitmap);
+    }
+    private Bitmap redondearImagen(Bitmap bitmap) {
+        // Obtén el mínimo entre el ancho y el alto de la imagen
+        int minSize = Math.min(bitmap.getWidth(), bitmap.getHeight());
+
+        // Crea un objeto Bitmap con el mismo tamaño (ancho y alto iguales) y configuración ARGB
+        Bitmap output = Bitmap.createBitmap(minSize, minSize, Bitmap.Config.ARGB_8888);
+
+        // Crea un objeto Canvas para dibujar
+        Canvas canvas = new Canvas(output);
+
+        // Crea un objeto Paint para configurar la apariencia del dibujo
+        final Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+
+        // Crea un objeto RectF con el mismo tamaño que el Bitmap
+        final RectF rectF = new RectF(0, 0, minSize, minSize);
+
+        // Dibuja un círculo utilizando el objeto Canvas y Paint
+        canvas.drawRoundRect(rectF, minSize / 2, minSize / 2, paint);
+
+        return output;
+    }
+    @Override
+    public void onResume() {
+descargarYMostrarImagen();
+        super.onResume();
     }
 }

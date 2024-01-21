@@ -3,18 +3,26 @@ package com.example.iot_farola.presentacion;
 
 
 import static android.content.ContentValues.TAG;
+import static com.example.iot_farola.datos.Mqtt.broker;
+import static com.example.iot_farola.datos.Mqtt.clientId;
+import static com.example.iot_farola.datos.Mqtt.qos;
+import static com.example.iot_farola.datos.Mqtt.topicRoot;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +41,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -40,6 +51,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.iot_farola.Aplicacion;
 import com.example.iot_farola.R;
 import com.example.iot_farola.SensorDataAdapter;
+import com.example.iot_farola.datos.AdaptadorFarolasFirestoreUI;
+import com.example.iot_farola.datos.AdaptadorFarolasResultadosFirestoreUI;
+import com.example.iot_farola.datos.RepositorioFarolas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,19 +66,39 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
+public class Tab2 extends Fragment implements MqttCallback {
     private static final int TU_CODIGO_DE_SOLICITUD_DE_PERMISO = 1; // Puedes elegir cualquier número
     private TextView nombre;
+    private  static MqttClient client;
+
+    private StorageReference storageRef;
+
+    private FirebaseUser usuario;
+
     private FirebaseFirestore db;
     private List<String> dataList = new ArrayList<>();  // Declara tu lista de datos como un miembro de la clase
     SensorDataAdapter sensorAdapter;
     private TextView luz;
+    private ImageView fotoUsuario;
     private int valorNumerico;
     private Button mas,menos;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,20 +108,25 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab2, container, false);
         Aplicacion aplicacion = (Aplicacion) requireActivity().getApplication();
-        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
         Button emergency = v.findViewById(R.id.Emergencias);
         nombre = v.findViewById(R.id.textView24);  // Asegúrate de inicializar farolas
         luz = v.findViewById(R.id.luminosidad);
         mas = v.findViewById(R.id.btnmas);
         menos = v.findViewById(R.id.btnmenos);
         nombre.setText(aplicacion.farolaId);
+        usuario = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
+        fotoUsuario = v.findViewById(R.id.imagen3);
         valorNumerico=50;
+        conectarMqtt();
         obtenerValorTemperatura();
         obtenerValorRuido();
         obtenerValorHumedad();
         actualizarTextView();
         obtenerValorHumo();
+        descargarYMostrarImagen();
+        //conectarMqtt();
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +145,7 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
             public void onClick(View v) {
                 btn_mas(v);
                 //subirLuminosidad(v);
+                publicarMqtt("luminosidad",luz.getText().toString());
             }
         });
         menos.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +153,7 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
             public void onClick(View v) {
                 btn_menos(v);
                 //subirLuminosidad(v);
+                publicarMqtt("luminosidad",luz.getText().toString());
             }
         });
         GridView gridView = v.findViewById(R.id.tabla_sensores);
@@ -125,8 +166,6 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
 
 // Set the adapter for the GridView
         gridView.setAdapter(sensorAdapter);
-        SearchView searchView = v.findViewById(R.id.searchView2);
-        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
         return v;
 
     }
@@ -161,38 +200,7 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         // Puedes agregar más elementos o realizar cualquier otra lógica necesaria
         return dataList;
     }
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        buscarEnFirestore(newText);
-        return false;
-    }
-    private void buscarEnFirestore(String consulta) {
-        // Accede a la colección "farolas" en Firestore
-        CollectionReference farolasCollection = FirebaseFirestore.getInstance().collection("farolas");
-
-        // Realiza la consulta con el filtro según el nombre (puedes ajustar esto según tu estructura de datos)
-        Query query = farolasCollection.whereEqualTo("nombre", consulta);
-
-        // Realiza la consulta y maneja los resultados
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    // Maneja los resultados de la consulta y actualiza dinámicamente la interfaz de usuario
-                    List<DocumentSnapshot> resultados = task.getResult().getDocuments();
-                    // Actualiza tu interfaz de usuario con los resultados (puedes usar un adaptador, por ejemplo)
-                } else {
-                    // Maneja cualquier error que pueda ocurrir durante la consulta
-                    Log.e(TAG, "Error al buscar en Firestore: " + task.getException());
-                }
-            }
-        });
-    }
     public void btn_menos(View v) {
         // Resta 5 al valor numérico
         valorNumerico -= 50;
@@ -257,6 +265,13 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
         obtenerValorRuido();
         // Actualiza el texto de nombre cada vez que el fragmento está en primer plano
         actualizarNombre();
+        descargarYMostrarImagen();
+        conectarMqtt();
+    }
+    @Override
+    public void onStop() {
+        deconectarMqtt();
+        super.onStop();
     }
     private void actualizarNombre() {
         // Obtiene la instancia de la aplicación
@@ -445,4 +460,130 @@ public class Tab2 extends Fragment implements SearchView.OnQueryTextListener{
             }
         });
     }
+//--------------------------------------------------------
+//---------------------CARGAR IMAGEN----------------------
+//--------------------------------------------------------
+    public void descargarYMostrarImagen() {
+        // Reemplaza "imagenes/imagen.jpg" con la referencia correcta en tu Firebase Storage
+        String name = usuario.getUid().toString();
+        String referenciaFirebase = "usuarios/"+name+"/"+name;
+
+        // Crear una referencia a la ubicación del archivo en Firebase Storage
+        StorageReference ficheroRef = storageRef.child(referenciaFirebase);
+
+        try {
+            // Crear un archivo temporal local donde se guardará la imagen descargada
+            File localFile = File.createTempFile("imagen", "jpg");
+
+            // Descargar la imagen en el archivo temporal local
+            ficheroRef.getFile(localFile)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        // La descarga fue exitosa
+                        // Aquí puedes realizar acciones adicionales después de la descarga exitosa
+                        // como mostrar la imagen en tu interfaz de usuario
+                        mostrarImagen(localFile.getAbsolutePath());
+                    })
+                    .addOnFailureListener(exception -> {
+                        // La descarga falló. Maneja el error aquí.
+                        // Puedes mostrar un mensaje de error o realizar acciones de recuperación.
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarImagen(String filePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        Bitmap roundedBitmap = redondearImagen(bitmap);
+        fotoUsuario.setImageBitmap(roundedBitmap);
+    }
+    private Bitmap redondearImagen(Bitmap bitmap) {
+        // Obtén el mínimo entre el ancho y el alto de la imagen
+        int minSize = Math.min(bitmap.getWidth(), bitmap.getHeight());
+
+        // Crea un objeto Bitmap con el mismo tamaño (ancho y alto iguales) y configuración ARGB
+        Bitmap output = Bitmap.createBitmap(minSize, minSize, Bitmap.Config.ARGB_8888);
+
+        // Crea un objeto Canvas para dibujar
+        Canvas canvas = new Canvas(output);
+
+        // Crea un objeto Paint para configurar la apariencia del dibujo
+        final Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+
+        // Crea un objeto RectF con el mismo tamaño que el Bitmap
+        final RectF rectF = new RectF(0, 0, minSize, minSize);
+
+        // Dibuja un círculo utilizando el objeto Canvas y Paint
+        canvas.drawRoundRect(rectF, minSize / 2, minSize / 2, paint);
+
+        return output;
+    }
+//--------------------------------------------------------
+//-------------------------MQTT---------------------------
+//--------------------------------------------------------
+
+    public static void conectarMqtt() {
+    try {
+        Log.i(TAG, "Conectando al broker " + broker);
+        client = new MqttClient(broker, clientId, new MemoryPersistence());
+        MqttConnectOptions connOpts = new MqttConnectOptions();
+        connOpts.setCleanSession(true);
+        connOpts.setKeepAliveInterval(60);
+        connOpts.setWill(topicRoot+"WillTopic","App desconectada".getBytes(),
+                qos, false);
+        client.connect(connOpts);
+    } catch (MqttException e) {
+        Log.e(TAG, "Error al conectar.", e);
+    }
+}
+    public static void publicarMqtt(String topic, String mensageStr) {
+        try {
+            MqttMessage message = new MqttMessage(mensageStr.getBytes());
+            message.setQos(qos);
+            message.setRetained(false);
+            client.publish(topicRoot + topic, message);
+            Log.i(TAG, "Publicando mensaje: " + topic+ "->"+mensageStr);
+        } catch (MqttException e) {
+            Log.e(TAG, "Error al publicar." + e);
+        }
+    }
+    public static void deconectarMqtt() {
+        try {
+            client.disconnect();
+            Log.i(TAG, "Desconectado");
+        } catch (MqttException e) {
+            Log.e(TAG, "Error al desconectar.", e);
+        }
+    }
+    @Override
+    public void onDestroy() {
+        //deconectarMqtt();
+        super.onDestroy();
+    }
+    public static String suscribirMqtt(String topic, MqttCallback listener) {
+        try {
+            Log.i(TAG, "Suscrito a " + topicRoot + topic);
+            client.subscribe(topicRoot + topic, qos);
+            client.setCallback(listener);
+            return "Suscrito a " + topicRoot + topic;
+        } catch (MqttException e) {
+            Log.e(TAG, "Error al suscribir.", e);
+            return "Error al suscribir." + e;
+        }
+    }
+
+    @Override public void connectionLost(Throwable cause) {
+        Log.d(TAG, "Conexión perdida");
+    }
+    @Override public void deliveryComplete(IMqttDeliveryToken token) {
+        Log.d(TAG, "Entrega completa");
+    }
+    @Override public void messageArrived(String topic, MqttMessage message)
+            throws Exception {
+        String payload = new String(message.getPayload());
+        Log.d(TAG, "Recibiendo: " + topic + "->" + payload);
+    }
+
+
 }

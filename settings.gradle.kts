@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "IoT_Farola"
 include(":app")
- 

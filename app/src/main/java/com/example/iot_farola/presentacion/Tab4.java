@@ -76,6 +76,7 @@ public class Tab4 extends Fragment {
         storageRef = FirebaseStorage.getInstance().getReference();
         fotoUsuario = v.findViewById(R.id.imageView8);
         subirFoto = v.findViewById(R.id.subirFoto);
+        subirFoto.setEnabled(false);
         subirFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -73,6 +73,9 @@
         <activity android:name=".presentacion.AdminActivity">
 
         </activity>
+        <activity android:name=".presentacion.BorrarFarolaActivity">
+
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

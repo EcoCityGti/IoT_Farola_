@@ -60,9 +60,6 @@ dependencies {
     implementation ("com.journeyapps:zxing-android-embedded:4.2.0")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
-
-    //noinspection GradleCompatible
-
-
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 
 }

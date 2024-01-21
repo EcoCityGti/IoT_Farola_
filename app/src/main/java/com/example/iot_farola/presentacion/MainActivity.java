@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.iot_farola.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,12 +23,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private FirebaseUser usuario;
+    private Button empezar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = findViewById(R.id.imagen);
-        Button empezar = findViewById(R.id.empezar);
+        empezar = findViewById(R.id.empezar);
         usuario = FirebaseAuth.getInstance().getCurrentUser();
         if(usuario!=null){
             checkUserRoleAndStartActivity();
@@ -71,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         animatorSet.start();
     }
     private void checkUserRoleAndStartActivity() {
-
+        Toast.makeText(this, getString(R.string.iniciarses) + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
+        empezar.setEnabled(false);
         if (usuario != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference userRef = db.collection("usuarios").document(usuario.getUid());
