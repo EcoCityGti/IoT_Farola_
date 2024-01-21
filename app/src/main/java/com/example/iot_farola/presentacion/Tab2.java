@@ -202,20 +202,28 @@ public class Tab2 extends Fragment implements MqttCallback {
     }
 
     public void btn_menos(View v) {
-        // Resta 5 al valor numérico
+        // Resta 50 al valor numérico
         valorNumerico -= 50;
 
         // Asegúrate de que el valor no sea menor que 0
-        if (valorNumerico < 50) {
-            valorNumerico = 50;
+        if (valorNumerico < 0) {
+            valorNumerico = 0;
         }
 
         // Actualiza el TextView
         actualizarTextView();
-        subirLuminosidad();
+
+        // Publica un mensaje al topic de luminosidad
+        String payload = String.valueOf(valorNumerico);
+        try {
+            client.publish("luminosidad", payload.getBytes(), 0, false);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
+
     public void btn_mas(View v) {
-        // Suma 5 al valor numérico
+        // Suma 50 al valor numérico
         valorNumerico += 50;
 
         // Asegúrate de que el valor no supere el límite superior
@@ -225,7 +233,14 @@ public class Tab2 extends Fragment implements MqttCallback {
 
         // Actualiza el TextView
         actualizarTextView();
-        subirLuminosidad();
+
+        // Publica un mensaje al topic de luminosidad
+        String payload = String.valueOf(valorNumerico);
+        try {
+            client.publish("luminosidad", payload.getBytes(), 0, false);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
     private void actualizarTextView() {
