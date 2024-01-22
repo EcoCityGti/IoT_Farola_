@@ -241,6 +241,7 @@ public class Tab2 extends Fragment implements MqttCallback {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+        //AAAAAAAAAAAAAAAAAAAAA
     }
 
     private void actualizarTextView() {
