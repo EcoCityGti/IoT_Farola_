@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "516170744801",
+    "firebase_url": "https://ecocity-gti-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "ecocity-gti",
     "storage_bucket": "ecocity-gti.appspot.com"
   },

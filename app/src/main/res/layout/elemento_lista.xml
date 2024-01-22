@@ -4,15 +4,16 @@
     android:layout_height="wrap_content"
     android:padding="4dp">
 
-    <ImageView
-        android:id="@+id/foto"
-        style="@style/icono"
-        android:layout_width="?android:attr/listPreferredItemHeight"
-        android:layout_height="?android:attr/listPreferredItemHeight"
-        android:contentDescription="fotografía"
-        android:src="@drawable/farolasin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<ImageView
+    android:id="@+id/foto"
+    android:scaleType="fitEnd"
+    style="@style/icono"
+    android:layout_width="?android:attr/listPreferredItemHeight"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:contentDescription="fotografía"
+    android:src="@drawable/farolasin"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nombre"

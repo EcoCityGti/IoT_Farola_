@@ -4,15 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iot_farola.Aplicacion;
+import com.example.iot_farola.R;
+import com.example.iot_farola.databinding.ElementoListaBinding;
 import com.example.iot_farola.modelo.Farola;
 import com.example.iot_farola.modelo.GeoPunto;
-import com.example.iot_farola.R;
 
 public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.ViewHolder> {
 
@@ -34,26 +34,31 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
         public TextView nombre, direccion;
         public ImageView foto;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            nombre = itemView.findViewById(R.id.nombre);
-            direccion = itemView.findViewById(R.id.direccion);
-            foto = itemView.findViewById(R.id.foto);
-            distancia = itemView.findViewById(R.id.distancia);
+        // View Binding
+        private final ElementoListaBinding binding;
+
+        public ViewHolder(ElementoListaBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            nombre = binding.nombre;
+            direccion = binding.direccion;
+            foto = binding.foto;
+            distancia = binding.distancia;
         }
 
         // Personalizamos un ViewHolder a partir de un lugar
         public void personaliza(Farola farola) {
-            nombre.setText(farola.getNombre());
-            direccion.setText(farola.getDireccion());
-            foto.setScaleType(ImageView.ScaleType.FIT_END);
+            binding.nombre.setText(farola.getNombre());
+            binding.direccion.setText(farola.getDireccion());
             GeoPunto pos = ((Aplicacion) itemView.getContext().getApplicationContext()).posicionActual;
             if (pos.equals(GeoPunto.SIN_POSICION) || farola.getPosicion().equals(GeoPunto.SIN_POSICION)) {
                 distancia.setText("... Km");
             } else {
                 int d = (int) pos.distancia(farola.getPosicion());
-                if (d < 2000) distancia.setText(d + " m");
-                else distancia.setText(d / 1000 + " Km");
+                if (d < 2000)
+                    distancia.setText(d + " " + itemView.getContext().getString(R.string.distancia_m));
+                else
+                    distancia.setText(d / 1000 + " " + itemView.getContext().getString(R.string.distancia_km));
             }
         }
     }
@@ -62,9 +67,10 @@ public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflamos la vista desde el xml
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.elemento_lista, parent, false);
-        view.setOnClickListener(onClickListener);
-        return new AdaptadorFarolas.ViewHolder(view);
+        ElementoListaBinding binding = ElementoListaBinding.inflate(LayoutInflater.from(parent.getContext()), parent,
+                false);
+        binding.getRoot().setOnClickListener(onClickListener);
+        return new ViewHolder(binding);
     }
 
     // Usando como base el ViewHolder y lo personalizamos
