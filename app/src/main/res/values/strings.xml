@@ -143,4 +143,7 @@
     <string name="recontr4"  translatable="true">
         No se pudo enviar el correo de restablecimiento de contraseña. Verifique la dirección de correo.
     </string>
+    //Cambios añadidos
+    <string name="distancia_km">Km</string>
+    <string name="distancia_m">m</string>
 </resources>
