@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.example.iot_farola.R;
+import com.example.iot_farola.databinding.ElementoListaBinding;
 import com.example.iot_farola.modelo.Farola;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -27,12 +28,11 @@ public class AdaptadorFarolasResultadosFirestoreUI extends
     }
 
     @Override
-    public AdaptadorFarolas.ViewHolder onCreateViewHolder(
-            ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.elemento_lista, parent, false);
-        view.setOnClickListener(onClickListener);
-        return new AdaptadorFarolas.ViewHolder(view);
+    public AdaptadorFarolas.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Infla la vista utilizando ViewBinding
+        ElementoListaBinding binding = ElementoListaBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding.getRoot().setOnClickListener(onClickListener);
+        return new AdaptadorFarolas.ViewHolder(binding);
     }
 
     @Override

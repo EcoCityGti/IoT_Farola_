@@ -4,17 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iot_farola.Aplicacion;
+import com.example.iot_farola.R;
+import com.example.iot_farola.databinding.ElementoListaBinding;
 import com.example.iot_farola.modelo.Farola;
 import com.example.iot_farola.modelo.GeoPunto;
-import com.example.iot_farola.R;
-
-import com.example.iot_farola.databinding.ElementoListaBinding;
 
 public class AdaptadorFarolas extends RecyclerView.Adapter<AdaptadorFarolas.ViewHolder> {
 

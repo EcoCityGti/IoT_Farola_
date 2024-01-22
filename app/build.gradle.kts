@@ -32,7 +32,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     viewBinding {
-        enabled = true
+        viewBinding.isEnabled = true
     }
 }
 
